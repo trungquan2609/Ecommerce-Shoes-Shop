@@ -1,0 +1,213 @@
+/* Mobile */
+@media (max-width: 739px) {
+    .cart-wrap {
+      padding-top:8px;
+      padding-bottom: 46px;
+    }
+      .cart-body-left {
+        width: 100%;
+      }
+      .cart-body-right {
+        margin-top: 8px;
+        width: 100%;
+        padding: 16px;
+      }
+      .cart-body-row {
+        flex-direction: row;
+        /* margin-left: -12px;
+        margin-right: -12px; */
+      }
+    .cart-body-left {
+      width: 100%;
+    }
+    .cart-body-right {
+      margin-top: 8px;
+      width: 100%;
+      padding: 16px;
+    }
+    .cart-body-row {
+      flex-direction: row;
+      /* margin-left: -12px;
+      margin-right: -12px; */
+    }
+    .card-info {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+    .card-info-img {
+      grid-row: span 3;
+    }
+    .cart-quantity {
+      margin-top: 5px;
+    }
+    .card:hover .hover-icon{
+        display: none;
+      }
+      .owl-item {
+        float: unset;
+        padding: 16px 0;
+      }
+      .daonguoc {
+        display: flex;
+        flex-direction: column-reverse;
+      }
+      #main-img img {
+        width: 100%;
+        margin-left: 0;
+        margin-top: 0;
+        background-size: cover;
+        background-position: center;
+        margin-bottom: 10px;
+      }
+      .all-img > li {
+        display: inline-block;
+      }
+      .all-img {
+        padding: unset;
+      }
+      .img-item img {
+        width: 80px;
+        margin: 5px 2px;
+      }
+      .product__price {
+        margin: 15px 0;
+      }
+      .product__wrap {
+        display: block;
+        margin: 15px 0;
+      }
+      .add-cart {
+        width: 100%;
+        padding: 10px 0;
+        margin: 15px 0;
+      }
+      .product__shopnow {
+        display: block;
+      }
+      .shopnow {
+        width: 100%;
+        margin-bottom: 15px;
+      }
+      .likenow {
+        width: 100%;
+      }
+      textarea {
+        width: 100%;
+      }
+      .btn-comment {
+        width: 100%;
+      }
+      .sale-off-2 {
+        top: 1px;
+      }
+      .btn-blocker {
+        display: block;
+        width: 100%;
+      }
+      .show-hide {
+        top: 56px;
+      }
+      .show-hide-two {
+        top: 56px;
+      }
+}
+  /* tablet */
+  @media (min-width: 740px) and (max-width: 1023px) {
+    .cart-wrap {
+      padding-top: 8px;
+      padding-bottom: 46px
+    }
+    .cart-body-left {
+      width: 100%;
+    }
+    .cart-body-right {
+      margin-top: 8px;
+      width: 100%;
+      padding: 16px;
+    }
+    textarea {
+      width: 100%;
+    }
+    .owl-item {
+        width: 396px;
+        padding: 16px 0;
+      }
+      .card:hover .hover-icon{
+        display: none;
+      }
+      .btn-blocker {
+        display: block;
+        width: 100%;
+      }
+      .show-hide {
+        top: 56px;
+      }
+      .show-hide-two {
+        top: 56px;
+      }
+      .daonguoc {
+        display: flex;
+        flex-direction: column-reverse;
+      }
+      #main-img {
+        max-width: unset;
+      }
+      #main-img img {
+        width: 100%;
+        margin-left: 0;
+        margin-top: 0;
+        background-size: cover;
+        background-position: center;
+        margin-bottom: 10px;
+      }
+      .all-img > li {
+        display: inline-block;
+      }
+      .all-img {
+        padding: unset;
+      }
+      .img-item img {
+        width: 150px;
+        cursor: pointer;
+        margin: 5px 10px;
+      }
+      textarea {
+        width: 100%;
+      }
+      .btn-comment {
+        display: block;
+        width: 100%;
+        padding: 25px 0 35px 0;
+        font-size: small;
+      }
+      .card:hover .hover-icon{
+        display: none;
+      }
+  }
+/* Mobile & tablet  */
+@media (max-width: 1023px) {
+    .custom-btn {
+        margin: unset;
+    }
+    .summary {
+        display: block;
+    }
+    .sortby {
+        float: left;
+      }
+      .sortby label {
+        display: none;
+      }
+      .sort-left {
+        margin-bottom: 20px;
+      }
+      .sortby2 {
+        display: block;
+      }
+      .sortby {
+        float: left;
+      }
+      .sale-off-2 {
+        top: 1px;
+      }
+}

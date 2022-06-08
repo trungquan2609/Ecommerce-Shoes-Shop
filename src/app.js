@@ -8,8 +8,28 @@ const app = express();
 const { engine } = require('express-handlebars');
 const path = require('path');
 const morgan = require('morgan');
-const route = require('./routes/site');
+const routeSite = require('./routes/site');
+const routeAdmin = require('./routes/admin');
 
+const session = require('express-session');
+const mongoose = require('mongoose');
+const passport = require('passport');
+const flash = require('connect-flash');
+
+const db = require('./config/connectDB');
+
+// Passport
+require('./config/passport');
+app.use(session({
+  secret: 'adsa897adsa98bs',
+  resave: false,
+  saveUninitialized: false,
+  }));
+app.use(flash());
+app.use(passport.initialize());
+app.use(passport.session());
+
+// Static files
 app.use(express.static(path.join(__dirname, 'public')));
 
 // HTTP Logger
@@ -25,7 +45,16 @@ app.engine('.hbs', engine({
 app.set('view engine',  'hbs');
 app.set('views', path.join(__dirname, 'resources', 'views'));
 
-route(app);
+// [METHOD POST]
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+
+// DB connect
+db.connect();
+
+// Router
+routeSite(app);
+routeAdmin(app);
 
 app.listen(port);
 

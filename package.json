@@ -1,48 +1,57 @@
 {
-    "name": "datn",
-    "version": "1.0.0",
-    "description": "website ban giay",
-    "main": "index.js",
-    "scripts": {
-        "beautiful": "lint-staged",
-        "start": "nodemon --inspect src/app.js",
-        "watch": "node-sass --watch src/resources/scss/ --output src/public/css/",
-        "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/trungquan2609/DATN.git"
-    },
-    "keywords": [
-        "ban",
-        "giay",
-        "giay",
-        "giay",
-        "chinh",
-        "hang"
-    ],
-    "author": "NTQnLNN",
-    "license": "ISC",
-    "bugs": {
-        "url": "https://github.com/trungquan2609/DATN/issues"
-    },
-    "homepage": "https://github.com/trungquan2609/DATN#readme",
-    "lint-staged": {
-        "src/**/*.{js,json,scss}": "prettier --single-quote --trailing-comma all --tab-width 4 --write",
-        "src/**/*.{css,hbs}": "prettier --tab-width 4 --write"
-    },
-    "devDependencies": {
-        "express": "^4.18.1",
-        "express-handlebars": "^6.0.6",
-        "handlebars": "^4.7.7",
-        "husky": "^8.0.1",
-        "lint-staged": "^12.4.2",
-        "mongoose": "^6.3.4",
-        "morgan": "^1.10.0",
-        "node-sass": "^7.0.1",
-        "nodemon": "^2.0.16",
-        "prettier": "^2.6.2",
-        "webpack": "^5.72.1",
-        "webpack-cli": "^4.9.2"
-    }
+  "name": "datn",
+  "version": "1.0.0",
+  "description": "website ban giay",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon --inspect src/app.js",
+    "beautiful": "lint-staged",
+    "watch": "node-sass --watch src/resources/scss/ --output src/public/css/",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/trungquan2609/DATN.git"
+  },
+  "keywords": [
+    "ban",
+    "giay",
+    "giay",
+    "giay",
+    "chinh",
+    "hang"
+  ],
+  "author": "NTQnLNN",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/trungquan2609/DATN/issues"
+  },
+  "homepage": "https://github.com/trungquan2609/DATN#readme",
+  "lint-staged": {
+    "src/**/*.{js,json,scss}": "prettier --single-quote --trailing-comma all --tab-width 4 --write"
+  },
+  "devDependencies": {
+    "connect-flash": "^0.1.1",
+    "express": "^4.18.1",
+    "express-handlebars": "^6.0.6",
+    "express-session": "^1.17.3",
+    "express-validator": "^6.14.1",
+    "handlebars": "^4.7.7",
+    "husky": "^8.0.1",
+    "lint-staged": "^12.4.2",
+    "mongoose": "^6.3.4",
+    "morgan": "^1.10.0",
+    "node-sass": "^7.0.1",
+    "nodemon": "^2.0.16",
+    "passport": "^0.6.0",
+    "passport-local": "^1.0.0",
+    "prettier": "^2.6.2",
+    "webpack": "^5.72.1",
+    "webpack-cli": "^4.9.2"
+  },
+  "dependencies": {
+    "bcrypt-nodejs": "^0.0.3",
+    "body-parser": "^1.20.0",
+    "dotenv": "^16.0.1"
+  }
 }

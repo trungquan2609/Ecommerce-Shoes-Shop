@@ -1,0 +1,83 @@
+form.example input[type=text] {
+    padding: 10px;
+    font-size: 17px;
+    border: 1px solid grey;
+    float: left;
+    width: 80%;
+    background: #f1f1f1;
+  }
+
+  form.example button {
+    float: left;
+    width: 20%;
+    padding: 10px;
+    background: #2196F3;
+    color: white;
+    font-size: 17px;
+    border: 1px solid grey;
+    border-left: none;
+    cursor: pointer;
+  }
+
+  form.example button:hover {
+    background: #0b7dda;
+  }
+
+  form.example::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+  .wrapper {
+    margin-top:30px;
+  }
+  .title-heading {
+    margin: 0;
+    color: #36424b;
+    font-size: 18px;
+    font-weight: 500;
+    padding: 0;
+    margin-top: 0;
+    margin-bottom: 10px;
+    position: relative;
+    text-transform: uppercase;
+}
+
+.contact-info {
+    padding: 0;
+}
+
+.contact-info li {
+    display: table;
+    margin-bottom: 7px;
+    font-size: 14px;
+}
+
+.text-contact {
+    font-style: italic;
+    color: #707e89;
+    font-size: 12px;
+}
+.mapbox {
+    border-top: 1px solid #e8e9f1;
+    margin-top: 30px;
+    height: 350px;
+    overflow: hidden;
+    border: 10px solid #e5e5e5;
+    border-radius: 3px;
+}
+.content-page p{
+font-size: 16px;
+padding: 5px 0;
+}
+.content-page p img{
+width: auto;
+height: auto;
+max-width: 100%;
+vertical-align: middle;
+height: initial !important;
+}
+  .sale-off-2 {
+  top: 14px;
+  right: 14px;
+  }

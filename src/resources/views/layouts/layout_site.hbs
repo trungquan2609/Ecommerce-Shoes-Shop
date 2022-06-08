@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>N{{&amp}}Q Shop</title>
+  <title>N&Q Shop</title>
   <!-- Latest compiled and minified CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
@@ -25,83 +25,19 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
   <!-- link css -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
-  <link rel="stylesheet" href="/css/base.css">
-  <link rel="stylesheet" href="/css/main.css">
-  <link rel="stylesheet" href="/css/productdetail.css">
-  <link rel="stylesheet" href="/css/reponsive1.css">
+  <link rel="stylesheet" href="/css/site/base.css">
+  <link rel="stylesheet" href="/css/site/main.css">
+  {{#each styles}}
+  <link rel="stylesheet" href="/css/site/{{this}}.css">
+  {{/each}}
+  <link rel="stylesheet" href="/css/site/reponsive1.css">
+  <link rel="stylesheet" href="/css/site/reponsive2.css">
+  <link rel="stylesheet" href="/css/site/synthetic.css">
   <link rel="icon" href="/img/logo/main.png" type="image/x-icon" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
     integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
     crossorigin="anonymous"></script>
 </head>
-<style>
-  form.example input[type=text] {
-    padding: 10px;
-    font-size: 17px;
-    border: 1px solid grey;
-    float: left;
-    width: 80%;
-    background: #f1f1f1;
-}
-
-  form.example button {
-    float: left;
-    width: 20%;
-    padding: 10px;
-    background: #2196F3;
-    color: white;
-    font-size: 17px;
-    border: 1px solid grey;
-    border-left: none;
-    cursor: pointer;
-  }
-
-  form.example button:hover {
-    background: #0b7dda;
-  }
-
-  form.example::after {
-    content: "";
-    clear: both;
-    display: table;
-  }
-          /* Mobile & tablet  */
-@media (max-width: 1023px) {
-  
-}
-/* tablet */
-@media (min-width: 740px) and (max-width: 1023px) {
-  .owl-item {
-    width: 396px;
-    padding: 16px 0;
-  }
-  .card:hover .hover-icon{
-    display: none;
-  }
-}
-/* mobile */
-@media (max-width: 739px) {
-  .owl-item {
-    float: unset;
-    padding: 16px 0;
-  }
-  .card:hover .hover-icon{
-    display: none;
-  }
-  .click-slideshow{
-    background-color: rgba(0,0,0,0.5);
-        color: var(--white-color);
-        border-radius: 5px;
-        padding: 6px 6px;
-        line-height: 20px;
-        font-weight: 600;
-        font-size: 10px;
-  }
-  .carousel-indicators{
-    width: 0;
-  }
-} 
-</style>
 <body>
 
     {{> site/header}}
@@ -110,6 +46,9 @@
 
     {{> site/footer}}
 
-    <script src="/js/main.js"></script>
+    <script src="/js/site/main.js"></script>
+    {{#each scripts}}
+    <script src="/js/site/{{this}}.js"></script>
+    {{/each}}
 </body>
 </html>

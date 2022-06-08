@@ -1,11 +1,24 @@
 
 class SiteController {
 
-    // Get /index
+    // Get /site/index
     index(req, res, next) {
-        res.render('site/index', {layout: 'layout_site.hbs'});
+        res.render('site/index', {
+            title: 'N&Q Shop',
+            styles: ['productdetail'],
+            scripts: [],
+            layout: 'layout_site.hbs'
+        });
     }
 
+    // Get /site/intro
+    intro(req, res, next) {
+        res.render('site/intro', {
+            styles: [],
+            scripts: [],
+            layout: 'layout_site.hbs'
+        });
+    }
 }
 
 module.exports = new SiteController;
