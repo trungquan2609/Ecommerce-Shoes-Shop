@@ -14,10 +14,10 @@ Validator({
       //   return document.querySelector('#form-1 #password').value;
       // }, 'Mật khẩu nhập lại không chính xác')
     ],
-    onSubmit: function (data) {
-      // call api
-      console.log(data);
-    }
+    // onSubmit: function (data) {
+    //   // call api
+    //   console.log(data);
+    // }
   });
   const pass_field = document.querySelector('#password');
   const show_btn = document.querySelector('.fa-eye')

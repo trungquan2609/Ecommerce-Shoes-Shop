@@ -1,41 +1,67 @@
 const app = require("express");
-const users = require('../../models/user_model');
+const User = require('../../models/user_model');
 const passport = require('passport');
+var csrf = require('csurf');
+var csrfProtection = csrf();
 
 class UserController {
 
-    // Get /account/register
+    // Get /user/register
     registerSite(req, res, next) {
         var messages = req.flash('error');
-        res.render('site/account/register', {
+        res.render('site/user/register', {
             title: 'Đăng ký tài khoản',
             styles: ['login'],
-            scripts: ['validator', 'registration'],
+            scripts: ['registration'],
             layout: 'layout_site.hbs',
-            messages: messages,
-            haseErrors: messages.length > 0
+            csrfToken: req.csrfToken(),
+            messages: messages
         });
     }
 
-    // Get /account/login
+    // Get /user/login
     loginSite(req, res, next) {
         var messages = req.flash('error');
-        res.render('site/account/login', {
+        res.render('site/user/login', {
             title: 'Đăng nhập',
             styles: ['login'],
-            scripts: ['validator', 'login'],
+            scripts: ['login'],
             layout: 'layout_site.hbs',
+            csrfToken: req.csrfToken(),
             messages: messages,
-            haseErrors: messages.length > 0
+            hasErrors: messages.length > 0,
         });
     }
 
-    // Post /account/register
-    register(req, res, next) {
-        passport.authenticate('local.register', {
-            successRedirect: '/site/account/login',
-            failureRedirect: '/site/account/register',
-            failureFlash: true
+    // isLoggedIn(req, res, next) {
+    //     if (req.isAuthenticated()) {
+    //         return next();
+    //     }
+    //     res.redirect('/')
+    // }
+
+    // notLoggedIn(req, res, next) {
+    //     if (!req.isAuthenticated()) {
+    //         return next();
+    //     }
+    //     res.redirect('/')
+    // }
+
+    // Get /user/profile
+    profile(req, res, next) {
+        res.render('site/user/profile', {
+            title: 'Thông tin tài khoản',
+            styles: ['login', 'account'],
+            scripts: ['account'],
+            layout: 'layout_site.hbs',
+        });
+    }
+
+    // Get /user/logout
+    logout(req, res, next) {
+        req.logout(function (err) {
+            if (err) { return next(err); }
+            res.redirect('/')
         });
     }
 }

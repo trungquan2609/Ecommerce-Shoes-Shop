@@ -2,8 +2,7 @@ const siteRouter = require('./site');
 const userRouter = require('./user');
 
 function routeSite(app) {
-
-    app.use('/account', userRouter);
+    app.use('/user', userRouter);
     app.use('/', siteRouter);
 
 }

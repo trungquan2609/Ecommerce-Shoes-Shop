@@ -2,13 +2,20 @@
     <div class="registration__form">
       <div class="row">
         <div class="col-sm-12 col-lg-6">
-          <form method="POST" action="/account/register" class="form" id="form-1">
+          <form method="POST" action="/user/register" class="form" id="form-1">
+            {{#if hasErrors}}
+              <div class="alert alert-danger">
+                {{#each messages}}
+                  <p>{{this}}</p>
+                {{/each}}
+              </div>
+            {{/if}}
             <h3 class="heading">ĐĂNG KÍ</h3>
-            <div class="form-group">
+            {{!-- <div class="form-group">
               <label for="fullname" class="form-label">Tên đầy đủ</label>
               <input id="fullname" name="fullname" type="text" placeholder="VD: Ngọc Nam" class="form-control">
               <span class="form-message"></span>
-            </div>
+            </div> --}}
             <div class="form-group">
               <label for="email" class="form-label">Email</label>
               <input id="email" name="email" type="text" placeholder="VD: email@domain.com" class="form-control">
@@ -28,7 +35,7 @@
               <span class="show-hide-two"><i class="fas fa-eye fa-eye-2"></i></span>
               <span class="form-message"></span>
             </div>
-            <div class="form-group">
+            {{!-- <div class="form-group">
               <label for="gender" class="form-label">Giới tính</label>
               <div>
                 <div class="form-check-inline">
@@ -42,11 +49,12 @@
                 </div>
               </div>
               <span class="form-message"></span>
-            </div>
+            </div> --}}
 
+            <input type="hidden" name="_csrf" value="{{ csrfToken }}">
             <button type="submit" class="form-submit btn-blocker" style="border-radius: unset;">Đăng ký <i class="fas fa-arrow-right"
                 style="font-size: 16px;margin-left: 10px;"></i></button>
-            <p style="font-size: 16px;margin: 10px 0;">Bạn đã có tài khoản? <a href="./Login.html"
+            <p style="font-size: 16px;margin: 10px 0;">Bạn đã có tài khoản? <a href="/user/login"
                 style="color: black; font-weight: bold">Đăng nhập</a></p>
           </form>
         </div>

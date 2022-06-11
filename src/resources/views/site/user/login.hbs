@@ -2,7 +2,7 @@
     <div class="login__form">
       <div class="row">
         <div class="col-sm-12 col-lg-6">
-          <form action="" method="POST" class="form" id="form-2">
+          <form action="/user/login" method="POST" class="form" id="form-2">
             <h3 class="heading">ĐĂNG NHẬP</h3>
             <a href="" class="form__forgot-password">Bạn quên mật khẩu?</a>
             <div class="form-group">
@@ -18,17 +18,18 @@
               <!-- <i class="fi-rs-eye-crossed undisplay" onclick="showhide()"></i> -->
               <span class="form-message"></span>
             </div>
-            <button class="form-submit btn-blocker" style="border-radius: unset;">ĐĂNG NHẬP <i class="fas fa-arrow-right"
+            <input type="hidden" name="_csrf" value="{{ csrfToken }}">
+            <button type="submit" class="form-submit btn-blocker" style="border-radius: unset;">ĐĂNG NHẬP <i class="fas fa-arrow-right"
                 style="font-size: 16px;margin-left: 10px;"></i></button>
             <h4>HOẶC</h4>
             <div class="form-social">
               <a href="" class="form-submit-social btn-blocker">
                 <span>Facebook</span>
-                <img src="./assets/icon/facebook.svg" alt="" class="form-submit-social--img">
+                <img src="/icon/facebook.svg" alt="" class="form-submit-social--img">
               </a>
               <a href="" class="form-submit-social btn-blocker">
                 <span>GOOGLE</span>
-                <img src="./assets/icon/google.svg" alt="" class="form-submit-social--img">
+                <img src="/icon/google.svg" alt="" class="form-submit-social--img">
               </a>
             </div>
           </form>
@@ -57,7 +58,7 @@
               <p class="text-login">Các sự kiện sắp tới</p>
             </li>
           </ul>
-          <a href="./registration.html"><button class="form-submit btn-blocker custom-btn" style="border-radius: unset;margin:unset">ĐĂNG KÍ <i
+          <a href="/user/register"><button class="form-submit btn-blocker custom-btn" style="border-radius: unset;margin:unset">ĐĂNG KÍ <i
                 class="fas fa-arrow-right" style="font-size: 16px;margin-left: 10px;"></i></button></a>
         </div>
       </div>

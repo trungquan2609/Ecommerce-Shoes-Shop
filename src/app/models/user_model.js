@@ -2,11 +2,11 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const bcrypt = require('bcrypt-nodejs');
 
-const user = new Schema({
+const userSchema = new Schema({
     email: { type: String, required: true },
     password: { type: String, required: true },
-    fullname: { type: String, required: true },
-    gender: { type: String, required: true },
+    fullname: { type: String, default: '' },
+    gender: { type: String, default: '' },
     address: { type: String, default: '' },
     phone: { type: Number, default: '' },
     avatar: { type: String, default: '' },
@@ -16,11 +16,11 @@ const user = new Schema({
     updateAt: { type: Date, default: Date.now },
 }, {collection: 'users'});
 
-user.methods.encryptPassword = function(password) {
-    return bcrypt.hashSync(password, bcrypt.genSaltSync(5),null);
+userSchema.methods.encryptPassword = function(password) {
+    return bcrypt.hashSync(password, bcrypt.genSaltSync(5), null);
 };
-user.methods.validPassword = function(password) {
+userSchema.methods.validPassword = function(password) {
     return bcrypt.compareSync(password, this.password);
 };
 
-module.exports = mongoose.model('User', user);
+module.exports = mongoose.model('User', userSchema);
