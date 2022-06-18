@@ -3,8 +3,13 @@
       <div class="row">
         <div class="col-lg-4 col-12">
           <div class="heading">
-            <img src="/img/product/noavatar.png" alt="" class="heading-img">
-            <span class="heading-name_acc">Ngọc Nam</span>
+            {{!-- <img src="/img/product/noavatar.png" alt="" class="heading-img"> --}}
+            <img src="{{user.avatar}}" onerror="this.src='/img/product/noavatar.png';" alt="" class="heading-img">
+              {{#if user.fullname}}
+                <span class="heading-name_acc">{{user.fullname}}</span>
+              {{else}}
+                <span class="heading-name_acc">{{user.email}}</span>
+              {{/if}}
           </div>
           <div class="menu-manager">
             <div class="my-profile item-manager active">
@@ -25,45 +30,46 @@
                 <div class="my-order-name">Đơn hàng của tôi</div>
               </div>
             </div>
-           
           </div>
         </div>
         <div class="col-lg-8 col-12">
           <div class="menu-detail">
-            <div class="detial__my-profile item-detail active">
-              <div class="heading-edit-account">
-                <h2>Hồ sơ của tôi</h2>
-                <div class="form-group">
-                  <label for="fullname" class="form-label">Tên đầy đủ</label>
-                  <input id="fullname" name="fullname" type="text" placeholder="VD: Ngọc Nam" class="form-control"
-                    value="Ngọc Nam">
-                  <span class="form-message"></span>
+            <form action="/user/updateprofile?_method=PUT" method="post">
+              <input type="hidden" name="_csrf" value="{{csrfToken}}">
+              <div class="detial__my-profile item-detail active">
+                <div class="heading-edit-account">
+                  <h2>Hồ sơ của tôi</h2>
+                  {{#if user}}
+                    <div class="form-group">
+                      <label for="fullname" class="form-label">Tên đầy đủ</label>
+                      <input id="fullname" name="fullname" type="text" class="form-control" value="{{user.fullname}}">
+                      <span class="form-message"></span>
+                    </div>
+                    <div class="form-group">
+                      <label for="email" class="form-label">Email</label>
+                      <input id="email" name="email" type="text" class="form-control" value="{{user.email}}" disabled>
+                      <span class="form-message"></span>
+                    </div>
+                    <div class="form-group">
+                      <label for="address" class="form-label">Địa chỉ</label>
+                      <input id="address" name="address" type="text" placeholder="VD: 8/22/36 Phúc Xá TP HN" class="form-control" value="{{user.address}}">
+                      <span class="form-message"></span>
+                    </div>
+                    <div class="form-group">
+                      <label for="phone" class="form-label">Số điện thoại</label>
+                      <input id="phone" name="phone" type="text" placeholder="VD: 089" class="form-control" value="{{user.phone}}">
+                      <span class="form-message"></span>
+                    </div>
+                    <div class="form-group">
+                      <label for="avatar" class="form-label">Cập nhật avatar</label>
+                      <input id="avatar" name="avatar" type="file" class="form-control">
+                      <span class="form-message"></span>
+                    </div>
+                  {{/if}}
+                  <button type="submit" class="form-submit">Lưu</button>
                 </div>
-                <div class="form-group">
-                  <label for="email" class="form-label">Email</label>
-                  <input id="email" name="email" type="text" placeholder="VD: email@domain.com" class="form-control"
-                    value="abc@gmail.com">
-                  <span class="form-message"></span>
-                </div>
-                <div class="form-group">
-                  <label for="email" class="form-label">Địa chỉ</label>
-                  <input id="email" name="email" type="text" placeholder="VD: 8/22/36 Phúc Xá TP HN" class="form-control"
-                    value="Âu Cơ, Q. Tây Hồ, TP. HN ">
-                  <span class="form-message"></span>
-                </div>
-                <div class="form-group">
-                  <label for="sdt" class="form-label">Số điện thoại</label>
-                  <input id="sdt" name="sdt" type="number" placeholder="VD: 089" class="form-control" value="0912420530">
-                  <span class="form-message"></span>
-                </div>
-                <div class="form-group">
-                  <label for="avatar" class="form-label">Cập nhật avatar</label>
-                  <input id="avatar" name="avatar" type="file" class="form-control">
-                  <span class="form-message"></span>
-                </div>
-                <button class="form-submit">Lưu</button>
               </div>
-            </div>
+            </form>
             <div class="detail__confirm-password item-detail">
               <div class="heading-edit-password">
                 <h2>Đổi lại mật khẩu</h2>

@@ -101,12 +101,34 @@
           </div>
           <div class="col-6 login_link">
             <ul class="header_link right m-auto">
-              <li>
-                <a href="/user/login"><i class="fas fa-sign-in-alt mr-3"></i>Đăng nhập</a>
-              </li>
-              <li>
-                <a href="/user/register"><i class="fas fa-user-plus mr-3" style="margin-left: 10px;"></i>Đăng kí</a>
-              </li>
+                    
+              {{#if login}}
+                {{#if user.fullname}}
+                  <p>{{user.fullname}}</p>
+                {{else}}
+                  <p>{{user.email}}</p>
+                {{/if}}
+                <li>
+                  <a href="/user/profile"><i class="fas fa-sign-in-alt mr-3"></i>Thông tin tài khoản</a>
+                </li>
+                <li>
+                  <form action="/user/logout?_method=DELETE" method="POST">
+                    <input type="hidden" name="_csrf" value="{{ csrfToken }}">
+                    <a href="">
+                      <button type="submit">
+                        <i class="fas fa-sign-in-alt mr-3"></i>Đăng xuất
+                      </button>
+                    </a>
+                  </form>
+                </li>
+              {{else}}
+                <li>
+                  <a href="/user/login"><i class="fas fa-sign-in-alt mr-3"></i>Đăng nhập</a>
+                </li>
+                <li>
+                  <a href="/user/register"><i class="fas fa-user-plus mr-3" style="margin-left: 10px;"></i>Đăng kí</a>
+                </li>
+              {{/if}}
             </ul>
           </div>
         </div>

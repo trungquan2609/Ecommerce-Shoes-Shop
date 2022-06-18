@@ -25,17 +25,20 @@ passport.use('local.register', new LocalStrategy({
     User.findOne({ 'email': email }, function(err, user) {
             if (err) { return done(err); }
             if (user) {
-                return done(null, false, {messages: 'Email đã được sử dụng'});
+                return done(null, false, {message: 'Email đã được sử dụng'});
             }
             var newUser = new User();
             newUser.email = email;
             newUser.password = newUser.encryptPassword(password);
-            newUser.save(function(err, result) {
-                if(err) { return done(err); }
-            })
-            return done(null, newUser);
+            newUser.save(function(err, user) {
+                if (err) { 
+                    return done(err); 
+                }
+                return done(null, newUser);
+            });
         });
 }));
+
 
 passport.use('local.login', new LocalStrategy({
     usernameField: 'email',
@@ -44,12 +47,12 @@ passport.use('local.login', new LocalStrategy({
 }, function(req, email, password, done) {
     User.findOne({ 'email': email }, function(err, user) {
         if (err) { return done(err); }
-        if (!user) {
-            return done(null, false, {messages: 'Tài khoản không tồn tại'});
+        if (!user || !user.validPassword(password)) {
+            return done(null, false, {message: 'Sai tài khoản hoặc mật khẩu'});
         }
-        if (!user.validPassword(password)) {
-            return done(null, false, {messages: 'Sai mật khẩu'});
-        }
+        // if (!user.validPassword(password)) {
+        //     return done(null, false, {message: 'Sai mật khẩu'});
+        // }
         return done(null, user);
     });
 }));

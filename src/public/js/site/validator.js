@@ -126,7 +126,7 @@ Validator.isRequired = function(selector, message){
     return {
         selector: selector,
         test: function(value){
-            return value ? undefined : message || 'Vui lòng nhập trường này'
+            return value ? undefined : message || 'Vui lòng nhập email'
         }
     };
 }
@@ -135,7 +135,7 @@ Validator.isEmail = function(selector, message){
         selector: selector,
         test: function(value){
             var regex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-            return regex.test(value) ? undefined : message || 'Trường này phải là email';
+            return regex.test(value) ? undefined : message || 'Vui long nhập email';
         }
     };
 }

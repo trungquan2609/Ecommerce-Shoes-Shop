@@ -14,8 +14,9 @@ class UserController {
             styles: ['login'],
             scripts: ['registration'],
             layout: 'layout_site.hbs',
-            csrfToken: req.csrfToken(),
-            messages: messages
+            // csrfToken: req.csrfToken(),
+            messages: messages,
+            hasErrors: messages.length > 0,
         });
     }
 
@@ -27,25 +28,11 @@ class UserController {
             styles: ['login'],
             scripts: ['login'],
             layout: 'layout_site.hbs',
-            csrfToken: req.csrfToken(),
+            // csrfToken: req.csrfToken(),
             messages: messages,
             hasErrors: messages.length > 0,
         });
     }
-
-    // isLoggedIn(req, res, next) {
-    //     if (req.isAuthenticated()) {
-    //         return next();
-    //     }
-    //     res.redirect('/')
-    // }
-
-    // notLoggedIn(req, res, next) {
-    //     if (!req.isAuthenticated()) {
-    //         return next();
-    //     }
-    //     res.redirect('/')
-    // }
 
     // Get /user/profile
     profile(req, res, next) {
@@ -63,6 +50,14 @@ class UserController {
             if (err) { return next(err); }
             res.redirect('/')
         });
+    }
+
+    // Put /user/updateprofile
+    updateProfile(req, res, next) {
+        console.log(req.user._id)
+        User.updateOne({ _id: req.user._id }, req.body)
+            .then(() => res.redirect('site/user/profile'))
+            .catch(next);
     }
 }
 

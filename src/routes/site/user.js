@@ -7,8 +7,8 @@ var csrfProtection = csrf();
 router.use(csrfProtection);
 
 router.get('/profile', isLoggedIn, userController.profile);
-
-router.get('/logout', isLoggedIn, userController.logout);
+router.put('/:id', userController.updateProfile);
+router.delete('/logout', isLoggedIn, userController.logout);
 
 router.use('/', notLoggedIn, function (req, res, next) {
     next();
@@ -17,16 +17,17 @@ router.use('/', notLoggedIn, function (req, res, next) {
 router.get('/register', userController.registerSite);
 
 router.post('/register', passport.authenticate('local.register', {
-    successRedirect: '/account/login',
-    failureRedirect: '/account/register',
-    failureFlash: true
+    successRedirect: '/user/login',
+    failureRedirect: '/user/register',
+    failureFlash: true,
+    session: false
 }));
 
 router.get('/login', userController.loginSite);
 
 router.post('/login', passport.authenticate('local.login', {
     successRedirect: '/',
-    failureRedirect: '/account/login',
+    failureRedirect: '/user/login',
     failureFlash: true
 }));
 
