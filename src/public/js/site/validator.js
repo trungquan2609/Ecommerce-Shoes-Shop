@@ -20,7 +20,7 @@ function Validator(options) {
         for (var i = 0; i < rules.length; ++i) {
             switch (inpuElement.type){
                 case 'radio':
-                case 'checkbox':
+                case 'checked':
                     errorMessage = rules[i](formElement.querySelector(rule.selector + ':checked')
                     );
                     break;
@@ -117,7 +117,7 @@ function Validator(options) {
             });
         });
     }
-}
+ }
 // định nghĩa rules
 // nguyên tắc của rules:
 // khi có lỗi tạo re mes lỗi
@@ -158,14 +158,14 @@ Validator.isConfirmed = function(selector , getConfirmValue, message){
 // ẩn hiện mật khẩu
 var checkPass = true;
 function showhide(){
-    // if(checkPass){
-    //     document.getElementById('password').setAttribute("type","text");
-    //     checkPass = false;
+    if(checkPass){
+        document.getElementById('password').setAttribute("type","text");
+        checkPass = false;
 
-    // }
-    // else {
-    //     document.getElementById('password').setAttribute("type","password");
-    //     checkPass = true;
-    // }
+    }
+    else {
+        document.getElementById('password').setAttribute("type","password");
+        checkPass = true;
+    }
     
 }

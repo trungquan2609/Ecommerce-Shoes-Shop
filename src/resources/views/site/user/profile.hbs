@@ -77,7 +77,7 @@
               <div class="heading-edit-password">
                 <h2>Đổi lại mật khẩu</h2>
               </div>
-              <form action="user/profile?_csrf={{ csrfToken }}&_method=PUT" method="POST">
+              <form action="user/profile/changepassword?_csrf={{ csrfToken }}&_method=PUT" method="POST">
                 <div class="form-group form-group-old-password">
                   <div style="display:flex;justify-content: space-between;">
                     <label for="password" class="form-label">Mật khẩu cũ</label>
@@ -102,7 +102,7 @@
                   <input id="confirmpassword" name="confirmpassword" type="password" placeholder="Nhập lại mật khẩu mới" class="form-control">
                   <span class="form-message"></span>
                 </div>
-                <button type="submit" class="form-submit">Lưu</button>
+                <button type="submit" class="form-submit">Đổi mật khẩu</button>
               </form>
             </div>
             <div class="detail__my-order item-detail">

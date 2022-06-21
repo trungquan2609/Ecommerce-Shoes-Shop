@@ -1,32 +1,7 @@
 const app = require("express");
 const User = require('../../models/user_model');
 const multer = require('multer');
-const bcrypt = require('bcrypt-nodejs');
-
-const storage = multer.diskStorage({
-    destination: function(req, file, cb) {
-        cb(null, './img/userImages');
-    },
-    filename: function(req, file, cb) {
-        cb(null, new Date().toISOString() + file.originalname);
-    }
-});
-
-const fileFilter = function(req, file, cb) {
-    if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
-        cb(null, true);
-    } else {
-        cb(null, false);
-    }
-};
-
-const upload = multer({
-    storage: storage,
-    limits: {
-        fieldSize: 1024 * 1024 * 5
-    },
-    fileFilter: fileFilter
-})
+const bcrypt = require('bcrypt');
 
 class UserController {
 
@@ -36,7 +11,7 @@ class UserController {
         res.render('site/user/register', {
             title: 'Đăng ký tài khoản',
             styles: ['login'],
-            scripts: ['registration'],
+            scripts: ['validator','registration'],
             layout: 'layout_site.hbs',
             // csrfToken: req.csrfToken(),
             messages: messages,
@@ -98,34 +73,8 @@ class UserController {
     }
 
     // PUT /user/profile
-    changePassword(req, res1, next) {
-        let session = req.user;
-        if (session.email) {
-            var oldPassword = req.body.oldPassword;
-            var newPassword = req.body.newPassword;
-            var confirmPassword = req.body.confirmPassword;
-            User.findOne({ "email": session.email }, function(err, user) {
-                if (user != null) {
-                    var hash = user.password;
-                    bcrypt.compare(oldPassword, hash, function(err, res) {
-                        if (res) {
-                            if (newPassword === confirmPassword) {
-                                bcrypt.hash(newPassword, 5, function(err, hash) {
-                                    user.password = hash
-                                    user.save(function(err, user) {
-                                        if (err) {
-                                            console.error(err);
-                                        }
-                                        res1.render('site/user/profile')
-                                        console.log(user.email+'! Thay đổi mật khẩu thành công');
-                                    })
-                                })
-                            }
-                        }
-                    })
-                }
-            })
-        }
+    changePassword(req, res, next) {
+        res.redirect('/profile');
     }
 }
 
