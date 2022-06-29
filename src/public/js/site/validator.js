@@ -30,6 +30,7 @@ function Validator(options) {
             
             if (errorMessage) break;
         }
+        if(errorMessage)
         
         if (errorMessage) {
             erorElement.innerText = errorMessage;
@@ -158,14 +159,14 @@ Validator.isConfirmed = function(selector , getConfirmValue, message){
 // ẩn hiện mật khẩu
 var checkPass = true;
 function showhide(){
-    if(checkPass){
-        document.getElementById('password').setAttribute("type","text");
-        checkPass = false;
+    // if(checkPass){
+    //     document.getElementById('password').setAttribute("type","text");
+    //     checkPass = false;
 
-    }
-    else {
-        document.getElementById('password').setAttribute("type","password");
-        checkPass = true;
-    }
+    // }
+    // else {
+    //     document.getElementById('password').setAttribute("type","password");
+    //     checkPass = true;
+    // }
     
 }

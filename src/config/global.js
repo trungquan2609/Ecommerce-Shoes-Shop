@@ -1,7 +1,7 @@
 const express = require('express');
 const passport = require('passport');
 const csrf = require('csurf');
-
+const BrandSite = require('../app/models/brand_model')
 
 
 function global(app) {
@@ -13,7 +13,7 @@ function global(app) {
         res.locals.login = req.isAuthenticated();
         res.locals.session = req.session;
         res.locals.user = req.user;
-        console.log(req.user);
+        // console.log(BrandSite);
         next();
     })
 }

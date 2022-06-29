@@ -67,6 +67,8 @@ app.engine('.hbs', expressHandlebars.engine({
   handlebars: allowInsecurePrototypeAccess(handlebars),
   helpers: {
     sum: (a, b) => a + b,
+    salePercent: (a, b) => Math.round(100 - (a / b * 100)),
+    price: (a) => a.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
   },
 }));
 app.set('view engine', 'hbs');

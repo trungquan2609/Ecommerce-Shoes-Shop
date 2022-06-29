@@ -1,4 +1,3 @@
-const app = require("express");
 const User = require('../../models/user_model');
 const multer = require('multer');
 const bcrypt = require('bcrypt');
