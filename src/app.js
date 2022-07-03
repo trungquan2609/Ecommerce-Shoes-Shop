@@ -68,7 +68,19 @@ app.engine('.hbs', expressHandlebars.engine({
   helpers: {
     sum: (a, b) => a + b,
     salePercent: (a, b) => Math.round(100 - (a / b * 100)),
-    price: (a) => a.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
+    priceFormat: (a) => a.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
+    json: function (context) {
+      return JSON.stringify(context);
+    },
+    limit: function (object, max, options) {
+      if(!object || object.length == 0)
+        return options.inverse(this);
+
+      var result = [ ];
+      for(var i = 0; i < max && i < object.length; ++i)
+          result.push(options.fn(object[i]));
+      return result.join('');
+    }
   },
 }));
 app.set('view engine', 'hbs');

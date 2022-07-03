@@ -189,7 +189,7 @@
           <div class="row row-product" id="products">
             {{#each products}}
               <div class="col-lg-4 col-md-6 col-12 mb-20" style="margin-bottom: 20px">
-                <a href="./ProductDetail.html" class="product__new-item">
+                <a href="/product/{{this._id.SKU}}" class="product__new-item">
                   <div class="card" style="width: 100%">
                     <div>
                       <img class="card-img-top" src="/img/product/{{this._id.productImage}}" alt="Card image cap">
@@ -209,11 +209,11 @@
                       </h5>
                       <div class="product__price">
                         {{#if this._id.salePrice}}
-                          <p class="card-text price-color product__price-old">{{price this._id.price}} đ</p>
-                          <p class="card-text price-color product__price-new">{{price this._id.salePrice}} đ</p>
+                          <p class="card-text price-color product__price-old">{{priceFormat this._id.price}} đ</p>
+                          <p class="card-text price-color product__price-new">{{priceFormat this._id.salePrice}} đ</p>
                         {{else}}
                           <p class="card-text price-color product__price-old"></p>
-                          <p class="card-text price-color product__price-new">{{price this._id.price}} đ</p>
+                          <p class="card-text price-color product__price-new">{{priceFormat this._id.price}} đ</p>
                         {{/if}}
                       </div>
                       <div class="home-product-item__action">

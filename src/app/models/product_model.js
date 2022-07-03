@@ -1,10 +1,11 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const Brand = require('./brand_model');
 
 const productShema = new Schema({
     SKU: { type: String, default: ''},
     productName: { type: String, default: '' },
-    brandId: { type: Schema.Types.ObjectId, ref: 'brands' },
+    brandId: { type: Schema.Types.ObjectId, ref: Brand },
     price: { type: Number, default: '' },
     salePrice: { type: Number, default: '' },
     size: { type: Number, default: '' },
