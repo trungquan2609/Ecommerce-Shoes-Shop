@@ -125,14 +125,22 @@
           <div class="row">
             <div class="col-1"></div>
             <div class="col-11">
-              <h3 class="name__product">NIKE MERCURIAL SUPERFLY 8 ACADEMY TF</h3>
+              {{!-- <h3 class="name__product">NIKE MERCURIAL SUPERFLY 8 ACADEMY TF</h3>
               <h3>Thông số kĩ thuật: </h3>
               <p>Phân khúc: Academy (tầm trung).</p>
               <p>Upper: Synthetic - Da tổng hợp cao cấp.</p>
               <p>Thiết kế đinh giày: Các đinh cao su hình chữ nhật, xếp chồng chéo với nhau. Theo đánh giá của nhiều người chơi thì những đinh TF hình chữ nhật lần này giúp đôi giày có thể trụ vững hơn trên sân.</p>
               <p>Độ ôm chân: Cao</p>
               <p>Bộ sưu tập: SAFARI PACK - Ra mắt tháng 4/2021</p>
-              <p>PTrên chân các cầu thủ nổi tiếng như: Cristiano Ronaldo, Kylian Mbappé, Erling Haaland, Jadon Sancho, Leroy Sané, Romelu Lukaku...</p>  
+              <p>PTrên chân các cầu thủ nổi tiếng như: Cristiano Ronaldo, Kylian Mbappé, Erling Haaland, Jadon Sancho, Leroy Sané, Romelu Lukaku...</p>   --}}
+              {{#limit product 1}}
+                {{#if product.description}}
+                  <h3 class="name__product">NIKE MERCURIAL SUPERFLY 8 ACADEMY TF</h3>
+                  <p>{{product.description}}</p>
+                {{else}}
+                  <h3>(Đang cập nhật)</h3>
+                {{/if}}
+              {{/limit}}
             </div>
           </div>
         </div>

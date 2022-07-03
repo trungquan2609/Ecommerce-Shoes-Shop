@@ -12,16 +12,59 @@ class ProductController {
 
     // Get /site/products
     index(req, res, next) {
-        if ( req.param('q') ) {
+        Product.aggregate([
+            { $group: {_id: {
+                SKU: '$SKU',
+                name: '$productName',
+                price: '$price' ,
+                salePrice: '$salePrice',
+                productImage: '$productImage'
+            }}}
+        ])
+            .then(products => res.render('site/product/product', {
+                title: 'N&Q Shop',
+                styles: ['product','productdetail'],
+                scripts: ['product'],
+                layout: 'layout_site.hbs',
+                products,
+            }))
+            .catch(next);
+    }
+
+    sort(req, res, next) {
+        if ( req.params.brandid && req.param('sn') === 'name' ) {
             Product.aggregate([
-                { $match: { brandId: req.param('q').toObjectId() }},
+                { $match: { brandId: req.params.brandid.toObjectId() }},
                 { $group: {_id: {
                     SKU: '$SKU',
                     name: '$productName',
                     price: '$price' ,
                     salePrice: '$salePrice',
                     productImage: '$productImage',
-                }}}
+                }}},
+                { $sort: { '_id.name' : parseInt(req.param('s')) } }
+            ])
+                .then(products => res.render('site/product/product', {
+                    title: 'N&Q Shop',
+                    styles: ['product','productdetail'],
+                    scripts: ['product'],
+                    layout: 'layout_site.hbs',
+                    products : products,
+                    brand: req.param('brand')
+                }))
+                .catch(next);
+        }
+        else if ( req.params.brandid && req.param('sn') == 'price' ) {
+            Product.aggregate([
+                { $match: { brandId: req.params.brandid.toObjectId() }},
+                { $group: {_id: {
+                    SKU: '$SKU',
+                    name: '$productName',
+                    price: '$price' ,
+                    salePrice: '$salePrice',
+                    productImage: '$productImage',
+                }}},
+                { $sort: { '_id.price' : parseInt(req.param('s')) } }
             ])
                 .then(products => res.render('site/product/product', {
                     title: 'N&Q Shop',
@@ -34,20 +77,22 @@ class ProductController {
                 .catch(next);
         } else {
             Product.aggregate([
+                { $match: { brandId: req.params.brandid.toObjectId() }},
                 { $group: {_id: {
                     SKU: '$SKU',
                     name: '$productName',
                     price: '$price' ,
                     salePrice: '$salePrice',
-                    productImage: '$productImage'
-                }}}
+                    productImage: '$productImage',
+                }}},
             ])
                 .then(products => res.render('site/product/product', {
                     title: 'N&Q Shop',
                     styles: ['product','productdetail'],
                     scripts: ['product'],
                     layout: 'layout_site.hbs',
-                    products,
+                    products : products,
+                    brand: req.param('brand')
                 }))
                 .catch(next);
         }

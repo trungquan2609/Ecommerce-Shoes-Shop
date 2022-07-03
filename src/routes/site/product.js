@@ -3,6 +3,8 @@ const router = express.Router();
 
 const productController = require('../../app/controllers/site/ProductController');
 
+router.get('/sort/:brandid', productController.sort);
+
 router.get('/:SKU', productController.detail);
 
 router.get('/', productController.index);
