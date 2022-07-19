@@ -828,13 +828,14 @@ ul .level1 li a:hover {
 .product__price {
     display: flex;
     justify-content: space-between;
+    height: 10px;
 }
 .product__price-old {
     color: var(--text-color);
     text-decoration: line-through;
 }
 .product__price-new {
-
+    height: 10px;
 }
 /* .shoesnews {
     background-color: #f5f5f7;

@@ -81,3 +81,6 @@ height: initial !important;
   top: 14px;
   right: 14px;
   }
+  .img_size{
+    height: 200px;
+  }

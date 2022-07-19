@@ -14,6 +14,7 @@ class SiteController {
     // Get /site/intro
     intro(req, res, next) {
         res.render('site/intro', {
+            title: 'Giới thiệu',
             styles: [],
             scripts: [],
             layout: 'layout_site.hbs'

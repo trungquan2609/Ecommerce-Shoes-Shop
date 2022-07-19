@@ -1,14 +1,485 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="/admin/assets/img/gallery/logomain.png">
     <title>{{title}}</title>
-</head>
-<body>
+    <link rel="stylesheet" type="text/css" href="/admin/assets/lib/perfect-scrollbar/css/perfect-scrollbar.css">
+    <link rel="stylesheet" type="text/css" href="/admin/assets/lib/material-design-icons/css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" type="text/css" href="/admin/assets/lib/jquery.vectormap/jquery-jvectormap-1.2.2.css">
+    <link rel="stylesheet" type="text/css" href="/admin/assets/lib/jqvmap/jqvmap.min.css">
+    <link rel="stylesheet" href="/admin/fontawesome-free-6.1.1-desktop/otfs/Font Awesome 6 Free-Regular-400.otf">
+    <link rel="stylesheet" href="/admin/fontawesome-free-6.1.1-desktop/otfs/Font Awesome 6 Brands-Regular-400.otf">
+    <link rel="stylesheet" href="/admin/fontawesome-free-6.1.1-desktop/otfs/Font Awesome 6 Free-Solid-900.otf">
+    <link rel="stylesheet" type="text/css" href="/admin/assets/lib/datetimepicker/css/bootstrap-datetimepicker.min.css">
+    <link rel="stylesheet" type="text/css" href="/admin\assets\lib\perfect-scrollbar\css\perfect-scrollbar.css">
+    <link rel="stylesheet" type="text/css" href="/admin\assets\lib\material-design-icons\css\material-design-iconic-font.min.css">
+    <link rel="stylesheet" type="text/css" href="/admin\assets\lib\datatables\datatables.net-bs4\css\dataTables.bootstrap4.css">
+    <link rel="stylesheet" type="text/css" href="/admin\assets\lib\datatables\datatables.net-responsive-bs4\css\responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="/admin/assets/css/app.css" type="text/css">
+    {{#each style}}
+    <link rel="stylesheet" href="/admin/assets/css/{{this}}.css" type="text/css">
+    {{/each}}
+  </head>
+  <body>
+    <div class="be-wrapper be-fixed-sidebar">
+      <nav class="navbar navbar-expand fixed-top be-top-header">
+        <div class="container-fluid">
+          <div class="be-navbar-header"><a class="navbar-brand" href="index.html"></a>
+          </div>
+          <!-- header -->
+          <div class="page-title"><span>Dashboard</span></div>
+          <div class="be-right-navbar">
+            <ul class="nav navbar-nav float-right be-user-nav">
+              <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-expanded="false"><img src="assets/img/avatar.png" alt="Avatar"><span class="user-name">Lương Ngọc Nam</span></a>
+                <div class="dropdown-menu" role="menu">     
+                  <div class="user-info">
+                    <div class="user-name">Lương Ngọc Nam</div>
+                    <div class="user-position online">Available</div>
+                  </div><a class="dropdown-item" href="account.html"><span class="icon mdi mdi-face"></span>Account</a><a class="dropdown-item" href="login.html"><span class="icon mdi mdi-power"></span>Logout</a>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <!-- phần menu -->
+      <div class="be-left-sidebar">
+        <div class="left-sidebar-wrapper"><a class="left-sidebar-toggle" href="#">Dashboard</a>
+          <div class="left-sidebar-spacer">
+            <div class="left-sidebar-scroll">
+              <div class="left-sidebar-content">
+                <ul class="sidebar-elements">
+                  <li class="divider">Menu</li>
+                  <li class="active"><a href="/admin"><i class="icon mdi mdi-home"></i><span>Dashboard</span></a>
+                  </li>
+                  <li><a href="User.html"><i class="icon mdi mdi-account"></i><span>User</span></a></li>
+                  <li class="parent"><a href="oder.html"><i class="icon mdi mdi-card"></i><span>Oder</span></a>
+                    <ul class="sub-menu">
+                      <li><a href="order.html">Xem tất cả đơn hàng</a>
+                      </li>
+                      <li><a href="Order_delivered.html">Xác nhận đơn hàng</a>
+                      </li>
+                      <!-- <li><a href="Order_completed.html">Hoàn thành đơn hàng</a>
+                      </li>
+                      <li><a href="form-wizard.html">Hủy đơn hàng</a>
+                      </li> -->
+                      </ul>
+                    </li>
+                  <li class="parent"><a href="/admin/product"><i class="icon mdi mdi-dot-circle"></i><span>Product</span></a>
+                    <ul class="sub-menu">
+                        <li><a href="/admin/product">Hiển thị sản phẩm</a>
+                        </li>
+                        <li><a href="/admin/product/addproduct">Thêm sản phẩm</a>
+                        </li>
+                        <!-- <li><a href="EditProduct.html">Sửa sản phẩm</a>
+                        </li> -->
+                        <li><a href="Comentproduct.html">Bình luận sản phẩm</a>
+                        </li>
+                    </ul>
+                  </li>
+                  <li><a href="bran.html"><i class="icon mdi mdi-layers"></i><span>Brand</span></a>
+                  </li>
+                  <li class="parent"><a href="news.html"><i class="icon mdi mdi-layers"></i><span>Tin tức</span></a>
+                    <!-- <ul class="sub-menu">
+                      <li><a href="pages-blank.html">Blank Page</a>
+                      </li>
+                      <li><a href="pages-blank-header.html">Blank Page Header</a>
+                      </li>
+                      <li><a href="pages-login.html">Login</a>
+                      </li>
+                      <li><a href="pages-login2.html">Login v2</a>
+                      </li>
+                      <li><a href="pages-404.html">404 Page</a>
+                      </li>
+                      <li><a href="pages-sign-up.html">Sign Up</a>
+                      </li>
+                      <li><a href="pages-forgot-password.html">Forgot Password</a>
+                      </li>
+                      <li><a href="pages-profile.html">Profile</a>
+                      </li>
+                      <li><a href="pages-pricing-tables.html">Pricing Tables</a>
+                      </li>
+                      <li><a href="pages-pricing-tables2.html">Pricing Tables v2</a>
+                      </li>
+                      <li><a href="pages-timeline.html">Timeline</a>
+                      </li>
+                      <li><a href="pages-timeline2.html">Timeline v2</a>
+                      </li>
+                      <li><a href="pages-invoice.html"><span class="badge badge-primary float-right">New</span>Invoice</a>
+                      </li>
+                      <li><a href="pages-calendar.html">Calendar</a>
+                      </li>
+                      <li><a href="pages-gallery.html">Gallery</a>
+                      </li>
+                      <li><a href="pages-code-editor.html"><span class="badge badge-primary float-right">New    </span>Code Editor</a>
+                      </li>
+                      <li><a href="pages-booking.html"><span class="badge badge-primary float-right">New</span>Booking</a>
+                      </li>
+                      <li><a href="pages-loaders.html"><span class="badge badge-primary float-right">New</span>Loaders</a>
+                      </li>
+                      <li><a href="pages-ajax-loader.html"><span class="badge badge-primary float-right">New</span>AJAX Loader</a>
+                      </li>
+                    </ul> -->
+                  </li>
+                  <!-- <li class="divider">Features</li>
+                  <li class="parent"><a href="#"><i class="icon mdi mdi-inbox"></i><span>Email</span></a>
+                    <ul class="sub-menu">
+                      <li><a href="email-inbox.html">Inbox</a>
+                      </li>
+                      <li><a href="email-read.html">Email Detail</a>
+                      </li>
+                      <li><a href="email-compose.html">Email Compose</a>
+                      </li>
+                    </ul>
+                  </li>
+                  <li class="parent"><a href="#"><i class="icon mdi mdi-view-web"></i><span>Layouts</span></a>
+                    <ul class="sub-menu">
+                      <li><a href="layouts-primary-header.html">Primary Header</a>
+                      </li>
+                      <li><a href="layouts-success-header.html">Success Header</a>
+                      </li>
+                      <li><a href="layouts-warning-header.html">Warning Header</a>
+                      </li>
+                      <li><a href="layouts-danger-header.html">Danger Header</a>
+                      </li>
+                      <li><a href="layouts-search-input.html">Search Input</a>
+                      </li>
+                      <li><a href="layouts-offcanvas-menu.html">Off Canvas Menu</a>
+                      </li>
+                      <li><a href="layouts-top-menu.html"><span class="badge badge-primary float-right">New</span>Top Menu</a>
+                      </li>
+                      <li><a href="layouts-nosidebar-left.html">Without Left Sidebar</a>
+                      </li>
+                      <li><a href="layouts-nosidebar-right.html">Without Right Sidebar</a>
+                      </li>
+                      <li><a href="layouts-nosidebars.html">Without Both Sidebars</a>
+                      </li>
+                      <li><a href="layouts-fixed-sidebar.html">Fixed Left Sidebar</a>
+                      </li>
+                      <li><a href="layouts-boxed-layout.html"><span class="badge badge-primary float-right">New</span>Boxed Layout</a>
+                      </li>
+                      <li><a href="pages-blank-aside.html">Page Aside</a>
+                      </li>
+                      <li><a href="layouts-collapsible-sidebar.html">Collapsible Sidebar</a>
+                      </li>
+                      <li><a href="layouts-sub-navigation.html"><span class="badge badge-primary float-right">New</span>Sub Navigation</a>
+                      </li>
+                      <li><a href="layouts-mega-menu.html"><span class="badge badge-primary float-right">New</span>Mega Menu</a>
+                      </li>
+                    </ul>
+                  </li>
+                  <li class="parent"><a href="#"><i class="icon mdi mdi-pin"></i><span>Maps</span></a>
+                    <ul class="sub-menu">
+                      <li><a href="maps-google.html">Google Maps</a>
+                      </li>
+                      <li><a href="maps-vector.html">Vector Maps</a>
+                      </li>
+                    </ul>
+                  </li>
+                  <li class="parent"><a href="#"><i class="icon mdi mdi-folder"></i><span>Menu Levels</span></a>
+                    <ul class="sub-menu">
+                      <li class="parent"><a href="#"><i class="icon mdi mdi-undefined"></i><span>Level 1</span></a>
+                        <ul class="sub-menu">
+                          <li><a href="#"><i class="icon mdi mdi-undefined"></i><span>Level 2</span></a>
+                          </li>
+                          <li class="parent"><a href="#"><i class="icon mdi mdi-undefined"></i><span>Level 2</span></a>
+                            <ul class="sub-menu">
+                              <li><a href="#"><i class="icon mdi mdi-undefined"></i><span>Level 3</span></a>
+                              </li>
+                              <li><a href="#"><i class="icon mdi mdi-undefined"></i><span>Level 3</span></a>
+                              </li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </li>
+                      <li class="parent"><a href="#"><i class="icon mdi mdi-undefined"></i><span>Level 1</span></a>
+                        <ul class="sub-menu">
+                          <li><a href="#"><i class="icon mdi mdi-undefined"></i><span>Level 2</span></a>
+                          </li>
+                          <li class="parent"><a href="#"><i class="icon mdi mdi-undefined"></i><span>Level 2</span></a>
+                            <ul class="sub-menu">
+                              <li><a href="#"><i class="icon mdi mdi-undefined"></i><span>Level 3</span></a>
+                              </li>
+                              <li><a href="#"><i class="icon mdi mdi-undefined"></i><span>Level 3</span></a>
+                              </li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                  <li><a href="documentation.html"><i class="icon mdi mdi-book"></i><span>Documentation</span></a>
+                  </li> -->
+                </ul>
+              </div>
+            </div>
+          </div>
+          {{!-- <div class="progress-widget">
+            <div class="progress-data"><span class="progress-value">60%</span><span class="name">Current Project</span></div>
+            <div class="progress">
+              <div class="progress-bar progress-bar-primary" style="width: 60%;"></div>
+            </div>
+          </div> --}}
+        </div>
+      </div>
+      {{!-- <div class="be-content">
+        <div class="main-content container-fluid">
+          <div class="row">
+            <div class="col-12 col-lg-6 col-xl-3">
+                        <div class="widget widget-tile">
+                          <div class="chart sparkline">
+                            <img src="/admin/assets/img/money total.jpg" width="81px" height="35px">
+                          </div>
+                          <div class="data-info">
+                            <div class="desc">total money</div>
+                            <div class="value"><span class="indicator indicator-equal mdi mdi-chevron-right"></span><span class="number" data-toggle="counter" data-end="113">0</span>
+                            </div>
+                          </div>
+                        </div>
+            </div>
+            <div class="col-12 col-lg-6 col-xl-3">
+                        <div class="widget widget-tile">
+                          <div class="chart sparkline" id="spark2"></div>
+                          <div class="data-info">
+                            <div class="desc">thương hiệu</div>
+                            <div class="value"><span class="indicator indicator-positive mdi mdi-chevron-up"></span><span class="number" data-toggle="counter" data-end="80" data-suffix="%">0</span>
+                            </div>
+                          </div>
+                        </div>
+            </div>
+            <div class="col-12 col-lg-6 col-xl-3">
+                        <div class="widget widget-tile">
+                          <div class="chart sparkline" id="spark3"></div>
+                          <div class="data-info">
+                            <div class="desc">Kho hàng</div>
+                            <div class="value"><span class="indicator indicator-positive mdi mdi-chevron-up"></span><span class="number" data-toggle="counter" data-end="532">0</span>
+                            </div>
+                          </div>
+                        </div>
+            </div>
+            <div class="col-12 col-lg-6 col-xl-3">
+                        <div class="widget widget-tile">
+                          <div class="chart sparkline" id="spark4"></div>
+                          <div class="data-info">
+                            <div class="desc">lượt xem</div>
+                            <div class="value"><span class="indicator indicator-negative mdi mdi-chevron-down"></span><span class="number" data-toggle="counter" data-end="113">0</span>
+                            </div>
+                          </div>
+                        </div>
+            </div>
+          </div>
+        </div>
+        </div> --}}
+        {{{body}}}
+    </div>
+      {{!-- <nav class="be-right-sidebar">
+        <div class="sb-content">
+          <div class="tab-navigation">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li class="nav-item" role="presentation"><a class="nav-link active" href="#tab1" aria-controls="tab1" role="tab" data-toggle="tab">Chat</a></li>
+              <li class="nav-item" role="presentation"><a class="nav-link" href="#tab2" aria-controls="tab2" role="tab" data-toggle="tab">Todo</a></li>
+              <li class="nav-item" role="presentation"><a class="nav-link" href="#tab3" aria-controls="tab3" role="tab" data-toggle="tab">Settings</a></li>
+            </ul>
+          </div>
+          <div class="tab-panel">
+            <div class="tab-content">
+              <div class="tab-pane tab-chat active" id="tab1" role="tabpanel">
+                <div class="chat-contacts">
+                  <div class="chat-sections">
+                    <div class="be-scroller-chat">
+                      <div class="content">
+                        <h2>Recent</h2>
+                        <div class="contact-list contact-list-recent">
+                          <div class="user"><a href="#"><img src="/admin/assets/img/1088x336.png" alt="Avatar">
+                              <div class="user-data"><span class="status away"></span><span class="name">Claire Sassu</span><span class="message">Can you share the...</span></div></a></div>
+                          <div class="user"><a href="#"><img src="/admin/assets/img/1088x336.png" alt="Avatar">
+                              <div class="user-data"><span class="status"></span><span class="name">Maggie jackson</span><span class="message">I confirmed the info.</span></div></a></div>
+                          <div class="user"><a href="#"><img src="/admin/assets/img/avatar3.png" alt="Avatar">
+                              <div class="user-data"><span class="status offline"></span><span class="name">Joel King		</span><span class="message">Ready for the meeti...</span></div></a></div>
+                        </div>
+                        <h2>Contacts</h2>
+                        <div class="contact-list">
+                          <div class="user"><a href="#"><img src="/admin/assets/img/avatar4.png" alt="Avatar">
+                              <div class="user-data2"><span class="status"></span><span class="name">Mike Bolthort</span></div></a></div>
+                          <div class="user"><a href="#"><img src="/admin/assets/img/avatar5.png" alt="Avatar">
+                              <div class="user-data2"><span class="status"></span><span class="name">Maggie jackson</span></div></a></div>
+                          <div class="user"><a href="#"><img src="/admin/assets/img/avatar6.png" alt="Avatar">
+                              <div class="user-data2"><span class="status offline"></span><span class="name">Jhon Voltemar</span></div></a></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="bottom-input">
+                    <input type="text" placeholder="Search..." name="q"><span class="mdi mdi-search"></span>
+                  </div>
+                </div>
+                <div class="chat-window">
+                  <div class="title">
+                    <div class="user"><img src="assets/img/avatar2.png" alt="Avatar">
+                      <h2>Maggie jackson</h2><span>Active 1h ago</span>
+                    </div><span class="icon return mdi mdi-chevron-left"></span>
+                  </div>
+                  <div class="chat-messages">
+                    <div class="be-scroller-messages">
+                      <div class="content">
+                        <ul>
+                          <li class="friend">
+                            <div class="msg">Hello</div>
+                          </li>
+                          <li class="self">
+                            <div class="msg">Hi, how are you?</div>
+                          </li>
+                          <li class="friend">
+                            <div class="msg">Good, I'll need support with my pc</div>
+                          </li>
+                          <li class="self">
+                            <div class="msg">Sure, just tell me what is going on with your computer?</div>
+                          </li>
+                          <li class="friend">
+                            <div class="msg">I don't know it just turns off suddenly</div>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="chat-input">
+                    <div class="input-wrapper"><span class="photo mdi mdi-camera"></span>
+                      <input type="text" placeholder="Message..." name="q" autocomplete="off"><span class="send-msg mdi mdi-mail-send"></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane tab-todo" id="tab2" role="tabpanel">
+                <div class="todo-container">
+                  <div class="todo-wrapper">
+                    <div class="be-scroller-todo">
+                      <div class="todo-content"><span class="category-title">Today</span>
+                        <ul class="todo-list">
+                          <li>
+                            <div class="custom-checkbox custom-control custom-control-sm"><span class="delete mdi mdi-delete"></span>
+                              <input class="custom-control-input" type="checkbox" checked="" id="tck1">
+                              <label class="custom-control-label" for="tck1">Initialize the project</label>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="custom-checkbox custom-control custom-control-sm"><span class="delete mdi mdi-delete"></span>
+                              <input class="custom-control-input" type="checkbox" id="tck2">
+                              <label class="custom-control-label" for="tck2">Create the main structure							</label>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="custom-checkbox custom-control custom-control-sm"><span class="delete mdi mdi-delete"></span>
+                              <input class="custom-control-input" type="checkbox" id="tck3">
+                              <label class="custom-control-label" for="tck3">Updates changes to GitHub							</label>
+                            </div>
+                          </li>
+                        </ul><span class="category-title">Tomorrow</span>
+                        <ul class="todo-list">
+                          <li>
+                            <div class="custom-checkbox custom-control custom-control-sm"><span class="delete mdi mdi-delete"></span>
+                              <input class="custom-control-input" type="checkbox" id="tck4">
+                              <label class="custom-control-label" for="tck4">Initialize the project							</label>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="custom-checkbox custom-control custom-control-sm"><span class="delete mdi mdi-delete"></span>
+                              <input class="custom-control-input" type="checkbox" id="tck5">
+                              <label class="custom-control-label" for="tck5">Create the main structure							</label>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="custom-checkbox custom-control custom-control-sm"><span class="delete mdi mdi-delete"></span>
+                              <input class="custom-control-input" type="checkbox" id="tck6">
+                              <label class="custom-control-label" for="tck6">Updates changes to GitHub							</label>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="custom-checkbox custom-control custom-control-sm"><span class="delete mdi mdi-delete"></span>
+                              <input class="custom-control-input" type="checkbox" id="tck7">
+                              <label class="custom-control-label" for="tck7" title="This task is too long to be displayed in a normal space!">This task is too long to be displayed in a normal space!							</label>
+                            </div>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="bottom-input">
+                    <input type="text" placeholder="Create new task..." name="q"><span class="mdi mdi-plus"></span>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane tab-settings" id="tab3" role="tabpanel">
+                <div class="settings-wrapper">
+                  <div class="be-scroller-settings"><span class="category-title">General</span>
+                    <ul class="settings-list">
+                      <li>
+                        <div class="switch-button switch-button-sm">
+                          <input type="checkbox" checked="" name="st1" id="st1"><span>
+                            <label for="st1"></label></span>
+                        </div><span class="name">Available</span>
+                      </li>
+                      <li>
+                        <div class="switch-button switch-button-sm">
+                          <input type="checkbox" checked="" name="st2" id="st2"><span>
+                            <label for="st2"></label></span>
+                        </div><span class="name">Enable notifications</span>
+                      </li>
+                      <li>
+                        <div class="switch-button switch-button-sm">
+                          <input type="checkbox" checked="" name="st3" id="st3"><span>
+                            <label for="st3"></label></span>
+                        </div><span class="name">Login with Facebook</span>
+                      </li>
+                    </ul><span class="category-title">Notifications</span>
+                    <ul class="settings-list">
+                      <li>
+                        <div class="switch-button switch-button-sm">
+                          <input type="checkbox" name="st4" id="st4"><span>
+                            <label for="st4"></label></span>
+                        </div><span class="name">Email notifications</span>
+                      </li>
+                      <li>
+                        <div class="switch-button switch-button-sm">
+                          <input type="checkbox" checked="" name="st5" id="st5"><span>
+                            <label for="st5"></label></span>
+                        </div><span class="name">Project updates</span>
+                      </li>
+                      <li>
+                        <div class="switch-button switch-button-sm">
+                          <input type="checkbox" checked="" name="st6" id="st6"><span>
+                            <label for="st6"></label></span>
+                        </div><span class="name">New comments</span>
+                      </li>
+                      <li>
+                        <div class="switch-button switch-button-sm">
+                          <input type="checkbox" name="st7" id="st7"><span>
+                            <label for="st7"></label></span>
+                        </div><span class="name">Chat messages</span>
+                      </li>
+                    </ul><span class="category-title">Workflow</span>
+                    <ul class="settings-list">
+                      <li>
+                        <div class="switch-button switch-button-sm">
+                          <input type="checkbox" name="st8" id="st8"><span>
+                            <label for="st8"></label></span>
+                        </div><span class="name">Deploy on commit</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav> --}}
+    </div>
     
-    {{{body}}}
-
-</body>
+ 
+    
+  </body>
 </html>

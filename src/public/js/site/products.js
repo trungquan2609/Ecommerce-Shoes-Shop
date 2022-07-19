@@ -238,9 +238,9 @@ var page = 1;
         if(apiProduct.page == page) {
           return `<div class="col-lg-4 col-md-6 col-12 mb-20" style="margin-bottom: 20px">
               <a href="./ProductDetail.html" class="product__new-item">
-                <div class="card" style="width: 100%">
+                <div class="card" style="width: 100%;">
                   <div>
-                    <img class="card-img-top" src="${apiProduct.img}" alt="Card image cap">
+                    <img class="card-img-top" style="height: 60%;" src="${apiProduct.img}" alt="Card image cap">
                     <form action="" class="hover-icon hidden-sm hidden-xs hidden-sm hidden-xs">
                       <input type="hidden">
                       <a href="" class="btn-add-to-cart" title="Mua ngay">
@@ -293,9 +293,9 @@ var page = 1;
         if(apiProduct.page == page) {
           return `<div class="col-lg-4 col-md-6 col-12 mb-20" style="margin-bottom: 20px">
               <a href="./ProductDetail.html" class="product__new-item">
-                <div class="card" style="width: 100%">
+                <div class="card" style="width: 100%;">
                   <div>
-                    <img class="card-img-top" src="${apiProduct.img}" alt="Card image cap">
+                    <img class="card-img-top" style="height: 60%;" src="${apiProduct.img}" alt="Card image cap">
                     <form action="" class="hover-icon hidden-sm hidden-xs hidden-sm hidden-xs">
                       <input type="hidden">
                       <a href="" class="btn-add-to-cart" title="Mua ngay">
@@ -361,9 +361,9 @@ var page = 1;
         if(apiProduct.idsort == idSort) {
           return `<div class="col-lg-4 col-md-6 col-12 mb-20" style="margin-bottom: 20px">
               <a href="./ProductDetail.html" class="product__new-item">
-                <div class="card" style="width: 100%">
+                <div class="card" style="width: 100%;">
                   <div>
-                    <img class="card-img-top" src="${apiProduct.img}" alt="Card image cap">
+                    <img class="card-img-top" style="height: 60%;" src="${apiProduct.img}" alt="Card image cap">
                     <form action="" class="hover-icon hidden-sm hidden-xs hidden-sm hidden-xs">
                       <input type="hidden">
                       <a href="" class="btn-add-to-cart" title="Mua ngay">
@@ -421,9 +421,9 @@ var page = 1;
         if(apiProduct.idkg == idkg) {
           return `<div class="col-lg-4 col-md-6 col-12 mb-20" style="margin-bottom: 20px">
               <a href="./ProductDetail.html" class="product__new-item">
-                <div class="card" style="width: 100%">
+                <div class="card" style="width: 100%;">
                   <div>
-                    <img class="card-img-top" src="${apiProduct.img}" alt="Card image cap">
+                    <img class="card-img-top" style="height: 60%;" src="${apiProduct.img}" alt="Card image cap">
                     <form action="" class="hover-icon hidden-sm hidden-xs hidden-sm hidden-xs">
                       <input type="hidden">
                       <a href="" class="btn-add-to-cart" title="Mua ngay">
@@ -481,7 +481,7 @@ var page = 1;
               <a href="./ProductDetail.html" class="product__new-item">
                 <div class="card" style="width: 100%">
                   <div>
-                    <img class="card-img-top" src="${apiProduct.img}" alt="Card image cap">
+                    <img class="card-img-top" style="height: 60%;" src="${apiProduct.img}" alt="Card image cap">
                     <form action="" class="hover-icon hidden-sm hidden-xs hidden-sm hidden-xs">
                       <input type="hidden">
                       <a href="" class="btn-add-to-cart" title="Mua ngay">
@@ -536,9 +536,9 @@ var page = 1;
         if(apiProduct.idsize == idsize) {
           return `<div class="col-lg-4 col-md-6 col-12 mb-20" style="margin-bottom: 20px">
               <a href="./ProductDetail.html" class="product__new-item">
-                <div class="card" style="width: 100%">
+                <div class="card" style="width: 100%;">
                   <div>
-                    <img class="card-img-top" src="${apiProduct.img}" alt="Card image cap">
+                    <img class="card-img-top" style="height: 60%;" src="${apiProduct.img}" alt="Card image cap">
                     <form action="" class="hover-icon hidden-sm hidden-xs hidden-sm hidden-xs">
                       <input type="hidden">
                       <a href="" class="btn-add-to-cart" title="Mua ngay">

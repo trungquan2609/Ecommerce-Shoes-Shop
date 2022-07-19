@@ -148,7 +148,7 @@ function initRender() {
     if(apiNew.page == page) {
       return `<div class="col-lg-3 col-md-6 col-sm-12 mb-20" style="margin-bottom: 20px">
                 <a href="./newDetail.html" class="product__new-item">
-                  <div class="card" style="width: 100%">
+                  <div class="card" style="width: 100%;  height :60%;">
                     <img class="card-img-top" src="${apiNew.img}" alt="Card image cap">
                     <div class="card-body">
                       <h5 class="card-title custom__name-product title-news">
@@ -171,7 +171,7 @@ function render() {
     if(apiNew.page == page) {
       return `<div class="col-lg-3 col-md-6 col-sm-12 mb-20" style="margin-bottom: 20px">
                 <a href="./newDetail.html" class="product__new-item">
-                  <div class="card" style="width: 100%">
+                  <div class="card" style="width: 100%; height :60%;">
                     <img class="card-img-top" src="${apiNew.img}" alt="Card image cap">
                     <div class="card-body">
                       <h5 class="card-title custom__name-product title-news">
