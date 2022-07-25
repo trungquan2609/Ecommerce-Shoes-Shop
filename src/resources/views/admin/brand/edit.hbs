@@ -1,0 +1,46 @@
+<div class="be-content">
+        <div class="page-head">
+          <h2 class="page-head-title">Thêm thương hiệu</h2>
+          <nav aria-label="breadcrumb" role="navigation">
+            <ol class="breadcrumb page-head-nav">
+              <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+              <li class="breadcrumb-item"><a href="bran.html">Brand</a></li>
+              <li class="breadcrumb-item active">Sửa thương hiệu</li>
+            </ol>
+          </nav>
+        </div>
+        <div class="main-content container-fluid">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="card card-border-color card-border-color-primary">
+                    <div class="card-header card-header-divider">Sửa Thương hiệu</div>
+                    <div class="card-body">
+                      <form action="/admin/brand/edit/{{brand._id}}?_csrf={{ csrfToken }}&_method=PATCH" method="POST" enctype="multipart/form-data">
+                        <div class="form-group row">
+                          <label class="col-12 col-sm-3 col-form-label text-sm-right">Tên thương hiệu</label>
+                          <div class="col-12 col-sm-8 col-lg-6">
+                            <input class="form-control" type="text" required="" placeholder="" name="brandName" value="{{brand.brandName}}">
+                          </div>
+                        </div>
+                          <div class="form-group row">
+                            <label class="col-12 col-sm-3 col-form-label text-sm-right" for="brandImage">Hình ảnh</label>
+                            <div class="col-12 col-sm-6">
+                              <input class="inputfile" id="brandImage" type="file" name="brandImage" data-multiple-caption="{count} files selected" multiple="">
+                              <label class="btn-secondary" for="brandImage"> <i class="mdi mdi-upload"></i><span>Thêm ảnh</span></label>
+                            </div>
+                          </div>
+                        <div class="form-group row text-right">
+                          <div class="col col-sm-10 col-lg-9 offset-sm-1 offset-lg-0">
+                            <button class="btn btn-space btn-primary" type="submit">Submit</button>
+                            <button class="btn btn-space btn-secondary">Cancel</button>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+      <nav class="be-right-sidebar">
+        </div>
+      </nav>
+    </div>

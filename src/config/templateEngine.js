@@ -11,8 +11,9 @@ function templateEngine(app) {
         handlebars: allowInsecurePrototypeAccess(handlebars),
         helpers: {
             sum: (a, b) => a + b,
+            totalPrice: (a) => a + 50000,
             salePercent: (a, b) => Math.round(100 - (a / b * 100)),
-            priceFormat: (a) => a.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
+            priceFormat: (a) => a?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
             json: function (context) {
                 return JSON.stringify(context);
             },
@@ -24,7 +25,7 @@ function templateEngine(app) {
                 for(var i = 0; i < max && i < object.length; ++i)
                     result.push(options.fn(object[i]));
                 return result.join('');
-            }
+            },
         },
     }));
     app.set('view engine', 'hbs');

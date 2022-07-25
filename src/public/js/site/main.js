@@ -26,26 +26,37 @@ function changeImg(id){
     let imgPath = document.getElementById(id).getAttribute('src');
     document.getElementById('img-main').setAttribute('src', imgPath);
 }
-function check(){
+function check(id){
     
-    var type = document.getElementsByName("mau");
-    if(type[0].checked)
-    {
-        var val = type[0].value;
-        console.log(val);
+    var type = document.getElementsByName("size");
+    // if(type[0].checked)
+    // {
+    //     var val = type[0].value;
+    //     console.log(val);
+    // }
+    // else if(type[1].checked)
+    // {
+    //     var val = type[1].value;
+    //     console.log(val);
+    // }
+    // else if(type[2].checked)
+    // {
+    //     var val = type[2].value;
+    //     console.log(val);
+    // }
+    for ( var i in type) {
+        if( type[i].checked){
+            var val = type[i].value;
+            var qty = $('#text_so_luong-1').val()
+            $('#add-to-cart').prop('href', `/cart/addtocart/${val}?qty=${qty}`)
+        }
     }
-    else if(type[1].checked)
-    {
-        var val = type[1].value;
-        console.log(val);
-    }
-    else if(type[2].checked)
-    {
-        var val = type[2].value;
-        console.log(val);
-    }
-    
 }
+
+$('.add-cart').click(function(){
+    check()
+})
+
 $(document).ready(function(){
     $(window).resize(function() {
         if($(window).width() < 739) {

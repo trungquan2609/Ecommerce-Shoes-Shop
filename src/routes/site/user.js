@@ -1,20 +1,20 @@
 const express = require('express');
 const router = express.Router();
 const passport = require('passport');
-const csrf = require('csurf');
+// const csrf = require('csurf');
 const userController = require('../../app/controllers/site/UserController');
-var csrfProtection = csrf();
+// var csrfProtection = csrf();
 const upload = require('../../config/upload');
 
 // router.use(csrfProtection);
 
-router.put('/profile/changepassword', csrfProtection, userController.changePassword);
+router.put('/profile/changepassword', userController.changePassword);
 
 router.get('/profile', isLoggedIn, userController.profile);
 
-router.patch('/profile', upload.single('avatar'), csrfProtection, userController.updateProfile);
+router.patch('/profile', upload.single('avatar'), userController.updateProfile);
 
-router.delete('/logout', isLoggedIn, csrfProtection, userController.logout);
+router.delete('/logout', isLoggedIn, userController.logout);
 
 router.use('/', notLoggedIn, function (req, res, next) {
     next();
@@ -22,7 +22,7 @@ router.use('/', notLoggedIn, function (req, res, next) {
 
 router.get('/register', userController.registerSite);
 
-router.post('/register', csrfProtection, passport.authenticate('local.register', {
+router.post('/register', passport.authenticate('local.register', {
     successRedirect: '/user/login',
     failureRedirect: '/user/register',
     failureFlash: true,
@@ -31,11 +31,10 @@ router.post('/register', csrfProtection, passport.authenticate('local.register',
 
 router.get('/login', userController.loginSite);
 
-router.post('/login', csrfProtection, passport.authenticate('local.login', {
-    successRedirect: '/',
+router.post('/login', passport.authenticate('local.login', {
     failureRedirect: '/user/login',
     failureFlash: true
-}));
+}), userController.login);
 
 module.exports = router;
 

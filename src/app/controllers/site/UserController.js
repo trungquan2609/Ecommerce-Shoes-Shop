@@ -75,6 +75,20 @@ class UserController {
     changePassword(req, res, next) {
         res.redirect('/profile');
     }
+
+    login(req, res, next) {
+        if (req.session.oldUrl) {
+            const oldUrl = req.session.oldUrl;
+            req.session.oldUrl = null;
+            res.redirect(oldUrl)
+        } else {
+            res.redirect('/user/profile')
+        }
+    }
+
+    register(req, res, next) {
+
+    }
 }
 
 module.exports = new UserController;

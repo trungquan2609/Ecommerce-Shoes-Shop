@@ -15,8 +15,7 @@
                   <div class="card card-border-color card-border-color-primary">
                     <div class="card-header card-header-divider">Thêm sản phẩm</div>
                     <div class="card-body">
-                      <form action="/admin/product/addproduct" method="POST">
-            <input type="hidden" name="_csrf" value="{{ csrfToken }}">
+                      <form action="/admin/product/addproduct?_csrf={{ csrfToken }}" method="POST" enctype="multipart/form-data">
 
                         <div class="form-group row">
                           <label class="col-12 col-sm-3 col-form-label text-sm-right">Sku</label>
@@ -33,12 +32,10 @@
                         <div class="form-group row pt-1">
                             <label class="col-12 col-sm-3 col-form-label text-sm-right">Nhãn hiệu</label>
                             <div class="col-12 col-sm-8 col-lg-6">
-                              <select class="form-control" name="brandName">
-                                <option value="1" selected="">Adidas</option>
-                                <option value="2">Nike</option>
-                                <option value="3">Asics</option>
-                                <option value="4">Puma</option>
-                                <option value="5">Converse</option>
+                              <select class="form-control" name="brandId">
+                                {{#each brand}}
+                                  <option value="{{this._id}}">{{this.brandName}}</option>
+                                {{/each}}
                               </select>
                             </div>
                           </div>
@@ -118,6 +115,20 @@
     <script src="/admin\assets\lib\datatables\datatables.net-buttons-bs4\js\buttons.bootstrap4.min.js" type="text/javascript"></script>
     <script src="/admin\assets\lib\datatables\datatables.net-responsive\js\dataTables.responsive.min.js" type="text/javascript"></script>
     <script src="/admin\assets\lib\datatables\datatables.net-responsive-bs4\js\responsive.bootstrap4.min.js" type="text/javascript"></script>
+    <script src="admin\assets\lib\jquery.nestable\jquery.nestable.js" type="text/javascript"></script>
+            <script src="admin\assets\lib\moment.js\min\moment.min.js" type="text/javascript"></script>
+            <script src="admin\assets\lib\datetimepicker\js\bootstrap-datetimepicker.min.js" type="text/javascript"></script>
+            <script src="admin\assets\lib\select2\js\select2.min.js" type="text/javascript"></script>
+            <script src="admin\assets\lib\select2\js\select2.full.min.js" type="text/javascript"></script>
+            <script src="admin\assets\lib\bootstrap-slider\bootstrap-slider.min.js" type="text/javascript"></script>
+            <script src="admin\assets\lib\bs-custom-file-input\bs-custom-file-input.js" type="text/javascript"></script>
+            <script type="text/javascript">
+              $(document).ready(function(){
+                //-initialize the javascript
+                App.init();
+                App.formElements();
+              });
+            </script>
     <script type="text/javascript">
       $(document).ready(function(){
       	//-initialize the javascript

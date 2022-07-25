@@ -1,3 +1,4 @@
+const { response } = require("express");
 
 class SiteController {
 
@@ -8,7 +9,7 @@ class SiteController {
             styles: ['productdetail'],
             scripts: [],
             layout: 'layout_site.hbs'
-        });
+        })
     }
 
     // Get /site/intro
@@ -19,6 +20,15 @@ class SiteController {
             scripts: [],
             layout: 'layout_site.hbs'
         });
+    }
+
+    success(req, res, next) {
+        res.render('site/success', {
+            title: 'Đặt hàng thành công',
+            styles: [],
+            scripts: [],
+            layout: 'layout_site.hbs'
+        })
     }
 }
 

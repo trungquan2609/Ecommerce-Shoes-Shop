@@ -11,6 +11,8 @@ const userSchema = new Schema({
     avatar: { type: String, default: '' },
     role: { type: String, default: 'member' },
     status: { type: String, default: 'noactive' },
+    totalSpent: { type: Number, default: 0 },
+    
 }, {
     collection: 'users',
     timestamps: true,

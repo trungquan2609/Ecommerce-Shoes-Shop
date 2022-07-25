@@ -6,7 +6,8 @@ String.prototype.toObjectId = function() {
     var ObjectId = (require('mongoose').Types.ObjectId);
     return new ObjectId(this.toString());
 };
-const _ = require('lodash')
+const _ = require('lodash');
+const user_model = require('../../models/user_model');
 
 class ProductController {
 
@@ -100,6 +101,14 @@ class ProductController {
 
     //GET site/productdetail
     detail(req, res, next) {
+        var user = req.user ? req.user : null;
+        
+        var message = req.flash('info')
+        if (message == 'Đã thêm vào giỏ hàng') {
+            var info = 'success';
+        } else {
+            var info = 'danger'
+        }
         Product.find({ SKU: req.params.SKU}).populate('brandId','brandName')
             // .then(function (product) {
             //     res.send((product));
@@ -107,9 +116,12 @@ class ProductController {
             .then(product => res.render('site/product/productDetail', {
                 title: 'N&Q Shop',
                 styles: ['productdetail'],
-                scripts: ['zoomsl','productdetail'],
+                scripts: ['zoomsl','productdetai'],
                 layout: 'layout_site.hbs',
-                product: product,
+                product,
+                user,
+                message,
+                info
             }))
             .catch(next);
     }
