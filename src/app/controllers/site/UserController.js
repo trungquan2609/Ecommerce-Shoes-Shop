@@ -1,6 +1,7 @@
 const User = require('../../models/user_model');
 const multer = require('multer');
 const bcrypt = require('bcrypt');
+const Order = require('../../models/order_model');
 
 class UserController {
 
@@ -32,14 +33,23 @@ class UserController {
     }
 
     // Get /user/profile
-    profile(req, res, next) {
+    async profile(req, res, next) {
         var messages = req.flash('error');
+        const order = await Order.find({userId: req.user._id})
+        // if ( order.confirmStatus === 'Xác nhận đơn hàng') {
+        //     const statusPending = 'green';
+        // } else if( order.confirmStatus === 'Huỷ đơn hàng') {
+        //     const statusPending = 'red';
+        // } else {
+        //     const statusPending = 'blue';
+        // }
         res.render('site/user/profile', {
             title: 'Thông tin tài khoản',
             styles: ['login', 'account'],
             scripts: ['account'],
             layout: 'layout_site.hbs',
             messages: messages,
+            order,
         });
     }
 

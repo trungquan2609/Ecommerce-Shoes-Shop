@@ -2,9 +2,11 @@ const adminRouter = require('./site');
 const productRouter = require('./product');
 const brandRouter = require('./brand');
 const orderRouter = require('./order');
+const userRouter = require('./user');
 
 function routeAdmin(app) {
 
+    app.use('/admin/user', userRouter)
     app.use('/admin/order', orderRouter);
     app.use('/admin/brand', brandRouter);
     app.use('/admin/product', productRouter);

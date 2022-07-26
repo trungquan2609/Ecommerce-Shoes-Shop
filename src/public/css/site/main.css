@@ -1214,6 +1214,3 @@ i.home-product-item__like-icon-fill {
           -ms-user-select: none; 
               user-select: none; 
   }
-  input:disabled {
-    background: #dddddd;
-  }

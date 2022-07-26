@@ -30,6 +30,7 @@
                         <th>Trang thái đơn hàng</th>
                         <th>Tình trạng đơn hàng</th>
                         <th>Ngày tạo đơn hàng</th>
+                        <th>Ngày cập nhật đơn hàng</th>
                         <th>Thao tác</th>
                       </tr>
                     </thead>
@@ -45,32 +46,13 @@
                         <td class="center">{{this.paymentMethod.name}}</td>
                         <td class="center">{{this.totalPrice}}</td>
                         <td class="center">{{this.status}}</td>
-                        <td class="center">{{this.confirmed}}</td>
+                        <td class="center">{{this.confirmStatus}}</td>
                         <td class="center">{{this.createdAt}}</td>
+                        <td class="center">{{this.updatedAt}}</td>
                         <td class="center">
-                          <a href="/admin/order/{{this._id}}"><button class="btn btn-rounded btn-space btn-primary">Sửa</button></a>
-                          <a href=""><button class="btn btn-rounded btn-space btn-danger">Xóa</button></a>
+                          <a href="/admin/order/{{this._id}}"><button class="btn btn-rounded btn-space btn-primary">Chi tiết</button></a>
                         </td>
                       </tr>
-                      {{!-- <tr class="even gradeC">
-                        <td>Ngọc nam</td>
-                        <td>0911068858</td>
-                        <td>
-                          Số nhà 12 an xá
-                        </td>
-                        <td>Giày addidas
-                          giày nike
-                          giày puma
-                          giày thể thao
-                        </td>
-                        <td class="center"> Thanh toán trực tiếp khi nhận hàng</td>
-                        <td class="center">25.000.000</td>
-                        <td class="center">Hủy đơn hàng</td>
-                        <td class="center">
-                          <a href="Order_status.html"><button class="btn btn-rounded btn-space btn-primary">Sửa</button></a>
-                          <a href=""><button class="btn btn-rounded btn-space btn-danger">Xóa</button></a>
-                        </td>
-                      </tr> --}}
                         {{/each}}
                     </tbody>
                   </table>

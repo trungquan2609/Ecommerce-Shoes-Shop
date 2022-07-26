@@ -30,6 +30,15 @@ class SiteController {
             layout: 'layout_site.hbs'
         })
     }
+
+    contact(req, res, next) {
+        res.render('site/contact', {
+            title: 'Liên hệ',
+            styles: ['login'],
+            scripts: [],
+            layout: 'layout_site.hbs'
+        })
+    }
 }
 
 module.exports = new SiteController;

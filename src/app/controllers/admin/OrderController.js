@@ -22,6 +22,15 @@ class OrderController {
                 rs
             }))
     }
+
+    async update(req, res, next) {
+        var productId = req.params.id;
+        var q = {
+            confirmStatus: req.body.confirmStatus
+        }
+        Order.updateOne({ _id: productId}, q)
+            .then(res.redirect('/admin/order/'))
+    }
 }
 
 module.exports = new OrderController;

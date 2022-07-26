@@ -3,6 +3,7 @@ const Product = require('../../models/product_model');
 const Order = require('../../models/order_model');
 const mongoose = require('mongoose');
 const fetch = require('node-fetch');
+const User = require('../../models/user_model');
 // const paypal = require('@paypal/checkout-server-sdk');
 // const Environment =
 //   process.env.NODE_ENV === "production"
@@ -14,7 +15,7 @@ const fetch = require('node-fetch');
 //     process.env.PAYPAL_CLIENT_SECRET
 //   )
 // )
-const paypal = require('../../../config/paypal-api')
+const paypal = require('../../../config/paypal-api');
 
 class CartController {
     
@@ -147,8 +148,8 @@ class CartController {
         try {
             var listItems = [];
             const captureData = await paypal.capturePayment(orderID);
-            var paypalFee = await (captureData.purchase_units[0].payments.captures[0].seller_receivable_breakdown.paypal_fee.value * 23405).toFixed(2);
-            var lastReceive = await (captureData.purchase_units[0].payments.captures[0].seller_receivable_breakdown.net_amount.value * 23405).toFixed(2);
+            var paypalFee = (captureData.purchase_units[0].payments.captures[0].seller_receivable_breakdown.paypal_fee.value * 23405).toFixed(2);
+            var lastReceive = (captureData.purchase_units[0].payments.captures[0].seller_receivable_breakdown.net_amount.value * 23405).toFixed(2);
             for (var i in req.session.cart.items) {
                 listItems.push(req.session.cart.items[i])
             }
@@ -167,9 +168,10 @@ class CartController {
             }
             const order = new Order(storeOrder)
             order.save()
+            const user = await User.findById(req.user._id)
+            var userTotalSpent = user.totalSpent + parseInt(req.session.cart.totalPrice);
+            const q = await User.findByIdAndUpdate({ _id: req.user._id} , { totalSpent: userTotalSpent})
             req.session.cart = null;
-                
-            // res.redirect('/success')
             res.send(captureData);
         } catch (err) {
             res.status(500).send(err.message);

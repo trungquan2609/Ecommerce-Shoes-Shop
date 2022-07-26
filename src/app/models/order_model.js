@@ -7,6 +7,7 @@ const orderSchema = new Schema({
     userId: {type: Schema.Types.ObjectId, ref: User},
     productId: Array,
     status: String,
+    confirmStatus: String,
     totalPrice: {type: Number},
     totalQty: Number,
     paymentMethod: Object,

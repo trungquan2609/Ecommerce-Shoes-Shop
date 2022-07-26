@@ -36,6 +36,7 @@
     "express-handlebars": "^6.0.6",
     "express-session": "^1.17.3",
     "express-validator": "^6.14.1",
+    "handlebars-dateformat": "^1.1.2",
     "husky": "^8.0.1",
     "lint-staged": "^12.4.2",
     "mongoose": "^6.3.4",

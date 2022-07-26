@@ -113,7 +113,6 @@
                 <table class="table table-hover">
                   <thead>
                     <tr>
-                      <th>MĐH</th>
                       <th>Ngày</th>
                       <th>Tổng tiền</th>
                       <th>Trạng thái</th>
@@ -121,17 +120,18 @@
                     </tr>
                   </thead>
                   <tbody>
+                    {{#each order}}
+                    
                     <tr>
-                      <td>#1</td>
-                      <td>05-06-2021</td>
-                      <td>3.000.000 VNĐ</td>
+                      <td>{{{dateFormat this.createdAt "DD-MM-YYYY"}}}</td>
+                      <td>{{this.totalPrice}}</td>
                       <td>
-                        <span class="btn-stt blue">Đang xác nhận</span>
+                        <span class="btn-stt blue">{{this.confirmStatus}}</span>
                       </td>
                       <td><a href="" data-toggle="modal" data-target="#myModal">Xem</a></td>
                     </tr>
-                    <tr>
-                      <td>#2</td>
+                    {{/each}}
+                    {{!-- <tr>
                       <td>05-06-2021</td>
                       <td>3.000.000 VNĐ</td>
                       <td>
@@ -147,7 +147,7 @@
                         <span class="btn-stt red">Đã hủy</span>
                       </td>
                       <td><a href="" data-toggle="modal" data-target="#myModal">Xem</a></td>
-                    </tr>
+                    </tr> --}}
                   </tbody>
                 </table>
               </div>

@@ -4,6 +4,7 @@ const expressHandlebars = require('express-handlebars');
 const handlebars = require('handlebars');
 const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access');
 const path = require('path');
+const dateFormat = require('handlebars-dateformat');
 
 function templateEngine(app) {
     app.engine('.hbs', expressHandlebars.engine({
@@ -17,6 +18,7 @@ function templateEngine(app) {
             json: function (context) {
                 return JSON.stringify(context);
             },
+            dateFormat,
             limit: function (object, max, options) {
                 if(!object || object.length == 0)
                 return options.inverse(this);
@@ -26,6 +28,7 @@ function templateEngine(app) {
                     result.push(options.fn(object[i]));
                 return result.join('');
             },
+            ifEq: (a, b, c) => (a == b) ? c.fn(this) : c.inverse(this)
         },
     }));
     app.set('view engine', 'hbs');
