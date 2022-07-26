@@ -126,7 +126,10 @@
                       <td>{{{dateFormat this.createdAt "DD-MM-YYYY"}}}</td>
                       <td>{{this.totalPrice}}</td>
                       <td>
-                        <span class="btn-stt blue">{{this.confirmStatus}}</span>
+                        <span class="btn-stt {{#ifEq this.confirmStatus "Xác nhận đơn hàng"}}green{{/ifEq}}
+                        {{#ifEq this.confirmStatus "Chưa xác nhận"}}blue{{/ifEq}}{{#ifEq this.confirmStatus "Huỷ đơn hàng"}}red{{/ifEq}}">
+                        {{this.confirmStatus}}
+                        </span>
                       </td>
                       <td><a href="" data-toggle="modal" data-target="#myModal">Xem</a></td>
                     </tr>
