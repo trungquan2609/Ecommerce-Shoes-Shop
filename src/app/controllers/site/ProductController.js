@@ -100,7 +100,7 @@ class ProductController {
     }
 
     //GET site/productdetail
-    detail(req, res, next) {
+    async detail(req, res, next) {
         var user = req.user ? req.user : null;
         
         var message = req.flash('info')

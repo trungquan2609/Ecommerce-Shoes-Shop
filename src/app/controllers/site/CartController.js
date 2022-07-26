@@ -37,11 +37,6 @@ class CartController {
                 layout: 'layout_site.hbs',
             })
         }
-        var listItems = [];
-        for (var i in req.session.cart.items) {
-            listItems.push(req.session.cart.items[i])
-        }
-        console.log(listItems)
     }
     
     async addToCart(req, res, next) {
@@ -52,6 +47,7 @@ class CartController {
             var count = currentQuantityProduct.quantity - qty
             var updateQuantityProduct = {quantity: count};
             const q = await Product.findOneAndUpdate({ _id: productId}, updateQuantityProduct)
+            console.log(q)
             var cart = new Cart(req.session.cart ? req.session.cart : {});
             Product.findById(productId, function (err, product) {
                 if (err) {
@@ -98,7 +94,7 @@ class CartController {
         res.render('site/cart/checkout', {
             title: 'Thanh toán',
             styles: ['pay'],
-            scripts: ['checkout', 'pay'],
+            scripts: ['checkout'],
             layout: 'layout_site.hbs',
             clientId: process.env.PAYPAL_CLIENT_ID,
             user: req.user,
@@ -160,14 +156,21 @@ class CartController {
                 userId: req.user._id,
                 productId: listItems,
                 totalPrice: req.session.cart.totalPrice,
-                status: "PayPal",
+                totalQty: req.session.cart.totalQty,
+                status: "Đã thanh toán",
+                confirmStatus: "Chưa xác nhận",
+                paymentMethod: {
+                name: "PayPal",
                 paypalFee: paypalFee,
                 lastTotal: lastReceive,
             }
+            }
             const order = new Order(storeOrder)
             order.save()
-                .then(() => res.redirect('/success'))
-            // res.send(captureData);
+            req.session.cart = null;
+                
+            // res.redirect('/success')
+            res.send(captureData);
         } catch (err) {
             res.status(500).send(err.message);
         }

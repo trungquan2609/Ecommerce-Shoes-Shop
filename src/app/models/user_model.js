@@ -9,8 +9,6 @@ const userSchema = new Schema({
     address: { type: String, default: '' },
     phone: { type: String, default: '' },
     avatar: { type: String, default: '' },
-    role: { type: String, default: 'member' },
-    status: { type: String, default: 'noactive' },
     totalSpent: { type: Number, default: 0 },
     
 }, {

@@ -8,8 +8,9 @@ const orderSchema = new Schema({
     productId: Array,
     status: String,
     totalPrice: {type: Number},
-    paypalFee: Number,
-    lastTotal: Number,
+    totalQty: Number,
+    paymentMethod: Object,
+
 }, {
     collection: 'orders',
     timestamps: true,

@@ -38,7 +38,8 @@ var _csrf = $('#_csrf').val();
                   // var element = document.getElementById('paypal-button-container');
                   // element.innerHTML = '<h3>Thank you for your payment!</h3>';
                   // Or go to another URL:  actions.redirect('thank_you.html');
-                  actions.redirect('/success')
+                  // actions.redirect('/success')
+                  window.location.href = "/success";
                 });
             },
           })

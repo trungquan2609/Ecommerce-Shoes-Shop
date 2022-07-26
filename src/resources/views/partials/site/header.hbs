@@ -81,18 +81,21 @@
             <a href=""><i class="fab fa-twitter" style="font-size: 24px; margin-right: 10px"></i></a>
           </div>
           <div class="col-6 login_link">
+            <div class="right dropdown">
             <ul class="header_link right m-auto">
-                    
-              {{#if login}}
+                    {{#if login}}
                 {{#if user.fullname}}
                   <p>{{user.fullname}}</p>
                 {{else}}
                   <p>{{user.email}}</p>
                 {{/if}}
-                <li>
+                  <i class="fas fa-angle-right dropbtn" style="margin-left: 5px;"></i>
+                  <div class="dropdown-content">
+                    <ul class="drop">
+                  <li>
                   <a href="/user/profile"><i class="fas fa-sign-in-alt mr-3"></i>Thông tin tài khoản</a>
-                </li>
-                <li>
+                  </li>
+                  <li>
                   <form action="/user/logout?_method=DELETE" method="POST">
                     <input type="hidden" name="_csrf" value="{{ csrfToken }}">
                     <a href="">
@@ -101,7 +104,10 @@
                       </button>
                     </a>
                   </form>
-                </li>
+                  </li>
+                </ul>
+                  </div>
+                  </div>
               {{else}}
                 <li>
                   <a href="/user/login"><i class="fas fa-sign-in-alt mr-3"></i>Đăng nhập</a>
@@ -217,8 +223,7 @@
               </div>
             </div>
           </li>
-          <li class="header_nav-list-item"><a href="./news.html">Tin tức</a></li>
-          <li class="header_nav-list-item"><a href="./contact.html">Liên hệ</a></li>
+          <li class="header_nav-list-item"><a href="/contact">Liên hệ</a></li>
         </ul>
       </div>
     </nav>

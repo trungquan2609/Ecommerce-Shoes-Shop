@@ -828,14 +828,14 @@ ul .level1 li a:hover {
 .product__price {
     display: flex;
     justify-content: space-between;
-    height: 10px;
+    height: 20px;
 }
 .product__price-old {
     color: var(--text-color);
     text-decoration: line-through;
 }
 .product__price-new {
-    height: 10px;
+    height: 20px;
 }
 /* .shoesnews {
     background-color: #f5f5f7;
@@ -1206,3 +1206,14 @@ i.home-product-item__like-icon-fill {
     padding: 10px 0;
     margin-bottom: unset !important;
 }
+.noselect {
+    -webkit-touch-callout: none;
+      -webkit-user-select: none;
+       -khtml-user-select: none; 
+         -moz-user-select: none;
+          -ms-user-select: none; 
+              user-select: none; 
+  }
+  input:disabled {
+    background: #dddddd;
+  }
