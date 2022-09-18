@@ -123,17 +123,22 @@
                     {{#each order}}
                     
                     <tr>
-                      <td>{{{dateFormat this.createdAt "DD-MM-YYYY"}}}</td>
-                      <td>{{this.totalPrice}}</td>
+                      <td>{{{dateFormat this.createdAt "DD-MM-YYYY, hh:mm"}}}</td>
+                      <td>{{priceFormat this.totalPrice}}</td>
                       <td>
                         <span class="btn-stt {{#ifEq this.confirmStatus "Xác nhận đơn hàng"}}green{{/ifEq}}
                         {{#ifEq this.confirmStatus "Chưa xác nhận"}}blue{{/ifEq}}{{#ifEq this.confirmStatus "Huỷ đơn hàng"}}red{{/ifEq}}">
                         {{this.confirmStatus}}
                         </span>
                       </td>
-                      <td><a href="" data-toggle="modal" data-target="#myModal">Xem</a></td>
+                      <td>
+                        <a href="" data-toggle="modal" data-target="#myModal">Xem</a>
+
+                        <a href="">Huỷ</a>
+                        </td>
                     </tr>
                     {{/each}}
+
                     {{!-- <tr>
                       <td>05-06-2021</td>
                       <td>3.000.000 VNĐ</td>

@@ -1192,7 +1192,7 @@ i.home-product-item__like-icon-fill {
     transform: scale(0.8);
     transform-origin: right;
     color: #d5d5d5;
-    margin: -1px 0 0 auto;
+    margin: 0 0 0 auto;
 }
 .home-product-item__star--gold {
     color: yellow;
@@ -1214,3 +1214,29 @@ i.home-product-item__like-icon-fill {
           -ms-user-select: none; 
               user-select: none; 
   }
+
+#paging ul {
+    list-style: none;
+    display: flex;
+    color: black !important;
+    
+    text-decoration: none !important;
+}
+
+#paging li {
+    cursor: pointer;
+    color: black !important;
+    text-decoration: none !important;
+    padding: 4px 8px;
+    margin: 0 4px;
+    font-size: 1.6rem;
+    border: 1px solid grey;
+}
+
+#paging .paginationjs-ellipsis {
+    border: none;
+}
+
+#paging .active {
+    background-color: #a6b0b9;
+}

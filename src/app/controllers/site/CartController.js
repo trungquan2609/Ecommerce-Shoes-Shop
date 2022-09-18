@@ -4,6 +4,7 @@ const Order = require('../../models/order_model');
 const mongoose = require('mongoose');
 const fetch = require('node-fetch');
 const User = require('../../models/user_model');
+const Receipt = require('../../models/receipt_model');
 // const paypal = require('@paypal/checkout-server-sdk');
 // const Environment =
 //   process.env.NODE_ENV === "production"
@@ -20,7 +21,7 @@ const paypal = require('../../../config/paypal-api');
 class CartController {
     
     //Get Cart
-    index(req, res, next) {
+    async index(req, res, next) {
         if (req.session.cart) {
             res.render('site/cart/cart', {
                 title: 'Giỏ hàng',
@@ -166,8 +167,16 @@ class CartController {
                 lastTotal: lastReceive,
             }
             }
-            const order = new Order(storeOrder)
-            order.save()
+            // const receipt = await Receipt.find().sort({createdAt: -1}).limit(1);
+            // const currentReceipt = receipt.receipt? receipt.receipt :0  + parseInt(req.session.cart.totalPrice)
+            var nextReceipt = {
+                receipt: req.session.cart.totalPrice
+            };
+            
+            const q1 = new Receipt(nextReceipt);
+            q1.save();
+            const order = new Order(storeOrder);
+            order.save();
             const user = await User.findById(req.user._id)
             var userTotalSpent = user.totalSpent + parseInt(req.session.cart.totalPrice);
             const q = await User.findByIdAndUpdate({ _id: req.user._id} , { totalSpent: userTotalSpent})

@@ -13,23 +13,58 @@ class ProductController {
 
     // Get /site/products
     index(req, res, next) {
-        Product.aggregate([
-            { $group: {_id: {
-                SKU: '$SKU',
-                name: '$productName',
-                price: '$price' ,
-                salePrice: '$salePrice',
-                productImage: '$productImage'
-            }}}
-        ])
-            .then(products => res.render('site/product/product', {
-                title: 'N&Q Shop',
-                styles: ['product','productdetail'],
-                scripts: ['product'],
-                layout: 'layout_site.hbs',
-                products,
-            }))
-            .catch(next);
+        const PAGE_SIZE = 6;
+        var page = req.query.page
+        if(page) {
+            page = parseInt(page)
+            if(page < 1 ) {
+                page = 1
+            }
+            var skip = (page-1) * PAGE_SIZE
+            Product.aggregate([
+                { $group: {_id: {
+                    SKU: '$SKU',
+                    name: '$productName',
+                    price: '$price' ,
+                    salePrice: '$salePrice',
+                    productImage: '$productImage'
+                }}}
+            ])
+                .skip(skip)
+                .limit(PAGE_SIZE)
+                .then(products=> {
+                    Product.countDocuments({}).then((total) => {
+                        var totalPage = Math.ceil(total/PAGE_SIZE)
+                        res.render('site/product/product', {
+                            title: 'N&Q Shop',
+                            styles: ['product','productdetail'],
+                            scripts: ['pagination.min','product'],
+                            layout: 'layout_site.hbs',
+                            products
+                        })
+
+                    })
+                })
+        }
+        // Product.aggregate([
+        //     { $group: {_id: {
+        //         SKU: '$SKU',
+        //         name: '$productName',
+        //         price: '$price' ,
+        //         salePrice: '$salePrice',
+        //         productImage: '$productImage'
+        //     }}}
+        // ])
+        //     .skip(skip)
+        //     .limit(PAGE_SIZE)
+        //     .then(products => res.render('site/product/product', {
+        //         title: 'N&Q Shop',
+        //         styles: ['product','productdetail'],
+        //         scripts: ['pagination.min','product'],
+        //         layout: 'layout_site.hbs',
+        //         products,
+        //     }))
+        //     .catch(next);
     }
 
     sort(req, res, next) {
@@ -48,7 +83,7 @@ class ProductController {
                 .then(products => res.render('site/product/product', {
                     title: 'N&Q Shop',
                     styles: ['product','productdetail'],
-                    scripts: ['product'],
+                    scripts: ['pagination.min','product'],
                     layout: 'layout_site.hbs',
                     products : products,
                     brand: req.param('brand')
@@ -70,7 +105,7 @@ class ProductController {
                 .then(products => res.render('site/product/product', {
                     title: 'N&Q Shop',
                     styles: ['product','productdetail'],
-                    scripts: ['product'],
+                    scripts: ['pagination.min','product'],
                     layout: 'layout_site.hbs',
                     products : products,
                     brand: req.param('brand')
@@ -90,7 +125,7 @@ class ProductController {
                 .then(products => res.render('site/product/product', {
                     title: 'N&Q Shop',
                     styles: ['product','productdetail'],
-                    scripts: ['product'],
+                    scripts: ['pagination.min','product'],
                     layout: 'layout_site.hbs',
                     products : products,
                     brand: req.param('brand')

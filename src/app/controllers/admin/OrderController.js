@@ -6,12 +6,13 @@ class OrderController {
 
     // Get /admin/index
     async index(req, res, next) {
-        Order.find().populate('userId')
+        Order.find().populate('userId').sort({createdAt : -1})
             .then(rs => res.render('admin/order/order', {
                 style: [],
                 layout: 'layout_admin.hbs',
                 rs
             }))
+            // .then(rs => res.send(rs))
     }
 
     async detail(req, res, next) {

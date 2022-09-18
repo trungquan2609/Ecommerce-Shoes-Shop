@@ -152,3 +152,33 @@ tabs.forEach(function(tab, index) {
         pane.classList.add('active')
     }
 })
+// $('#paging').pagination({
+//     dataSource: '/api/product?page=1',
+//     locator: 'data',
+//     totalNumber: totalPage,
+//     pageSize: 6,
+//     ajax: {
+//         beforeSend: function() {
+//             dataContainer.html('Loading data from flickr.com ...');
+//         }
+//     },
+// })
+$('#paging').pagination({
+    dataSource: '/api/product?page=1',
+    locator: 'data',
+    totalNumberLocator: function(response) {
+        // you can return totalNumber by analyzing response content
+        return response.total[0].SKU;
+    },
+    pageSize: 6,
+    // ajax: {
+    //     beforeSend: function() {
+    //         dataContainer.html('Loading data from flickr.com ...');
+    //     }
+    // },
+    // callback: function(data, pagination) {
+    //     // template method of yourself
+    //     var html = template(data);
+    //     dataContainer.html(html);
+    // }
+})

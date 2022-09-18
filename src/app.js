@@ -12,6 +12,7 @@ const path = require('path');
 const morgan = require('morgan');
 const routeSite = require('./routes/site');
 const routeAdmin = require('./routes/admin');
+const routeApi = require('./routes/api');
 const methodOverride = require('method-override');
 const cookieParser = require('cookie-parser');
 const MongoStore = require('connect-mongo');
@@ -21,6 +22,9 @@ const flash = require('connect-flash');
 const db = require('./config/connectDB');
 const global = require('./config/global');
 const templateEngine = require('./config/templateEngine');
+const cors = require('cors');
+
+app.use(cors());
 require('dotenv').config({ 
   debug: true,
 });
@@ -67,5 +71,6 @@ global(app);
 // Router
 routeSite(app);
 routeAdmin(app);
+routeApi(app);
 
 app.listen(process.env.PORT);

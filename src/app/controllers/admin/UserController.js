@@ -6,7 +6,7 @@ class UserController {
         res.render('admin/user/index', {
             style: ['image'],
             layout: 'layout_admin.hbs',
-            user
+            user,
         })
     }
 }
