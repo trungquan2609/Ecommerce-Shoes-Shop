@@ -1240,3 +1240,7 @@ i.home-product-item__like-icon-fill {
 #paging .active {
     background-color: #a6b0b9;
 }
+
+.disabled {
+    background-color: #dddddd;
+}

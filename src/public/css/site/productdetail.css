@@ -553,3 +553,13 @@ input[type="radio"] + .label-css::after{
       text-align: center;
       cursor: pointer;
 }   
+
+.outofstock {
+    background-color: #dddddd;
+}
+
+.message {
+    font-size: 1.6rem;
+    display: flex;
+    justify-content: center;
+}

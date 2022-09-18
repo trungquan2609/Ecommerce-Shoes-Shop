@@ -1,7 +1,7 @@
       <!-- product detail -->
       <div class="container">
         {{#if message}}
-            <div class="alert-{{info}}">
+            <div class="alert-{{info}} message">
               <p>{{message}}</p>
             </div>
           {{/if}}
@@ -90,9 +90,9 @@
                         <div class="select-swap">
                             {{#each product}}
                             
-                              <div class="swatch-element {{#unless this.quantity}}outofstock{{/unless}}" data-value="{{this.size}}" >
+                              <div class="swatch-element" data-value="{{this.size}}" >
                                 <input type="radio" class="variant-1" id="swatch-1-{{this.size}}" name="size" value="{{this._id}}" onclick="check()"{{#unless this.quantity}} disabled{{/unless}}>
-                                <label for="swatch-1-{{this.size}}" class="sd noselect" ><span>{{this.size}}</span></label>
+                                <label for="swatch-1-{{this.size}}" class="sd noselect {{#unless this.quantity}}outofstock{{/unless}}" ><span>{{this.size}}</span></label>
                               </div>
                             
                             {{/each}}
