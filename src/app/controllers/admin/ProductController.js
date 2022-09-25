@@ -45,6 +45,7 @@ class ProductController {
             brandId: mongoose.Types.ObjectId(req.body.brandId),
             price: req.body.price,
             salePrice: req.body.salePrice,
+            currentPrice: req.body.salePrice ? req.body.salePrice : req.body.price,
             size: req.body.size,
             quantity: req.body.quantity,
             description: req.body.description,

@@ -8,6 +8,7 @@ const productShema = new Schema({
     brandId: { type: Schema.Types.ObjectId, ref: Brand },
     price: { type: Number },
     salePrice: { type: Number },
+    currentPrice: Number,
     size: { type: Number },
     productImage: { type: String },
     quantity: { type: Number },

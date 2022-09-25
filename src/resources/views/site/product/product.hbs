@@ -10,27 +10,27 @@
                   <ul id = "khoanggia" class="product__filter-ckeckbox">
                     <li class="product__filter-item">
                         <label class="form-check-label" for="kg1">
-                            <input type="radio" class="form-check-input checkGia" id="kg1" name="optradio" value="0-1000000" onclick="checkgia(1)"><span>Dưới 1,000,000đ</span>
+                              <input type="radio" class="form-check-input checkGia" id="kg1" name="optradio" onclick="priceFilter()" value="1000000"><span>Dưới 1,000,000đ</span>
                             </label>
                     </li>
                     <li class="product__filter-item">
                         <label class="form-check-label" for="kg2">
-                            <input type="radio" class="form-check-input checkGia" id="kg2" name="optradio" value="1000000-2000000" onclick="checkgia(2)"><span>1,000,000đ->2,000,000đ</span>
+                              <input type="radio" class="form-check-input checkGia" id="kg2" name="optradio" onclick="priceFilter()" value="2000000"><span>1,000,000đ->2,000,000đ</span>
                             </label>
                     </li>
                     <li class="product__filter-item">
                         <label class="form-check-label" for="kg3">
-                            <input type="radio" class="form-check-input checkGia" id="kg3" name="optradio" value="2000000-3000000" onclick="checkgia(3)"><span>2,000,000đ->3,000,000đ</span>
+                              <input type="radio" class="form-check-input checkGia" id="kg3" name="optradio" onclick="priceFilter()" value="3000000"><span>2,000,000đ->3,000,000đ</span>
                             </label>
                     </li>
                     <li class="product__filter-item">
                         <label class="form-check-label" for="kg4">
-                            <input type="radio" class="form-check-input checkGia" id="kg4" name="optradio" value="3000000-4000000" onclick="checkgia(4)"><span>3,000,000đ->4,000,000đ</span>
+                              <input type="radio" class="form-check-input checkGia" id="kg4" name="optradio" onclick="priceFilter()" value="4000000"><span>3,000,000đ->4,000,000đ</span>
                           </label>
                     </li>
                     <li class="product__filter-item">
                         <label class="form-check-label" for="kg5">
-                            <input type="radio" class="form-check-input checkGia" id="kg5" name="optradio" value="4000000-100000000" onclick="checkgia(5)"><span>Trên 4,000,000đ</span>
+                              <input type="radio" class="form-check-input checkGia" id="kg5" name="optradio" onclick="priceFilter()" value="9999000000"><span>Trên 4,000,000đ</span>
                           </label>
                     </li>
                 </ul>
@@ -40,63 +40,63 @@
                   onclick="khonghienthidanhsach(2,`thuonghieu`)" id="minus-2"></i> <i class="fi-rs-plus hidden"
                   onclick="khonghienthidanhsach(2,`thuonghieu`)" id="plus-2"></i></h4>
               <ul id="thuonghieu" class="product__filter-ckeckbox">
-                <li class="product__filter-item">
+                <li class="product__filter-item checkBrandFilter">
                   <label class="form-check-label" for="th1">
-                    <input type="checkbox" class="form-check-input checkthuonghieu checkthuonghieu" id="th1" name="option2"
+                    <a href="/product/sort/62b727023c79cdf5b7e32721"></a><input type="checkbox" class="form-check-input checkthuonghieu" onclick="checkedBrandFilterOnClick('62b727023c79cdf5b7e32721')" id="th1" name="option2"
                       value="something"><span>Adidas</span>
                   </label>
                 </li>
-                <li class="product__filter-item">
+                <li class="product__filter-item checkBrandFilter">
                   <label class="form-check-label" for="th2">
-                    <input type="checkbox" class="form-check-input checkthuonghieu" id="th2" name="option2"
+                    <input type="checkbox" class="form-check-input checkthuonghieu" onclick="checkedBrandFilterOnClick('62bc672ee27b9d2c8072bdc2')" id="th2" name="option2"
                       value="something"><span>Nike</span>
                   </label>
                 </li>
-                <li class="product__filter-item">
+                <li class="product__filter-item checkBrandFilter">
                   <label class="form-check-label" for="th3">
-                    <input type="checkbox" class="form-check-input checkthuonghieu" id="th3" name="option2"
+                    <input type="checkbox" class="form-check-input checkthuonghieu" onclick="checkedBrandFilterOnClick('62bc67a3e27b9d2c8072bdc6')" id="th3" name="option2"
                       value="something"><span>Puma</span>
                   </label>
                 </li>
-                <li class="product__filter-item">
+                <li class="product__filter-item checkBrandFilter">
                   <label class="form-check-label" for="th4">
-                    <input type="checkbox" class="form-check-input checkthuonghieu" id="th4" name="option2"
+                    <input type="checkbox" class="form-check-input checkthuonghieu" onclick="checkedBrandFilterOnClick('62bc67bfe27b9d2c8072bdc8')" id="th4" name="option2"
                       value="something"><span>Vans</span>
                   </label>
                 </li>
-                <li class="product__filter-item">
+                <li class="product__filter-item checkBrandFilter">
                   <label class="form-check-label" for="th5">
-                    <input type="checkbox" class="form-check-input checkthuonghieu" id="th5" name="option2"
+                    <input type="checkbox" class="form-check-input checkthuonghieu" onclick="checkedBrandFilterOnClick('62bc6760e27b9d2c8072bdc3')" id="th5" name="option2"
                       value="something"><span>Converse</span>
                   </label>
                 </li>
-                <li class="product__filter-item">
+                <li class="product__filter-item checkBrandFilter">
                   <label class="form-check-label" for="th6">
-                    <input type="checkbox" class="form-check-input checkthuonghieu" id="th6" name="option2"
+                    <input type="checkbox" class="form-check-input checkthuonghieu" onclick="checkedBrandFilterOnClick('62bc6784e27b9d2c8072bdc5')" id="th6" name="option2"
                       value="something"><span>Fila</span>
                   </label>
                 </li>
-                <li class="product__filter-item">
+                <li class="product__filter-item checkBrandFilter">
                   <label class="form-check-label" for="th7">
-                    <input type="checkbox" class="form-check-input checkthuonghieu" id="th7" name="option2"
+                    <input type="checkbox" class="form-check-input checkthuonghieu" onclick="checkedBrandFilterOnClick('62bc67b4e27b9d2c8072bdc7')" id="th7" name="option2"
                       value="something"><span>Reebok</span>
                   </label>
                 </li>
-                <li class="product__filter-item">
+                <li class="product__filter-item checkBrandFilter">
                   <label class="form-check-label" for="th8">
-                    <input type="checkbox" class="form-check-input checkthuonghieu" id="th8" name="option2"
+                    <input type="checkbox" class="form-check-input checkthuonghieu" onclick="checkedBrandFilterOnClick('62bc677ae27b9d2c8072bdc4')" id="th8" name="option2"
                       value="something"><span>Domba</span>
                   </label>
                 </li>
-                <li class="product__filter-item">
+                {{!-- <li class="product__filter-item checkBrandFilter">
                   <label class="form-check-label" for="th9">
                     <input type="checkbox" class="form-check-input checkthuonghieu" id="th9" name="option2"
                       value="something"><span>Asic</span>
                   </label>
-                </li>
+                </li> --}}
               </ul>
             </div>
-            <div class="product__filter-size">
+            <!--<div class="product__filter-size">
               <h4 class="product__filter-heading">Size <i class="fi-rs-minus" onclick="khonghienthidanhsach(3,`size`)"
                   id="minus-3"></i> <i class="fi-rs-plus hidden" onclick="khonghienthidanhsach(3,`size`)"
                   id="plus-3"></i></h4>
@@ -150,7 +150,7 @@
                   </label>
                 </li>
               </ul>
-            </div>
+            </div>-->
           </div>
         </div>
         <div class="col-lg-9 col-12">
@@ -162,7 +162,7 @@
               <div class="sortby">
                 <label for="">Sắp xếp theo:</label>
                 <div class="dropdown">
-                  <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown">
+                  <button type="button" class="btn btn-dark dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Sản phẩm nổi bật
                   </button>
                   <div class="dropdown-menu">
@@ -170,9 +170,9 @@
                     <a href="?sn=price&s=-1" class="dropdown-item" id="sort2">Giá: giảm dần</a>
                     <a href="?sn=name&s=1" class="dropdown-item" id="sort3">Tên A->Z</a>
                     <a href="?sn=name&s=-1" class="dropdown-item" id="sort4">Tên Z->A</a>
-                    <a href="?sn=createAt&s=1" class="dropdown-item" id="sort5">Cũ nhất</a>
+                    <!--<a href="?sn=createAt&s=1" class="dropdown-item" id="sort5">Cũ nhất</a>
                     <a href="?sn=createAt&s=-1" class="dropdown-item" id="sort6">Mới nhất</a>
-                    <a href="?sn=name&s=1" class="dropdown-item" id="sort7">Bán chạy nhất</a>
+                    <a href="?sn=name&s=1" class="dropdown-item" id="sort7">Bán chạy nhất</a>-->
                   </div>
                 </div>
               </div>
@@ -187,7 +187,7 @@
           </div>
           <!-- phần hàng cột show sản phẩm có ghi id liên kết đến products.js để click vào thì sẽ show ra sản phẩm theo tìm kiếm -->
           <div class="row row-product" id="products">
-            {{#each products}}
+            <!--{{#each products}}
               <div class="col-lg-4 col-md-6 col-12 mb-20" style="margin-bottom: 20px">
                 <a href="/product/{{this._id.SKU}}" class="product__new-item">
                   <div class="card" style="width: 100%">
@@ -241,7 +241,7 @@
                   </div>
                 </a>
               </div>
-            {{/each}}
+            {{/each}}-->
           </div>
           <div id="paging"></div>
         </div>

@@ -28,10 +28,13 @@
                   </div>
                   <div id="main-img" style="cursor: pointer;" >
                       <img src="/img/product/{{this.productImage}}" class="big-img" alt="ảnh chính" id="img-main" xoriginal="/img/product/{{productImage}}">
+                      {{#if this.salePrice}}
                       <div class="sale-off sale-off-2">
+                      
                       <span class="sale-off-percent">{{salePercent this.salePrice this.price}}%</span>
                       <span class="sale-off-label">GIẢM</span>
                       </div>
+                      {{/if}}
                   </div>
                   </div>
                   <div class="col-lg-6 col-12">
