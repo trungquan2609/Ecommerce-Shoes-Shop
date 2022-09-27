@@ -67,6 +67,7 @@
     border: 1px solid var(--black-color);
 }
 .dropdown-item {
+    cursor: pointer;
     font-size: 14px;
 }
 .row-product {

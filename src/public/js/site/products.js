@@ -103,23 +103,38 @@ function salePercent(a, b) {
 
 function titleSort() {
   var title = $('#dropdownMenuButton')
-  switch (search.slice(1, 13)) {
-    case 'sn=price&s=1':
-      title.html('Giá: Tăng dần');
-      break;
-    case 'sn=price&s=-':
-      title.html('Giá: giảm dần');
-      break;
-    case 'sn=name&s=1':
-      title.html('Tên A->Z');
-      break;
-    case 'sn=name&s=-1':
-      title.html('Tên Z->A');
-      break;
+  var q= window.location.search
+  if (q.search('sn=price&order=1') != -1) {
+    return title.html('Giá: Tăng dần');
   }
+  if (q.search('sn=price&order=-1') != -1) {
+    return title.html('Giá: Giảm dần');
+  }
+  if (q.search('sn=name&order=1') != -1) {
+    return title.html('Tên A->Z');
+  }
+  if (q.search('sn=name&order=1') != -1) {
+    return title.html('Tên Z->A');
+  }  
 }
 
 titleSort()
+
+function sortFilter(sn, order) {
+  var sortFilter = document.querySelectorAll('.dropdown-item')
+  for (var i in sortFilter) {
+    var q = window.location.search
+    if ( q.search('sn') == -1) {
+      return window.location.search = q + '&' +`sn=${sn}&order=${order}`
+    }
+    if ( q.search('gt') > 16) {
+      return window.location.search = `sn=${sn}&order=${order}&${q.slice(q.search('gt'))}` 
+    }
+    if (q.search('sn') != -1) {
+      return window.location.search = `${q.slice(1, q.search('sn'))}sn=${sn}&order=${order}`
+    }
+  }
+}
 
 function priceFilter() {
   var priceFilter = document.querySelectorAll('input[type=radio]');
@@ -127,10 +142,13 @@ function priceFilter() {
     if(priceFilter[i].checked) {
       var q = window.location.search
       if ( q.search('gt') == -1 || q.search('lt') == -1 ) {
-        window.location.search = window.location.search + '&' + `gt=${parseInt(priceFilter[i].value) == 9999000000 ? 4000000 : parseInt(priceFilter[i].value) - 1000000}&lt=${parseInt(priceFilter[i].value)}`;
+        return window.location.search = window.location.search + '&' + `gt=${parseInt(priceFilter[i].value) == 9999000000 ? 4000000 : parseInt(priceFilter[i].value) - 1000000}&lt=${parseInt(priceFilter[i].value)}`;
+      }
+      if( q.search('sn') > 10) {
+        return window.location.search = `gt=${parseInt(priceFilter[i].value) == 9999000000 ? 4000000 : parseInt(priceFilter[i].value) - 1000000}&lt=${parseInt(priceFilter[i].value)}&${q.slice(q.search('sn'))}`
       }
       if ( q.search('gt') != -1 || q.search('lt') != -1 ) {
-        window.location.search = `${window.location.search.slice(1, q.search('gt'))}gt=${parseInt(priceFilter[i].value) == 9999000000 ? 4000000 : parseInt(priceFilter[i].value) - 1000000}&lt=${parseInt(priceFilter[i].value)}`
+        return window.location.search = `${q.slice(1, q.search('gt'))}gt=${parseInt(priceFilter[i].value) == 9999000000 ? 4000000 : parseInt(priceFilter[i].value) - 1000000}&lt=${parseInt(priceFilter[i].value)}`
       }
     }
   }
@@ -139,26 +157,67 @@ function priceFilter() {
 function checkedPriceFilter() {
   var priceFilter = document.querySelectorAll('input[type=radio]');
   var q = window.location.search;
-  switch ( q.slice(q.search('gt'))) {
-    case 'gt=0&lt=1000000':
+  switch ( q.slice(q.search('lt'),q.search('lt') + 4)) {
+    case 'lt=1':
       document.getElementById('kg1').checked = true;
       break;
-    case 'gt=1000000&lt=2000000':
+    case 'lt=2':
       document.getElementById('kg2').checked = true;
       break;
-    case 'gt=2000000&lt=3000000':
+    case 'lt=3':
       document.getElementById('kg3').checked = true;
       break;
-    case 'gt=3000000&lt=4000000':
+    case 'lt=4':
       document.getElementById('kg4').checked = true;
       break;
-    case 'gt=4000000&lt=9999000000':
+    case 'lt=9':
       document.getElementById('kg5').checked = true;
       break;
   }
 }
 
 checkedPriceFilter()
+
+function checkedBrandFilterOnClick(brand) {
+  var brandFilter = document.querySelectorAll('.checkthuonghieu');
+  for(var i in brandFilter) {
+    if(brandFilter[i].checked) {
+      return window.location =  `/product/sort/${brand}`
+    }else {
+      window.location =  `/product`
+    }
+
+  }
+}
+
+function removeVietnameseTones(str) {
+  str = str.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g,"a"); 
+  str = str.replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g,"e"); 
+  str = str.replace(/ì|í|ị|ỉ|ĩ/g,"i"); 
+  str = str.replace(/ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ/g,"o"); 
+  str = str.replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g,"u"); 
+  str = str.replace(/ỳ|ý|ỵ|ỷ|ỹ/g,"y"); 
+  str = str.replace(/đ/g,"d");
+  str = str.replace(/À|Á|Ạ|Ả|Ã|Â|Ầ|Ấ|Ậ|Ẩ|Ẫ|Ă|Ằ|Ắ|Ặ|Ẳ|Ẵ/g, "A");
+  str = str.replace(/È|É|Ẹ|Ẻ|Ẽ|Ê|Ề|Ế|Ệ|Ể|Ễ/g, "E");
+  str = str.replace(/Ì|Í|Ị|Ỉ|Ĩ/g, "I");
+  str = str.replace(/Ò|Ó|Ọ|Ỏ|Õ|Ô|Ồ|Ố|Ộ|Ổ|Ỗ|Ơ|Ờ|Ớ|Ợ|Ở|Ỡ/g, "O");
+  str = str.replace(/Ù|Ú|Ụ|Ủ|Ũ|Ư|Ừ|Ứ|Ự|Ử|Ữ/g, "U");
+  str = str.replace(/Ỳ|Ý|Ỵ|Ỷ|Ỹ/g, "Y");
+  str = str.replace(/Đ/g, "D");
+  // Some system encode vietnamese combining accent as individual utf-8 characters
+  // Một vài bộ encode coi các dấu mũ, dấu chữ như một kí tự riêng biệt nên thêm hai dòng này
+  str = str.replace(/\u0300|\u0301|\u0303|\u0309|\u0323/g, ""); // ̀ ́ ̃ ̉ ̣  huyền, sắc, ngã, hỏi, nặng
+  str = str.replace(/\u02C6|\u0306|\u031B/g, ""); // ˆ ̆ ̛  Â, Ê, Ă, Ơ, Ư
+  // Remove extra spaces
+  // Bỏ các khoảng trắng liền nhau
+  // str = str.replace(/ + /g," ");
+  // str = str.trim();
+  // Remove punctuations
+  // Bỏ dấu câu, kí tự đặc biệt
+  // str = str.replace(/!|@|%|\^|\*|\(|\)|\+|\=|\<|\>|\?|\/|,|\.|\:|\;|\'|\"|\&|\#|\[|\]|~|\$|_|`|-|{|}|\||\\/g," ");
+  return str;
+}
 
 function checkedBrandFilter() {
   var brandFilter = document.querySelectorAll('.checkthuonghieu')
@@ -190,9 +249,8 @@ function checkedBrandFilter() {
       document.getElementById('th8').checked = true;
       break;
   }
-  console.log(brandFilter)
   if (window.location.pathname == '/product') {
-    brandFilter2.classList.toggle('hidden')
+    brandFilter2.classList.remove('hidden')
   }
   for(var i in brandFilter) {
     if(brandFilter[i].checked){
@@ -204,15 +262,3 @@ function checkedBrandFilter() {
 }
 
 checkedBrandFilter()
-
-function checkedBrandFilterOnClick(brand) {
-  var brandFilter = document.querySelectorAll('.checkthuonghieu');
-  for(var i in brandFilter) {
-    if(brandFilter[i].checked) {
-      return window.location =  `/product/sort/${brand}`
-    }else {
-      window.location =  `/product`
-    }
-
-  }
-}

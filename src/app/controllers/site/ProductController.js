@@ -82,7 +82,7 @@ class ProductController {
                     salePrice: '$salePrice',
                     productImage: '$productImage',
                 }}},
-                { $sort: { '_id.name' : parseInt(req.param('s')) } }
+                { $sort: { '_id.name' : parseInt(req.param('order')) } }
             ])
                 .then(products => res.render('site/product/product', {
                     title: 'N&Q Shop',
@@ -104,7 +104,7 @@ class ProductController {
                     salePrice: '$salePrice',
                     productImage: '$productImage',
                 }}},
-                { $sort: { '_id.price' : parseInt(req.param('s')) } }
+                { $sort: { '_id.price' : parseInt(req.param('order')) } }
             ])
                 .then(products => res.render('site/product/product', {
                     title: 'N&Q Shop',

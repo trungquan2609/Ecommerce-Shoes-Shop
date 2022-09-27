@@ -26,31 +26,26 @@ function changeImg(id){
     let imgPath = document.getElementById(id).getAttribute('src');
     document.getElementById('img-main').setAttribute('src', imgPath);
 }
-function check(id){
+function check(){
     
     var type = document.getElementsByName("size");
-    // if(type[0].checked)
-    // {
-    //     var val = type[0].value;
-    //     console.log(val);
-    // }
-    // else if(type[1].checked)
-    // {
-    //     var val = type[1].value;
-    //     console.log(val);
-    // }
-    // else if(type[2].checked)
-    // {
-    //     var val = type[2].value;
-    //     console.log(val);
-    // }
+    var pathName = window.location.pathname
     for ( var i in type) {
         if( type[i].checked){
             var val = type[i].value;
             var qty = $('#text_so_luong-1').val()
             $('#add-to-cart').prop('href', `/cart/addtocart/${val}?qty=${qty}`)
+            fetch(`/api${pathName}?_id=${val}`)
+            .then(response => response.json())
+            .then(rs => renderQuantity(rs))
         }
     }
+}
+
+function renderQuantity(element) {
+    $('#info-quantity').html('')
+    var item = `Số lượng: <b>${element[0].quantity}</b>`
+    $('#info-quantity').append(item);
 }
 
 $('.add-cart').click(function(){
@@ -152,3 +147,16 @@ tabs.forEach(function(tab, index) {
         pane.classList.add('active')
     }
 })
+
+// function search() {
+//     var formInput = $('#form-input');
+//     var textSearch = $('input[name="search"]').value;
+//     var btnSubmit = $('.search-btn');
+//     formInput.preventDefault;
+//     btnSubmit.preventDefault;
+//     btnSubmit.on('click', function(e) {
+//         console.log(textSearch);ư
+//     })
+
+// }
+// search()

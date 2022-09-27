@@ -5,6 +5,7 @@ const Brand = require('./brand_model');
 const productShema = new Schema({
     SKU: { type: String},
     productName: { type: String },
+    productName2: String,
     brandId: { type: Schema.Types.ObjectId, ref: Brand },
     price: { type: Number },
     salePrice: { type: Number },

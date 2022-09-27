@@ -20,3 +20,20 @@ $(document).ready(function(){
       $('#alert-cart').fadeOut();
   }
   setInterval(fadeOutModal, 7000);
+
+function render() {
+
+}
+
+function check(){
+    
+    var type = document.getElementsByName("size");
+    for ( var i in type) {
+        if( type[i].checked){
+            var val = type[i].value;
+            var qty = $('#text_so_luong-1').val()
+            $('#add-to-cart').prop('href', `/cart/addtocart/${val}?qty=${qty}`)
+            console.log(val)
+        }
+    }
+}
