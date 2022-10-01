@@ -52,7 +52,7 @@ app.use(session({
     touchAfter: 24 * 3600
   }),
   cookie: { 
-    maxAge: 60 * 60 * 1000,
+    maxAge: 120 * 60 * 1000,
     secure: false
   },
 }));

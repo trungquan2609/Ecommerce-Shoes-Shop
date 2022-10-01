@@ -8,17 +8,11 @@ module.exports = function cart(oldCart) {
         if (!storedItem) {
             storedItem = this.items[id] = { item: item, qty: 0, price: 0}
         }
-        if (storedItem.item.salePrice || storedItem.item.quantity > 0){
             storedItem.qty += qty;
-            storedItem.price = storedItem.item.salePrice * storedItem.qty;
+            storedItem.price = storedItem.item.currentPrice * storedItem.qty;
             this.totalQty += qty;
-            this.totalPrice += storedItem.item.salePrice * qty;
-        } else {
-            storedItem.qty += qty;
-            storedItem.price = storedItem.item.price * storedItem.qty;
-            this.totalQty += qty;
-            this.totalPrice += storedItem.item.price * qty;
-        }
+            this.totalPrice += storedItem.item.currentPrice * qty;
+            storedItem.item = item
     }
 
     this.removeItem = function(id) {

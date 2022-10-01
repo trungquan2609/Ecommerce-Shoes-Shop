@@ -17,16 +17,20 @@ const Receipt = require('../../models/receipt_model');
 //   )
 // )
 const paypal = require('../../../config/paypal-api');
+const { request } = require('express');
 
 class CartController {
     
     //Get Cart
     async index(req, res, next) {
+        
         if (req.session.cart) {
+            console.log(req.session.cart);
+
             res.render('site/cart/cart', {
                 title: 'Giỏ hàng',
                 styles: ['cart'],
-                scripts: [''],
+                scripts: ['cart'],
                 layout: 'layout_site.hbs',
                 items: req.session.cart.items,
                 cart: req.session.cart
@@ -35,7 +39,7 @@ class CartController {
             res.render('site/cart/cart', {
                 title: 'Giỏ hàng',
                 styles: ['cart'],
-                scripts: [''],
+                scripts: ['cart'],
                 layout: 'layout_site.hbs',
             })
         }
@@ -57,7 +61,6 @@ class CartController {
                 }
                 cart.add(product, qty, product._id)
                 req.session.cart = cart;
-                // console.log(req.session.cart);
                 req.flash('info', 'Đã thêm vào giỏ hàng');
                 res.redirect('back')
             })
@@ -91,8 +94,36 @@ class CartController {
         res.redirect('/cart');
     }
 
+    updateCart(req, res) {
+        var param = req.param('id')
+        var param2 = req.param('quantity')
+        var cart = req.session.cart;
+        var totalQty = 0
+        var totalPrice = 0
+        var items = {}
+        var updateCart = {
+        }
+        for ( var i in param) {
+            var id = `${param[i]}`;
+            var qty = parseInt(param2[i]);
+            var price = cart.items[id].item.currentPrice
+            var item = cart.items[id]
+            totalQty += qty
+            item.qty = qty;
+            item.price = qty*cart.items[id].item.currentPrice
+            items[id] = item
+            updateCart.items = items
+            updateCart.totalQty = totalQty
+            totalPrice += item.price
+            updateCart.totalPrice = totalPrice
+
+        }
+        req.session.cart = updateCart
+        res.redirect('/cart/checkout')
+    }
+
     async checkout(req, res, next) {
-        console.log(req.user)
+
         res.render('site/cart/checkout', {
             title: 'Thanh toán',
             styles: ['pay'],

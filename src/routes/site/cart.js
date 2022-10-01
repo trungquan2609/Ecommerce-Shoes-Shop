@@ -13,6 +13,8 @@ router.get('/remove/:id', cartController.removeItem);
 
 router.get('/addtocart/:id', isLoggedIn, cartController.addToCart)
 
+router.get('/updatecart', cartController.updateCart)
+
 router.get('/', cartController.index);
 
 module.exports = router;

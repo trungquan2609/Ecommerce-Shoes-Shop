@@ -99,18 +99,52 @@ function hienthi(id, name){
 function cong(id) {
     var value = document.getElementById(`text_so_luong-${id}`).value
     document.getElementById(`text_so_luong-${id}`).value = parseInt(value) + 1;
+    $(`#total_price-${id}`).html('')
+    var price = $(`#price-${id}`).val().replaceAll(',','')
+    $(`#total_price-${id}`).html(`${priceFormat(parseInt(price)*(parseInt(value) + 1))}₫`)
+    totalPriceAll()
 }
+
 function tru(id) {
     var value = document.getElementById(`text_so_luong-${id}`).value
     if(parseInt(value) > 1)
     {
+    $(`#total_price-${id}`).html('')
+    var price = $(`#price-${id}`).val().replaceAll(',','')
+    $(`#total_price-${id}`).html(`${priceFormat(parseInt(price)*(parseInt(value) - 1))}₫`)
         document.getElementById(`text_so_luong-${id}`).value = parseInt(value) - 1;
     }
-    
+    totalPriceAll()
 }
 
+function totalPriceAll() {
+    $('.total__price-all').html('')
+    var totalPrice = document.getElementsByClassName('total_price');
+    var arr = []
+    for ( var i = 0; i < totalPrice.length; i++) {
+        var totalPriceInt = parseInt(totalPrice[i].innerHTML.slice(0, totalPrice[i].innerHTML.length - 1).replaceAll(',',''));
+        arr.push(totalPriceInt)
+    }
+    var totalPriceAll = arr.reduce((a,b) => a + b,0)
+    $('.total__price-all').html(`${priceFormat(totalPriceAll)}₫`)
+}
 
-    function validate(evt) {
+totalPriceAll()
+
+function quantityInput(id) {
+    $(`#total_price-${id}`).html('')
+    var quantityInput = $(`#text_so_luong-${id}`).val()
+    var price = $(`#price-${id}`).val().replaceAll(',','')
+    var totalPrice = $(`#total_price-${id}`)
+    totalPrice.html(`${priceFormat(quantityInput*price)}₫`)
+    totalPriceAll()
+}
+
+function priceFormat(price) {
+    return price?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+}
+
+function validate(evt, id) {
   var theEvent = evt || window.event;
 
   // Handle paste

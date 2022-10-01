@@ -54,7 +54,9 @@
                         <td class="center">{{this.description}}</td>
                         <td class="center">
                           <a href="/admin/product/editproduct/{{this._id}}"><button class="btn btn-rounded btn-space btn-primary">Sửa</button></a>
+                          <a href="/admin/product/editproductall/{{this.SKU}}"><button class="btn btn-rounded btn-space btn-primary">Sửa mặt hàng</button></a>
                           <button class="btn btn-rounded btn-space btn-danger" data-id="{{this._id}}" data-toggle="modal" data-target="#delete-product">Xóa</button>
+                          <button class="btn btn-rounded btn-space btn-danger" data-id="{{this.SKU}}" data-toggle="modal" data-target="#delete-product-all">Xóa mặt hàng</button>
                         </td>
                       </tr>
                       {{/each}}
@@ -93,6 +95,25 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="delete-product-all" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Xoá mặt hàng?</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            Bạn có chắc chắn xoá toàn bộ mặt hàng?
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+            <button id="btn-delete-product-all" type="button" class="btn btn-danger">Xoá bỏ</button>
+        </div>
+        </div>
+    </div>
+</div>
 
 
 
@@ -123,15 +144,24 @@
     <script>
     document.addEventListener('DOMContentLoaded', function() {
         var productID;
+        var productSKU;
         var deleteForm = document.forms['delete-product-form'];
         var btnDeleteProduct = document.getElementById('btn-delete-product');
+        var btnDeleteProductAll = document.getElementById('btn-delete-product-all');
         $('#delete-product').on('show.bs.modal', function (event) {
             var button = $(event.relatedTarget)
             productID = button.data('id')
         });
-
+        $('#delete-product-all').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget)
+            productSKU = button.data('id')
+        });
         btnDeleteProduct.onclick = function () {
             deleteForm.action = '/admin/product/' + productID + '?_method=DELETE'
+            deleteForm.submit();
+        }
+        btnDeleteProductAll.onclick = function () {
+            deleteForm.action = '/admin/product/deleteAll/' + productSKU + '?_method=DELETE'
             deleteForm.submit();
         }
     });

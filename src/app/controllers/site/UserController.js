@@ -92,7 +92,7 @@ class UserController {
             req.session.oldUrl = null;
             res.redirect(oldUrl)
         } else {
-            res.redirect('/user/profile')
+            res.redirect('back')
         }
     }
 

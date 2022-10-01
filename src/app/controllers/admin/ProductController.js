@@ -125,6 +125,8 @@ class ProductController {
                 quantity: req.body.quantity,
                 description: req.body.description,
                 productImage: productImage,
+                currentPrice: req.body.salePrice ? req.body.salePrice : req.body.price,
+
             }
         } else {
             var updateProduct = await {
@@ -136,11 +138,67 @@ class ProductController {
                 salePrice: req.body.salePrice,
                 size: req.body.size,
                 quantity: req.body.quantity,
-                description: req.body.description,
+            currentPrice: req.body.salePrice ? req.body.salePrice : req.body.price,
+            description: req.body.description,
             }
         }
         Product.updateOne({ _id: req.params.id }, updateProduct)
             .then(() => res.redirect('/admin/product'))
+            .catch(next);
+    }
+
+    //Get /admin/editproductall
+    async editAll(req, res, next) {
+        var brand = await Brand.find()
+        Product.find( { SKU:req.params.SKU} ).populate('brandId','brandName')
+            .then(product => {
+                console.log(product)
+                res.render('admin/product/editall', {
+                title: 'Sửa sản phẩm',
+                style: ['app'],
+                script: ['dataTables'],
+                layout: 'layout_admin.hbs',
+                product: product,
+                brand: brand,
+            })})
+    }
+
+    //POST /admin/editproduct
+    async updateAll(req, res, next) {
+        if (req.file) {
+            var productImage = req.file.filename;
+            var removeTonesProductName = removeVietnameseTones(req.body.productName);
+            var updateProduct = await {
+                SKU: req.body.SKU,
+                productName: req.body.productName,
+                productName2: removeTonesProductName,
+                brandId: mongoose.Types.ObjectId(req.body.brandId),
+                price: req.body.price,
+                salePrice: req.body.salePrice,
+                description: req.body.description,
+            currentPrice: req.body.salePrice ? req.body.salePrice : req.body.price,
+            productImage: productImage,
+            }
+        } else {
+            var updateProduct = await {
+                SKU: req.body.SKU,
+                productName: req.body.productName,
+                productName2: removeTonesProductName,
+                brandId: mongoose.Types.ObjectId(req.body.brandId),
+                price: req.body.price,
+                salePrice: req.body.salePrice,
+            currentPrice: req.body.salePrice ? req.body.salePrice : req.body.price,
+            description: req.body.description,
+            }
+        }
+        Product.updateMany({ SKU: req.params.SKU }, { $set: updateProduct})
+            .then(() => res.redirect('/admin/product'))
+            .catch(next);
+    }
+
+    deleteAll(req, res, next) {
+        Product.deleteMany({ SKU: req.params.SKU })
+            .then(() => res.redirect('back'))
             .catch(next);
     }
 }
