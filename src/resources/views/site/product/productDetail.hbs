@@ -172,8 +172,12 @@
                 <i class="home-product-item__star--gold fas fa-star"></i>
                 <i class="fas fa-star"></i>
               </div>
-              <textarea name="" id="" cols="70" rows="10"></textarea>
-              <button type="submit" class="btn btn-comment">Gửi</button>
+              <form action="/feedback/comment?_csrf={{ csrfToken }}" method="post">
+                <input type="hidden" name="userId" value="{{user._id}}">
+                <input type="hidden" name="SKU" value="{{#limit product 1}}{{this.SKU}}{{/limit}}">
+                <textarea name="comment" id="" cols="70" rows="10"></textarea>
+                <button type="submit" class="btn btn-comment">Gửi</button>
+              </form>
             </div>
             <div class="col-lg-8 col-12">
               <div class="body__comment">
@@ -283,7 +287,64 @@
         <div class="container">
           <h3 class="product__relateto-heading">Sản phẩm liên quan</h3>
           <div class="row">
+            {{#each closeProduct}}
+            
             <div class="col-lg-3 col-md-6 col-sm-12 mb-20">
+              <a href="/product/{{this._id.SKU}}" class="product__new-item">
+                <div class="card" style="width: 100%">
+                  <div>
+                    <img class="card-img-top" src="/img/product/{{this._id.productImage}}" alt="Card image cap">
+                    <!-- <form action="" class="hover-icon hidden-sm hidden-xs">
+                      <input type="hidden">
+                      <a href="./pay.html" class="btn-add-to-cart" title="Mua ngay">
+                        <i class="fas fa-cart-plus"></i>
+                      </a>
+                      <a data-toggle="modal" data-target="#myModal" class="quickview" title="Xem nhanh">
+                        <i class="fas fa-search"></i>
+                      </a>
+                    </form> -->
+                  </div>
+                  <div class="card-body">
+                    <h5 class="card-title custom__name-product">
+                    {{this._id.name}}
+                    </h5>
+                    <div class="product__price">
+                      {{#if this._id.salePrice}}
+                          <p class="card-text price-color product__price-old">{{priceFormat this._id.price}} đ</p>
+                          <p class="card-text price-color product__price-new">{{priceFormat this._id.salePrice}} đ</p>
+                        {{else}}
+                          <p class="card-text price-color product__price-old"></p>
+                          <p class="card-text price-color product__price-new">{{priceFormat this._id.price}} đ</p>
+                        {{/if}}
+                    </div>
+                    {{!-- <div class="home-product-item__action"> --}}
+                      {{!-- <span class="home-product-item__like home-product-item__like--liked">
+                          <i class="home-product-item__like-icon-empty far fa-heart"></i>
+                          <i class="home-product-item__like-icon-fill fas fa-heart"></i>
+                      </span>
+                      <div class="home-product-item__rating">
+                          <i class="home-product-item__star--gold fas fa-star"></i>
+                          <i class="home-product-item__star--gold fas fa-star"></i>
+                          <i class="home-product-item__star--gold fas fa-star"></i>
+                          <i class="home-product-item__star--gold fas fa-star"></i>
+                          <i class="fas fa-star"></i>
+                      </div> --}}
+                      {{!-- <span class="home-product-item__sold">79 đã bán</span>
+                    </div> --}}
+                    {{#if this._id.salePrice}}
+                        <div class="sale-off">
+                          <span class="sale-off-percent">{{salePercent this._id.salePrice this._id.price}}%</span>
+                          <span class="sale-off-label">GIẢM</span>
+                        </div>
+                      {{else}}
+                      
+                      {{/if}}
+                  </div>
+                </div>
+              </a>
+            </div>
+            {{/each}}
+            {{!-- <div class="col-lg-3 col-md-6 col-sm-12 mb-20">
               <a href="./ProductDetail.html" class="product__new-item">
                 <div class="card" style="width: 100%">
                   <div>
@@ -417,52 +478,7 @@
                   </div>
                 </div>
               </a>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-12 mb-20">
-              <a href="./ProductDetail.html" class="product__new-item">
-                <div class="card" style="width: 100%">
-                  <div>
-                    <img class="card-img-top" src="./assets/img/product/addidas1.jpg" alt="Card image cap">
-                    <!-- <form action="" class="hover-icon hidden-sm hidden-xs">
-                      <input type="hidden">
-                      <a href="./pay.html" class="btn-add-to-cart" title="Mua ngay">
-                        <i class="fas fa-cart-plus"></i>
-                      </a>
-                      <a data-toggle="modal" data-target="#myModal" class="quickview" title="Xem nhanh">
-                        <i class="fas fa-search"></i>
-                      </a>
-                    </form> -->
-                  </div>
-                  <div class="card-body">
-                    <h5 class="card-title custom__name-product">
-                    Adidas
-                    </h5>
-                    <div class="product__price">
-                      <p class="card-text price-color product__price-old">1,000,000 đ</p>
-                      <p class="card-text price-color product__price-new">1,000,000 đ</p>
-                    </div>
-                    <div class="home-product-item__action">
-                      <span class="home-product-item__like home-product-item__like--liked">
-                          <i class="home-product-item__like-icon-empty far fa-heart"></i>
-                          <i class="home-product-item__like-icon-fill fas fa-heart"></i>
-                      </span>
-                      <div class="home-product-item__rating">
-                          <i class="home-product-item__star--gold fas fa-star"></i>
-                          <i class="home-product-item__star--gold fas fa-star"></i>
-                          <i class="home-product-item__star--gold fas fa-star"></i>
-                          <i class="home-product-item__star--gold fas fa-star"></i>
-                          <i class="fas fa-star"></i>
-                      </div>
-                      <span class="home-product-item__sold">79 đã bán</span>
-                    </div>
-                    <div class="sale-off">
-                      <span class="sale-off-percent">20%</span>
-                      <span class="sale-off-label">GIẢM</span>
-                    </div>
-                  </div>
-                </div>
-              </a>
-            </div>
+            </div> --}}
           </div>
           <div class="seemore">
             <a href="/product">Xem thêm</a>

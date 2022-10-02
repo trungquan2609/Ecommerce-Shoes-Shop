@@ -12,5 +12,4 @@ const homePageSchema = new Schema({
     timestamps: true,
 });
 
-
 module.exports = mongoose.model('Homepage', homePageSchema);

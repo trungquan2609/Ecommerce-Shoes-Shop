@@ -5,18 +5,28 @@ const Homepage = require('../../models/homepage_model');
 
 class HomepageController {
 
-    index(req, res, next) {
+    async index(req, res, next) {
+        var edithomepage = await Homepage.find()
         res.render('admin/edithomepage/index', {
             title: 'Sửa trang chủ',
             layout: 'layout_admin.hbs',
+            edithomepage
         })
     }
 
-    edit(req, res, next) {
+    async edit(req, res, next) {
+        var edithomepage = await Homepage.findById( req.params._id)
         res.render('admin/edithomepage/edit', {
             title: 'Sửa trang chủ',
             layout: 'layout_admin.hbs',
+            edithomepage
         })
+    }
+
+    async update(req, res, next) {
+        var update = req.body
+        Homepage.updateOne( {_id: req.params._id}, update)
+        .then(res.redirect('/admin/edithomepage'))
     }
 }
 

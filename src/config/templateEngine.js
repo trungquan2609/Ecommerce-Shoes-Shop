@@ -28,7 +28,8 @@ function templateEngine(app) {
                     result.push(options.fn(object[i]));
                 return result.join('');
             },
-            ifEq: (a, b, c) => (a == b) ? c.fn(this) : c.inverse(this)
+            ifEq: (a, b, c) => (a == b) ? c.fn(this) : c.inverse(this),
+            toLowerCase: (str) => str.toLowerCase()
         },
     }));
     app.set('view engine', 'hbs');

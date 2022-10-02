@@ -27,28 +27,34 @@
                         <th>SKU2</th>
                         <th>SKU3</th>
                         <th>SKU4</th>
+                        <th>Ngày cập nhật</th>
                         <th>Thao tác</th>
                       </tr>
                     </thead>
                     <tbody>
+                      {{#each edithomepage}}
                       <tr class="odd name">
-                        <td>SẢN PHẨM MỚI</td>
-                        <td>SKU</td>
-                        <td>SKU2</td>
-                        <td>SKU3</td>
-                        <td>SKU4</td>
+                        <td>{{this.name}}</td>
+                        <td>{{this.SKU}}</td>
+                        <td>{{this.SKU2}}</td>
+                        <td>{{this.SKU3}}</td>
+                        <td>{{this.SKU4}}</td>
+                        <th>{{this.updatedAt}}</th>
                         <td class="center">
-                          <a href="/admin/edithomepage/a"><button class="btn btn-rounded btn-space btn-primary">Sửa</button></a>
+                          <a href="/admin/edithomepage/{{this._id}}"><button class="btn btn-rounded btn-space btn-primary">Sửa</button></a>
                         </td>
                       </tr>
-                      <tr class="odd name">
+                      
+                      {{/each}}
+                      {{!-- <tr class="odd name">
                         <td>TOP SẢN PHẨM HOT</td>
                         <td>SKU</td>
                         <td>SKU2</td>
                         <td>SKU3</td>
                         <td>SKU4</td>
+                        <th>Ngày cập nhật</th>
                         <td class="center">
-                          <a href="/admin/edithomepage/a"><button class="btn btn-rounded btn-space btn-primary">Sửa</button></a>
+                          <a href="/admin/edithomepage/633883b0e3c3a89028676d28"><button class="btn btn-rounded btn-space btn-primary">Sửa</button></a>
                         </td>
                       </tr>
                       <tr class="odd name">
@@ -57,10 +63,11 @@
                         <td>SKU2</td>
                         <td>SKU3</td>
                         <td>SKU4</td>
+                        <th>Ngày cập nhật</th>
                         <td class="center">
-                          <a href="/admin/edithomepage/a"><button class="btn btn-rounded btn-space btn-primary">Sửa</button></a>
+                          <a href="/admin/edithomepage/633883966871f078d7b0a643"><button class="btn btn-rounded btn-space btn-primary">Sửa</button></a>
                         </td>
-                      </tr>
+                      </tr> --}}
                     </tbody>
                   </table>
                 </div>

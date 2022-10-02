@@ -3,7 +3,9 @@ const router = express.Router();
 
 const EditHomePage = require('../../app/controllers/admin/EditHomePageController');
 
-router.get('/:title', EditHomePage.edit)
+router.patch('/:_id', EditHomePage.update);
+
+router.get('/:_id', EditHomePage.edit)
 
 router.get('/', EditHomePage.index);
 

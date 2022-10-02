@@ -418,6 +418,7 @@ input[type="radio"] + .label-css::after{
     border-radius: unset;
 }
 .body__comment {
+    margin-left: 16px;
     background-color: #eee;
     height: 400px;
     overflow-y: auto;
