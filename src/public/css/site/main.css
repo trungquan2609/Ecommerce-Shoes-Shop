@@ -1195,7 +1195,7 @@ i.home-product-item__like-icon-fill {
     margin: 0 0 0 auto;
 }
 .home-product-item__star--gold {
-    color: yellow;
+    color: #ffc107;
 }
 .home-product-item__sold {
     margin-left: 6px;

@@ -23,6 +23,7 @@ function isLoggedIn(req, res, next) {
     if (req.isAuthenticated()) {
         return next();
     }
-    req.session.oldUrl = req.url;
+    res.locals.oldUrl = req.url;
+    console.log(res.locals.oldUrl)
     res.redirect('/user/login');
 }

@@ -66,6 +66,11 @@
                   <div class="infor-oder" id="info-quantity">
                       Số lượng: <b></b>
                   </div>
+                  <div class="info-rate">
+                    <span>Đánh giá:</span>
+                    <div class="home-product-item__rating" id="info-rate" style="font-size: 20px;transform-origin: left;margin-bottom: 5px">
+                    </div>
+                  </div>
                     {{!-- <div class="product__color d-flex" style="align-items: center;">
                         <div class="title" style="font-size: 16px; margin-right: 10px;">
                         Màu: 
@@ -150,8 +155,8 @@
               <p>PTrên chân các cầu thủ nổi tiếng như: Cristiano Ronaldo, Kylian Mbappé, Erling Haaland, Jadon Sancho, Leroy Sané, Romelu Lukaku...</p>   --}}
               {{#limit product 1}}
                 {{#if product.description}}
-                  <h3 class="name__product">NIKE MERCURIAL SUPERFLY 8 ACADEMY TF</h3>
-                  <p>{{product.description}}</p>
+                  <h3 class="name__product">{{this.productName}}</h3>
+                  <p>{{this.description}}</p>
                 {{else}}
                   <h3>(Đang cập nhật)</h3>
                 {{/if}}
@@ -165,13 +170,14 @@
           <h2 class="product__describe-heading">Bình luận</h2>
           <div class="row">
             <div class="col-lg-4 col-12 mb-4">
-              <div class="home-product-item__rating" style="font-size: 24px;transform-origin: left;margin-bottom: 5px">
-                <i class="home-product-item__star--gold fas fa-star"></i>
-                <i class="home-product-item__star--gold fas fa-star"></i>
-                <i class="home-product-item__star--gold fas fa-star"></i>
-                <i class="home-product-item__star--gold fas fa-star"></i>
-                <i class="fas fa-star"></i>
+              <div class="home-product-item__rating" id="rate-star" style="font-size: 24px;transform-origin: left;margin-bottom: 5px">
+                <i class="fas fa-star rate-star" onclick="rateStar(0)"></i>
+                <i class="fas fa-star rate-star" onclick="rateStar(1)"></i>
+                <i class="fas fa-star rate-star" onclick="rateStar(2)"></i>
+                <i class="fas fa-star rate-star" onclick="rateStar(3)"></i>
+                <i class="fas fa-star rate-star" onclick="rateStar(4)"></i>
               </div>
+                      {{!-- home-product-item__star--gold --}}
               <form action="/feedback/comment?_csrf={{ csrfToken }}" method="post">
                 <input type="hidden" name="userId" value="{{user._id}}">
                 <input type="hidden" name="SKU" value="{{#limit product 1}}{{this.SKU}}{{/limit}}">
@@ -181,101 +187,39 @@
             </div>
             <div class="col-lg-8 col-12">
               <div class="body__comment">
-                <div class="comment" style="align-items: center;">
-                  <img class="comment-img" src="./assets/img/product/noavatar.png" alt="" >
-                  <div class="comment__content">
-                    <div class="comment__content-heding">
-                      <h4 class="comment__content-name">Nguyễn Ngọc Nam</h4>
-                      <span class="comment__content-time">2021-11-12</span>
-                    </div>
-                    <div class="home-product-item__rating" style="font-size: 14px;transform-origin: left;margin-bottom: 5px">
-                      <i class="home-product-item__star--gold fas fa-star"></i>
-                      <i class="home-product-item__star--gold fas fa-star"></i>
-                      <i class="home-product-item__star--gold fas fa-star"></i>
-                      <i class="home-product-item__star--gold fas fa-star"></i>
-                      <i class="fas fa-star"></i>
-                    </div>
-                    <div class="comment__content-content">
-                      <span>Đẹp quá</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="comment">
-                  <img class="comment-img" src="./assets/img/product/noavatar.png" alt="" >
-                  <div class="comment__content">
-                    <div class="comment__content-heding">
-                      <h4 class="comment__content-name">Nguyễn Ngọc Nam</h4>
-                      <span class="comment__content-time">2021-11-12</span>
-                    </div>
-                    <div class="home-product-item__rating" style="font-size: 14px;transform-origin: left;margin-bottom: 5px">
-                      <i class="home-product-item__star--gold fas fa-star"></i>
-                      <i class="home-product-item__star--gold fas fa-star"></i>
-                      <i class="home-product-item__star--gold fas fa-star"></i>
-                      <i class="home-product-item__star--gold fas fa-star"></i>
-                      <i class="fas fa-star"></i>
-                    </div>
-                    <div class="comment__content-content">
-                      <span>Quá đẹp</span>
+                <!-- {{#ifCond comment '||' rate}} 
+                {{#if comment}}
+                {{#each comment}}
+                  <div class="comment">
+                    <img class="comment-img" src="{{this.userId.avatar}}" onerror="this.src='/img/userImages/noavatar.png';" alt="" >
+                    <div class="comment__content">
+                      <div class="comment__content-heding">
+                        <h4 class="comment__content-name">{{#if this.userId.fullname}}
+                        {{this.userId.fullname}}
+                        {{else}}
+                        {{this.userId.email}}
+                        {{/if}}</h4>
+                        <span class="comment__content-time">{{dateFormat this.createdAt "DD-MM-YYYY, HH:MM"}}</span>
+                      </div>
+                      <div class="home-product-item__rating" style="font-size: 14px;transform-origin: left;margin-bottom: 5px">
+                        <i class="home-product-item__star--gold fas fa-star"></i>
+                        <i class="home-product-item__star--gold fas fa-star"></i>
+                        <i class="home-product-item__star--gold fas fa-star"></i>
+                        <i class="home-product-item__star--gold fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                      </div>
+                       home-product-item__star--gold 
+                      <div class="comment__content-content">
+                        <span>{{this.comment}}</span>
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div class="comment">
-                  <img class="comment-img" src="./assets/img/product/noavatar.png" alt="" >
-                  <div class="comment__content">
-                    <div class="comment__content-heding">
-                      <h4 class="comment__content-name">Nguyễn Ngọc Nam</h4>
-                      <span class="comment__content-time">2021-11-12</span>
-                    </div>
-                    <div class="home-product-item__rating" style="font-size: 14px;transform-origin: left;margin-bottom: 5px">
-                      <i class="home-product-item__star--gold fas fa-star"></i>
-                      <i class="home-product-item__star--gold fas fa-star"></i>
-                      <i class="home-product-item__star--gold fas fa-star"></i>
-                      <i class="home-product-item__star--gold fas fa-star"></i>
-                      <i class="fas fa-star"></i>
-                    </div>
-                    <div class="comment__content-content">
-                      <span>Đẹp quá</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="comment">
-                  <img class="comment-img" src="./assets/img/product/noavatar.png" alt="" >
-                  <div class="comment__content">
-                    <div class="comment__content-heding">
-                      <h4 class="comment__content-name">Nguyễn Ngọc Nam</h4>
-                      <span class="comment__content-time">2021-11-12</span>
-                    </div>
-                    <div class="home-product-item__rating" style="font-size: 14px;transform-origin: left;margin-bottom: 5px">
-                      <i class="home-product-item__star--gold fas fa-star"></i>
-                      <i class="home-product-item__star--gold fas fa-star"></i>
-                      <i class="home-product-item__star--gold fas fa-star"></i>
-                      <i class="home-product-item__star--gold fas fa-star"></i>
-                      <i class="fas fa-star"></i>
-                    </div>
-                    <div class="comment__content-content">
-                      <span>Sản phẩm tốt</span>
-                    </div>
-                  </div>
-                </div>
-                <!-- <div class="comment">
-                  <img class="comment-img" src="./assets/img/product/noavatar.png" alt="" >
-                  <div class="comment__content">
-                    <div class="comment__content-heding">
-                      <h4 class="comment__content-name">Nguyễn Ngọc Nam</h4>
-                      <span class="comment__content-time">2021-11-12</span>
-                    </div>
-                    <div class="home-product-item__rating" style="font-size: 14px;transform-origin: left;margin-bottom: 5px">
-                      <i class="home-product-item__star--gold fas fa-star"></i>
-                      <i class="home-product-item__star--gold fas fa-star"></i>
-                      <i class="home-product-item__star--gold fas fa-star"></i>
-                      <i class="home-product-item__star--gold fas fa-star"></i>
-                      <i class="fas fa-star"></i>
-                    </div>
-                    <div class="comment__content-content">
-                      <span>Sản phẩm tốt</span>
-                    </div>
-                  </div>
-                </div> -->
+                
+                {{/each}}
+                {{else}}
+                  <h3 class="comment">Chưa có bình luận</h3>
+                {{/if}}
+                 {{/ifCond}} -->
               </div>
             </div>
           </div>

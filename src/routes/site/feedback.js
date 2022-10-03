@@ -5,7 +5,7 @@ const feedbackController = require('../../app/controllers/site/FeedbackControlle
 
 router.post('/comment', isLoggedIn, feedbackController.comment);
 
-router.post('/rate', isLoggedIn, feedbackController.rate);
+router.get('/rate', isLoggedIn, feedbackController.rate);
 
 module.exports = router;
 

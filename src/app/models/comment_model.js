@@ -3,6 +3,7 @@ const Schema = mongoose.Schema;
 const User = require('./user_model');
 const Product = require('./product_model');
 const Admin = require('./admin_model');
+const Rate = require('./rate_model')
 
 const commentSchema = new Schema({
     comment: String,

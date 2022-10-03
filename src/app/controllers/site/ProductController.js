@@ -1,5 +1,8 @@
 const Product = require('../../models/product_model');
 const Brand = require('../../models/brand_model');
+const Comment = require('../../models/comment_model');
+const User = require('../../models/user_model');
+const Rate = require('../../models/rate_model');
 const { multipleMongooseToObject } = require('../../../util/mongoose');
 const { mongoosesToObject } = require('../../../util/mongoose');
 String.prototype.toObjectId = function() {
@@ -7,70 +10,19 @@ String.prototype.toObjectId = function() {
     return new ObjectId(this.toString());
 };
 const _ = require('lodash');
-const user_model = require('../../models/user_model');
 const { result } = require('lodash');
 
 class ProductController {
 
     // Get /site/products
     index(req, res, next) {
-        // const PAGE_SIZE = 6;
-        // var page = req.query.page
-        // if(page) {
-        //     page = parseInt(page)
-        //     if(page < 1 ) {
-        //         page = 1
-        //     }
-        //     var skip = (page-1) * PAGE_SIZE
-        //     Product.aggregate([
-        //         { $group: {_id: {
-        //             SKU: '$SKU',
-        //             name: '$productName',
-        //             price: '$price' ,
-        //             salePrice: '$salePrice',
-        //             productImage: '$productImage'
-        //         }}}
-        //     ])
-        //         .skip(skip)
-        //         .limit(PAGE_SIZE)
-        //         .then(products=> {
-        //             Product.countDocuments({}).then((total) => {
-        //                 var totalPage = Math.ceil(total/PAGE_SIZE)
-        //                 res.render('site/product/product', {
-        //                     title: 'N&Q Shop',
-        //                     styles: ['product','productdetail'],
-        //                     scripts: ['pagination.min','product', 'products'],
-        //                     layout: 'layout_site.hbs',
-        //                     products
-        //                 })
-
-        //             })
-        //         })
-        // }
-        // Product.aggregate([
-        //     { $group: {_id: {
-        //         SKU: '$SKU',
-        //         name: '$productName',
-        //         price: '$price' ,
-        //         salePrice: '$salePrice',
-        //         productImage: '$productImage'
-        //     }}}
-        // ])
-        //     .then(products => res.render('site/product/product', {
-        //         title: 'N&Q Shop',
-        //         styles: ['product','productdetail'],
-        //         scripts: ['pagination.min','product', 'products'],
-        //         layout: 'layout_site.hbs',
-        //         products,
-        //     }))
-        //     .catch(next);
-            res.render('site/product/product', {
-                title: 'N&Q Shop',
-                styles: ['product','productdetail'],
-                scripts: ['pagination.min', 'product', 'products'],
-                layout: 'layout_site.hbs',
-            })
-    }
+        res.render('site/product/product', {
+            title: 'N&Q Shop',
+            styles: ['product','productdetail'],
+            scripts: ['pagination.min', 'product', 'products'],
+            layout: 'layout_site.hbs',
+        })
+}
 
     sort(req, res, next) {
         if ( req.params.brandid && req.param('sn') === 'name' ) {
@@ -150,9 +102,6 @@ class ProductController {
             var info = 'danger'
         }
         Product.find({ SKU: req.params.SKU}).populate('brandId','brandName')
-            // .then(function (product) {
-            //     res.send((product));
-            // })
             .then(product => {
                 Product.aggregate([
                     { $match: { brandId: product[0].brandId._id }},
@@ -174,7 +123,7 @@ class ProductController {
                             user,
                             message,
                             info,
-                            closeProduct
+                            closeProduct,
                         })
                     })
             })

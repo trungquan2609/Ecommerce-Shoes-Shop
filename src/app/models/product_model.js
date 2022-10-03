@@ -14,6 +14,7 @@ const productShema = new Schema({
     productImage: { type: String },
     quantity: { type: Number },
     description: { type: String },
+    rate: Number
 }, {
     collection: 'products',
     timestamps: true,

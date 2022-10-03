@@ -419,8 +419,8 @@ input[type="radio"] + .label-css::after{
 }
 .body__comment {
     margin-left: 16px;
+    min-height: 200px;
     background-color: #eee;
-    height: 400px;
     overflow-y: auto;
 }
 .comment {
@@ -563,4 +563,15 @@ input[type="radio"] + .label-css::after{
     font-size: 1.6rem;
     display: flex;
     justify-content: center;
+}
+
+.info-rate {
+    display: flex;
+    font-size: 2rem
+}
+
+#info-rate {
+    margin-left: 0;
+    padding: 4px;
+    line-height: 2rem;
 }

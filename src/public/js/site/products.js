@@ -58,6 +58,9 @@ function render(element) {
                 <p class="card-text price-color product__price-new">${priceFormat(element._id.salePrice)} đ</p>
             </div>
             <div class="home-product-item__action">
+              <div class="home-product-item__rating">
+              ${renderStar(element._id.rate)?renderStar(element._id.rate):renderStar(0)}
+              </div>
             </div>
               <div class="sale-off">
                 <span class="sale-off-percent">${salePercent(element._id.salePrice, element._id.price)}%</span>
@@ -83,6 +86,9 @@ function render(element) {
                 <p class="card-text price-color product__price-new">${priceFormat(element._id.price)} đ</p>
             </div>
             <div class="home-product-item__action">
+            <div class="home-product-item__rating">
+                  ${renderStar(element._id.rate)?renderStar(element._id.rate):renderStar(0)}
+              </div>
             </div>
           </div>
         </div>
@@ -91,6 +97,19 @@ function render(element) {
   }
   $('#products').append(item)
 
+}
+
+function renderStar(number) {
+  var goldStar = '<i class="home-product-item__star--gold fas fa-star"></i>'
+  var star = '<i class="fas fa-star"></i>'
+  var str = ''
+  for (var i = 0; i < number ; i++) {
+      str += goldStar
+  }
+  for (var i = 0; i < (5 - number) ; i++) {
+      str += star
+  }
+  return str
 }
 
 function priceFormat(price) {
