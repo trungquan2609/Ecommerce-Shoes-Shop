@@ -101,12 +101,13 @@ class CartController {
         var totalQty = 0
         var totalPrice = 0
         var items = {}
+        console.log(cart)
         var updateCart = {
         }
         for ( var i in param) {
-            var id = `${param[i]}`;
+            var id = param[i];
             var qty = parseInt(param2[i]);
-            var price = cart.items[id].item.currentPrice
+            var price = cart.items[id]?.item.currentPrice
             var item = cart.items[id]
             totalQty += qty
             item.qty = qty;
@@ -119,7 +120,7 @@ class CartController {
 
         }
         req.session.cart = updateCart
-        res.redirect('/cart/checkout')
+        // res.redirect('/cart/checkout')
     }
 
     async checkout(req, res, next) {

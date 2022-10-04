@@ -1,4 +1,5 @@
       <div class="be-content">
+        
         <div class="main-content container-fluid">
           <div class="row">
             <div class="col-12 col-lg-6 col-xl-3">
@@ -53,7 +54,12 @@
             <div class="col-lg-10">
               <div class="card">
                 <div class="card-header card-header-divider">
-                  <div class="tools"></div><span class="title">Biều đồ doanh thu</span><span class="card-subtitle">Theo tháng</span>
+                  <div class="tools"></div><span class="title">Biều đồ doanh thu</span>
+                  {{!-- <span class="card-subtitle">Theo tháng</span> --}}
+                  <label for="from">From</label>
+                  <input type="text" id="from" onchange="getData()" autocomplete="off" name="from">
+                  <label for="to">to</label>
+                  <input type="text" id="to" onchange="getData()" autocomplete="off" name="to">
                 </div>
                 <div class="card-body">
                   <canvas id="myChart"></canvas>
