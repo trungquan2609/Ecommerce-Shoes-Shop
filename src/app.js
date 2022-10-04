@@ -23,6 +23,7 @@ const db = require('./config/connectDB');
 const global = require('./config/global');
 const templateEngine = require('./config/templateEngine');
 const cors = require('cors');
+const xlsx = require('xlsx');
 
 app.use(cors());
 require('dotenv').config({ 

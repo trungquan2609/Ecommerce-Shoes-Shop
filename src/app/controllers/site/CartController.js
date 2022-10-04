@@ -53,7 +53,6 @@ class CartController {
             var count = currentQuantityProduct.quantity - qty
             var updateQuantityProduct = {quantity: count};
             const q = await Product.findOneAndUpdate({ _id: productId}, updateQuantityProduct)
-            console.log(q)
             var cart = new Cart(req.session.cart ? req.session.cart : {});
             Product.findById(productId, function (err, product) {
                 if (err) {
@@ -94,20 +93,41 @@ class CartController {
         res.redirect('/cart');
     }
 
-    updateCart(req, res) {
+    async updateCart(req, res) {
         var param = req.param('id')
         var param2 = req.param('quantity')
         var cart = req.session.cart;
         var totalQty = 0
         var totalPrice = 0
         var items = {}
-        console.log(cart)
+        
         var updateCart = {
         }
-        for ( var i in param) {
-            var id = param[i];
-            var qty = parseInt(param2[i]);
-            var price = cart.items[id]?.item.currentPrice
+        console.log(req.query.id)
+        if ( typeof param === 'object') {
+            for ( var i in param) {
+                var id = param[i];
+                var qty = parseInt(param2[i]);
+                var product = await Product.findById(id)
+                var updateProductQty = await Product.updateOne({ _id:id }, {quantity: (product.quantity - (qty - cart.items[id].qty))})
+                var price = cart.items[id].item.currentPrice
+                var item = cart.items[id]
+                totalQty += qty
+                item.qty = qty;
+                item.price = qty*cart.items[id].item.currentPrice
+                items[id] = item
+                updateCart.items = items
+                updateCart.totalQty = totalQty
+                totalPrice += item.price
+                updateCart.totalPrice = totalPrice
+
+            }
+        } else {
+            var id = param;
+            var qty = parseInt(param2);
+            var product = await Product.findById(id)
+            var updateProductQty = await Product.updateOne({ _id:id }, {quantity: (product.quantity - (qty - cart.items[id].qty))})
+            var price = cart.items[id].item.currentPrice
             var item = cart.items[id]
             totalQty += qty
             item.qty = qty;
@@ -117,10 +137,10 @@ class CartController {
             updateCart.totalQty = totalQty
             totalPrice += item.price
             updateCart.totalPrice = totalPrice
-
         }
         req.session.cart = updateCart
-        // res.redirect('/cart/checkout')
+        // console.log(updateCart)
+        res.redirect('/cart/checkout')
     }
 
     async checkout(req, res, next) {

@@ -1,4 +1,5 @@
 const User = require('../../models/user_model');
+const Product = require('../../models/product_model')
 const multer = require('multer');
 const bcrypt = require('bcrypt');
 const Order = require('../../models/order_model');
@@ -54,7 +55,13 @@ class UserController {
     }
 
     // Get /user/logout
-    logout(req, res, next) {
+    async logout(req, res, next) {
+        var cart = req.session.cart;
+        var id = Object.keys(cart.items)
+        for ( var i in id ) {
+            var product = await Product.findById(id[i])
+            var updateProductQty = await Product.updateOne({ _id:id[i] }, {quantity: (product.quantity + (cart.items[id[i]].qty))})
+        }
         req.logout(function (err) {
             if (err) { return next(err); }
             res.redirect('/')

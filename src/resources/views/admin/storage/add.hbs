@@ -1,11 +1,11 @@
 <div class="be-content">
         <div class="page-head">
-          <h2 class="page-head-title">Sửa danh sách {{toLowerCase edithomepage.name}}</h2>
+          <h2 class="page-head-title">Nhập hàng</h2>
           <nav aria-label="breadcrumb" role="navigation">
             <ol class="breadcrumb page-head-nav">
               <li class="breadcrumb-item"><a href="index.html">Trang chủ</a></li>
-              <li class="breadcrumb-item"><a href="Product.html">Sửa trang chủ</a></li>
-              <li class="breadcrumb-item active">Sửa danh sách {{toLowerCase edithomepage.name}}</li>
+              <li class="breadcrumb-item"><a href="Product.html">Danh sách nhập hàng</a></li>
+              <li class="breadcrumb-item active">Nhập hàng</li>
             </ol>
           </nav>
         </div>
@@ -13,47 +13,30 @@
               <div class="row">
                 <div class="col-md-12">
                   <div class="card card-border-color card-border-color-primary">
-                    <div class="card-header card-header-divider">{{edithomepage.name}}</div>
+                    <div class="card-header card-header-divider">Nhập hàng</div>
                     <div class="card-body">
-                      <form action="/admin/edithomepage/{{edithomepage._id}}?_csrf={{ csrfToken }}&_method=PATCH" method="POST">
-                        <div class="form-group row">
-                          <label class="col-12 col-sm-3 col-form-label text-sm-right">SKU1</label>
-                          <div class="col-12 col-sm-8 col-lg-6">
-                            <input class="form-control" name="SKU" value="{{edithomepage.SKU}}" type="text" required="" placeholder="">
-                          </div>
-                        </div>
-                        <div class="form-group row">
-                          <label class="col-12 col-sm-3 col-form-label text-sm-right">SKU2</label>
-                          <div class="col-12 col-sm-8 col-lg-6">
-                            <input class="form-control" name="SKU2" value="{{edithomepage.SKU2}}" type="text" required="" placeholder="">
-                          </div>
-                        </div>
-                        <div class="form-group row">
-                          <label class="col-12 col-sm-3 col-form-label text-sm-right">SKU3</label>
-                          <div class="col-12 col-sm-8 col-lg-6">
-                            <input class="form-control" name="SKU3" value="{{edithomepage.SKU3}}" type="text" required="" placeholder="">
-                          </div>
-                        </div>
-                        <div class="form-group row">
-                          <label class="col-12 col-sm-3 col-form-label text-sm-right">SKU4</label>
-                          <div class="col-12 col-sm-8 col-lg-6">
-                            <input class="form-control" name="SKU4" value="{{edithomepage.SKU4}}" type="text" required="" placeholder="">
-                          </div>
-                        </div>
-                        <div class="form-group row text-right">
-                          <div class="col col-sm-10 col-lg-9 offset-sm-1 offset-lg-0">
-                            <button class="btn btn-space btn-primary" type="submit">Submit</button>
-                            <button class="btn btn-space btn-secondary">Cancel</button>
-                          </div>
-                        </div>
-                      </form>
+                        <form action="/admin/stockin/addstockin?_csrf={{ csrfToken }}" method="POST" enctype="multipart/form-data">
+                            <div class="form-group row">
+                                <label class="col-12 col-sm-3 col-form-label text-sm-right" for="stock_in-file">Danh sách sản phẩm</label>
+                                <div class="col-12 col-sm-6">
+                                    <input class="inputfile" id="stock_in-file" type="file" name="stock_in-file" data-multiple-caption="{count} files selected" multiple="">
+                                    <label class="btn-secondary" name="stock_in-file" for="stock_in-file"> <i class="mdi mdi-upload"></i><span>Thêm file</span></label>
+                                </div>
+                            </div>
+                            <div class="form-group row text-right">
+                            <div class="col col-sm-10 col-lg-9 offset-sm-1 offset-lg-0">
+                                <button class="btn btn-space btn-primary" type="submit">Nhập hàng</button>
+                                <a href="/admin/stockin" class="btn btn-space btn-secondary">Huỷ bỏ</a>
+                            </div>
+                            </div>
+                        </form>
                     </div>
-                  </div>
                 </div>
-              </div>
-      <nav class="be-right-sidebar">
+            </div>
         </div>
-      </nav>
+    <nav class="be-right-sidebar">
+    </div>
+    </nav>
     </div>
     <script src="/admin\assets\lib\jquery\jquery.min.js" type="text/javascript"></script>
     <script src="/admin\assets\lib\perfect-scrollbar\js\perfect-scrollbar.min.js" type="text/javascript"></script>
@@ -72,6 +55,20 @@
     <script src="/admin\assets\lib\datatables\datatables.net-buttons-bs4\js\buttons.bootstrap4.min.js" type="text/javascript"></script>
     <script src="/admin\assets\lib\datatables\datatables.net-responsive\js\dataTables.responsive.min.js" type="text/javascript"></script>
     <script src="/admin\assets\lib\datatables\datatables.net-responsive-bs4\js\responsive.bootstrap4.min.js" type="text/javascript"></script>
+    <script src="admin\assets\lib\jquery.nestable\jquery.nestable.js" type="text/javascript"></script>
+    <script src="/admin\assets\lib\moment.js\min\moment.min.js" type="text/javascript"></script>
+    <script src="/admin\assets\lib\datetimepicker\js\bootstrap-datetimepicker.min.js" type="text/javascript"></script>
+    <script src="/admin\assets\lib\select2\js\select2.min.js" type="text/javascript"></script>
+    <script src="/admin\assets\lib\select2\js\select2.full.min.js" type="text/javascript"></script>
+    <script src="/admin\assets\lib\bootstrap-slider\bootstrap-slider.min.js" type="text/javascript"></script>
+    <script src="/admin\assets\lib\bs-custom-file-input\bs-custom-file-input.js" type="text/javascript"></script>
+            <script type="text/javascript">
+              $(document).ready(function(){
+                //-initialize the javascript
+                App.init();
+                App.formElements();
+              });
+            </script>
     <script type="text/javascript">
       $(document).ready(function(){
       	//-initialize the javascript

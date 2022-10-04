@@ -5,31 +5,36 @@ const Comment = require('../../models/comment_model');
 
 class FeedbackController {
     async rate(req, res, next) {
-        var userId = req.param('userId');
-        var star = parseInt(req.param('star')) + 1;
-        var SKU = req.param('sku');
-        var q1 = await Rate.find({$and:[{ userId: userId }, {SKU : SKU}]}).count();
-        var rate = await Rate.find({ SKU: SKU})
-        var star2 = Math.round(rate.map(r => r.rate).reduce((pre, acc) => pre + acc, 0 ) / rate.length)
-        if ( q1 == 0) {
+        var userId = req.query.userId;
+        var star = parseInt(req.query.star) + 1;
+        var SKU = req.query.sku;
+        var q1 = await Rate.find({$and:[{ userId: userId }, {SKU : SKU}]});
+        // var rateNum = await Rate.find({ SKU: SKU})
+        // var starAvg = Math.round(rateNum.map(r => r.rate).reduce((pre, acc) => pre + acc, 0 ) / rateNum.length)
+        if ( q1.length == 0) {
             var newRate = new Rate({
                 userId,
                 rate: star,
                 SKU
             })
-            newRate.save()
-            .then(rs => Product.updateMany({SKU:SKU}, { $set: {'rate':star2}}))
-            .then(res.redirect('back'))
+            var q2 = await newRate.save()
+            var rateNum = await Rate.find({ SKU: SKU})
+            var starAvg = Math.round(rateNum.map(r => r.rate).reduce((pre, acc) => pre + acc, 0 ) / rateNum.length)
+            var q3 = await Product.updateMany({SKU:SKU}, { $set: {rate:starAvg}})
+            res.redirect('back')
         } else {
             var newRate = {
                 userId,
                 rate: star,
                 SKU
             }
-            Rate.updateOne({ userId: userId}, newRate)
-            .then(rs => Product.updateMany({SKU:SKU}, { $set: {'rate':star2}}))
-            .then(res.redirect('back'))
+            var q2 = await Rate.updateOne({$and:[{ userId: userId }, {SKU : SKU}]}, newRate)
+            var rateNum = await Rate.find({ SKU: SKU})
+            var starAvg = Math.round(rateNum.map(r => r.rate).reduce((pre, acc) => pre + acc, 0 ) / rateNum.length)
+            var q3 = await Product.updateMany({SKU:SKU}, { $set: {rate:starAvg}})
+            res.redirect('back')
         }
+        console.log(starAvg)
     }
 
     comment(req, res, next) {

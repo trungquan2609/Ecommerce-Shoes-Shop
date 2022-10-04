@@ -143,11 +143,7 @@
                         <h5>{{this.item.productName}} - {{this.item.size}}</h5>
                     </div>
                     <div class="col-2">
-                        {{#if this.item.salePrice}}
-                                <span>{{priceFormat this.item.salePrice}}₫</span>
-                                {{else}}
-                                <span>{{priceFormat this.item.price}}₫</span>
-                                {{/if}}
+                        <span>{{priceFormat this.item.currentPrice}}₫</span>
                     </div>
                 </div>
                 {{/each}}
