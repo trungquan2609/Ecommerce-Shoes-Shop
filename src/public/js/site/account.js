@@ -31,3 +31,43 @@ const pass_field = document.querySelector('#password');
       show_btn3.classList.remove("hide");
     }
   });
+
+function getOrder(id) {
+  fetch(`/api/order?orderId=${id}`)
+  .then((response) => response.json())
+  .then(rs => {
+    $('#order-detail').html('')
+    for (var i in rs) {
+      renderOrder(rs[i])
+      console.log(rs)
+    }
+  })
+}
+
+function renderOrder(element) {
+  var item = `
+        <tr>
+          <td>
+            <img src="/img/product/${element.item.productImage}" alt="" width="150px">
+          </td>
+          <td>${element.item.productName}</td>
+          <td>${element.item.size}</td>
+          <td>${priceFormat(element.item.currentPrice)}</td>
+          <td>${element.qty}</td>
+          <td>${priceFormat(element.price)}</td>
+        </tr>`
+    $('#order-detail').append(item)
+}
+
+function priceFormat(price) {
+  return price?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+}
+
+function cancelOrder(id) {
+  document.getElementById('btn-cancel-order').value = id
+}
+
+function confirmCancelOrder() {
+  var orderId = document.getElementById('btn-cancel-order').value
+  window.location = `/api/order/cancelorder?id=${orderId}`
+}

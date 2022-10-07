@@ -29,7 +29,7 @@
                           <div class="chart sparkline" id="spark3"></div>
                           <div class="data-info">
                             <div class="desc">Kho hàng</div>
-                            <div class="value"><span class="indicator indicator-positive mdi mdi-chevron-up"></span><span class="number" data-toggle="counter" data-end="{{product}}">0</span>
+                            <div class="value"><span class="indicator indicator-positive mdi mdi-chevron-up"></span><span class="number" data-toggle="counter" data-end="{{quantity}}">0</span>
                             </div>
                           </div>
                         </div>
@@ -55,11 +55,13 @@
               <div class="card">
                 <div class="card-header card-header-divider">
                   <div class="tools"></div><span class="title">Biều đồ doanh thu</span>
-                  {{!-- <span class="card-subtitle">Theo tháng</span> --}}
-                  <label for="from">From</label>
-                  <input type="text" id="from" onchange="getData()" autocomplete="off" name="from">
-                  <label for="to">to</label>
-                  <input type="text" id="to" onchange="getData()" autocomplete="off" name="to">
+                  <div class="card-subtitle">
+                    <label for="from">Từ ngày</label>
+                    <input type="text" id="from" onchange="getData()" autocomplete="off" name="from">
+                    <label for="to">Đến ngày</label>
+                    <input type="text" id="to" onchange="getData()" autocomplete="off" name="to">
+                    <button onclick="getDataByMonth()">Xem theo tháng</button>
+                  </div>
                 </div>
                 <div class="card-body">
                   <canvas id="myChart"></canvas>

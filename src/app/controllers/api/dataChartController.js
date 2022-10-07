@@ -6,7 +6,8 @@ class dataChartController {
     async dataTotal(req, res, next) {
         var from = new Date(req.query.from ? req.query.from : '2020-01-01')
         var to = new Date(req.query.to ? req.query.to : Date.now())
-        console.log(to.setDate(to.getDate() + 1))
+        to.setHours(23,59,59,9999)
+        // console.log(to)
         Receipt.aggregate([
             { $match: { 
                 createdAt: { $gte: from, $lte: to}
@@ -17,8 +18,6 @@ class dataChartController {
                     day: { $dayOfMonth: {date:"$createdAt", timezone:'Asia/Bangkok'}}, 
                     month: {$month: {date:"$createdAt", timezone:'Asia/Bangkok'}}, 
                     year: {$year: {date:"$createdAt", timezone:'Asia/Bangkok'}},
-                    dateJson: "$createdAt", 
-                    dayOfYear: {$dayOfYear: "$createdAt"},
                 },
                 total: {$sum: "$receipt"}
             }},

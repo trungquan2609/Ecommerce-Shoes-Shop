@@ -25,11 +25,21 @@ class OrderController {
     }
 
     async update(req, res, next) {
-        var productId = req.params.id;
+        var orderId = req.params.id;
         var q = {
             confirmStatus: req.body.confirmStatus
         }
-        Order.updateOne({ _id: productId}, q)
+        if ( req.body.confirmStatus == 'Huỷ đơn hàng') {
+            var product = await Order.findById(orderId)
+            for (var i in product.productId) {
+                var productSKUUpdate = product.productId[i].item.SKU
+                var productSizeUpdate = product.productId[i].item.size
+                var quantityUpdate = product.productId[i].qty
+                var q1 = await Product.find({$and: [{SKU: productSKUUpdate}, {size: productSizeUpdate}]})
+                var q2 = await Product.updateOne({$and: [{SKU: productSKUUpdate}, {size: productSizeUpdate}]}, {$set:{quantity: (q1[0].quantity + quantityUpdate)}})
+            }
+        }
+        Order.updateOne({ _id: orderId}, q)
             .then(res.redirect('/admin/order/'))
     }
 }

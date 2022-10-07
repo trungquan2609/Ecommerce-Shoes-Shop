@@ -5,7 +5,7 @@
   "main": "src/app.js",
   "scripts": {
     "start": "nodemon --inspect src/app.js",
-    "beautiful": "lint-staged",
+    "beautiful": "npx prettier --single-quote --trailing-comma all --tab-width 4 --write src/**/*.{js}",
     "watch": "node-sass --watch src/resources/scss/ --output src/public/css/",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -28,7 +28,12 @@
   },
   "homepage": "https://github.com/trungquan2609/DATN#readme",
   "lint-staged": {
-    "src/**/*.{js,json,scss}": "prettier --single-quote --trailing-comma all --tab-width 4 --write"
+    "src/**/*.{js}": "prettier --single-quote --trailing-comma all --tab-width 4 --write"
+  },
+  "husky":{
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   },
   "devDependencies": {
     "bcrypt": "^5.0.1",

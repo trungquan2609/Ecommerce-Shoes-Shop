@@ -5,9 +5,11 @@ const orderRouter = require('./order');
 const userRouter = require('./user');
 const homepageRouter = require('./edithomepage');
 const stockinRouter = require('./stockin');
+const contactRouter = require('./contact');
 
 function routeAdmin(app) {
 
+    app.use('/admin/contact', contactRouter)
     app.use('/admin/stockin', stockinRouter)
     app.use('/admin/edithomepage', homepageRouter)
     app.use('/admin/user', userRouter)

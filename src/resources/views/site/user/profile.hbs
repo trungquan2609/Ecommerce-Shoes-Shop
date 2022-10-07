@@ -132,9 +132,10 @@
                         </span>
                       </td>
                       <td>
-                        <a href="" data-toggle="modal" data-target="#myModal">Xem</a>
-
-                        <a href="">Huỷ</a>
+                        <span class="btn-detail btn btn-rounded btn-space btn-primary btn_A"data-toggle="modal" data-target="#myModal" onclick="getOrder('{{this._id}}')">Xem</span>
+                        {{#ifCond this.confirmStatus '!=' "Huỷ đơn hàng"}}
+                        <span class="btn-cancel btn btn-rounded btn-space btn-danger btn_A" data-toggle="modal" data-target="#cancelModal" onclick="cancelOrder('{{this._id}}')">Huỷ</span>
+                        {{/ifCond}}
                         </td>
                     </tr>
                     {{/each}}
@@ -163,5 +164,69 @@
           </div>
         </div>
       </div>
+    </div>
+  </div>
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title">Chi tiết đơn hàng</h3>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>Ảnh</th>
+                <th>Tên sản phẩm</th>
+                <th>Kích cỡ</th>
+                <th>Giá bán</th>
+                <th>Số lượng</th>
+                <th>Thành tiền</th>
+              </tr>
+            </thead>
+            <tbody id="order-detail">
+              {{!-- <tr>
+                <td>
+                  <img src="./assets/img/product/addidas1.jpg" alt="" width="50px">
+                </td>
+                <td>ADIDAS</td>
+                <td>đỏ</td>
+                <td>
+                  L
+                </td>
+                <td>1.000.000đ</td>
+                <td>2</td>
+                <td>2.000.000đ</td>
+              </tr> --}}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="modal fade" id="cancelModal" role="dialog">
+    <div class="modal-dialog modal-dialog-cancel ">
+
+      <!-- Modal content-->
+      <div class="modal-content modal-cancel">
+        <div class="modal-header">
+          <h3 class="modal-title">Huỷ đơn hàng</h3>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <h4>Bạn chắc chắn muốn huỷ đơn hàng</h4>
+          <h4>Thao tác này không thể hoàn tác!!!</h4>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+            <button id="btn-cancel-order" onclick="confirmCancelOrder()" type="button" class="btn btn-danger">Huỷ bỏ</button>
+        </div>
+      </div>
+
     </div>
   </div>

@@ -36,7 +36,7 @@ class UserController {
     // Get /user/profile
     async profile(req, res, next) {
         var messages = req.flash('error');
-        const order = await Order.find({userId: req.user._id})
+        const order = await Order.find({userId: req.user._id}).sort({createdAt:-1})
         // if ( order.confirmStatus === 'Xác nhận đơn hàng') {
         //     const statusPending = 'green';
         // } else if( order.confirmStatus === 'Huỷ đơn hàng') {
@@ -56,11 +56,14 @@ class UserController {
 
     // Get /user/logout
     async logout(req, res, next) {
-        var cart = req.session.cart;
-        var id = Object.keys(cart.items)
-        for ( var i in id ) {
-            var product = await Product.findById(id[i])
-            var updateProductQty = await Product.updateOne({ _id:id[i] }, {quantity: (product.quantity + (cart.items[id[i]].qty))})
+        if (req.session.cart ) {
+
+            var cart = req.session.cart;
+            var id = Object.keys(cart.items)
+            for ( var i in id ) {
+                var product = await Product.findById(id[i])
+                var updateProductQty = await Product.updateOne({ _id:id[i] }, {quantity: (product.quantity + (cart.items[id[i]].qty))})
+            }
         }
         req.logout(function (err) {
             if (err) { return next(err); }

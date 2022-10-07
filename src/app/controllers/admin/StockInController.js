@@ -33,6 +33,9 @@ class StockInController {
         var workbook = XLSX.readFile(req.file.destination + '/' + req.file.filename)
         var data = XLSX.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[0]])
         for ( var i in data ) {
+            if ( !data[i].currentPrice) {
+                data[i].currentPrice = data[i].salePrice ? data[i].salePrice : data[i].price
+            }
             var product = await Product.find({$and: [{SKU: data[i].SKU}, {size: data[i].size}]})
             if ( product.length > 0 ) {
                 var update = await Product.updateOne({_id: product[0]._id}, {$set:{quantity: (product[0].quantity + data[i].quantity)}})
