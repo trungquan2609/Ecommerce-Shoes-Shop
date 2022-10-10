@@ -1,0 +1,150 @@
+<div class="be-content">
+        <div class="page-head">
+          <h2 class="page-head-title">Thêm sản phẩm</h2>
+          <nav aria-label="breadcrumb" role="navigation">
+            <ol class="breadcrumb page-head-nav">
+              <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+              <li class="breadcrumb-item"><a href="Product.html">Product</a></li>
+              <li class="breadcrumb-item active">Thêm sản phẩm</li>
+            </ol>
+          </nav>
+        </div>
+        <div class="main-content container-fluid">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="card card-border-color card-border-color-primary">
+                    <div class="card-header card-header-divider">Thêm quản trị viên</div>
+                    <div class="card-body">
+                      {{#if hasErrors}}
+                        <div class="alert alert-danger">
+                          {{#each messages}}
+                            <p>{{this}}</p>
+                          {{/each}}
+                        </div>
+                      {{/if}}
+                      <form action="/admin/moderator/add?_csrf={{ csrfToken }}" method="POST" id="form-1" enctype="multipart/form-data">
+
+                        <div class="form-group row">
+                          <label class="col-12 col-sm-3 col-form-label text-sm-right">Email</label>
+                          <div class="col-12 col-sm-8 col-lg-6">
+                            <input class="form-control" id="email" name="email" type="text" required="" placeholder="">
+                            <span class="form-message"></span>
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-12 col-sm-3 col-form-label text-sm-right">Mật khẩu</label>
+                            <div class="col-12 col-sm-8 col-lg-6">
+                              <input class="form-control" id="password" name="password" type="password" required="" placeholder="">
+                            <span class="form-message"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-12 col-sm-3 col-form-label text-sm-right">Nhập lại mật khẩu</label>
+                            <div class="col-12 col-sm-8 col-lg-6">
+                              <input class="form-control" id="checkPassword" name="checkPassword" type="password" required="" placeholder="">
+                            <span class="form-message"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-12 col-sm-3 col-form-label text-sm-right">Tên</label>
+                            <div class="col-12 col-sm-8 col-lg-6">
+                                <div class="input-group mb-3">
+                                <input class="form-control" name="fullname" type="text" data-mask="currency" placeholder="">
+                            </div>
+                        </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-12 col-sm-3 col-form-label text-sm-right">Địa chỉ</label>
+                            <div class="col-12 col-sm-8 col-lg-6">
+                            <div class="input-group mb-3">
+                                <input class="form-control" name="address" type="text" data-mask="currency" placeholder="">
+                            </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-12 col-sm-3 col-form-label text-sm-right">Số điện thoại</label>
+                            <div class="col-12 col-sm-8 col-lg-6">
+                                <input id="phone" pattern="[0-9]{10}" name="phone" type="tel" placeholder="" class="form-control" {{#if user}}value="{{user.phone}}"{{/if}} required>
+                            
+                            {{!-- <input class="form-control" name="phone" type="text" required="" placeholder=""> --}}
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-12 col-sm-3 col-form-label text-sm-right" for="avatar">Avatar</label>
+                            <div class="col-12 col-sm-6">
+                            <input class="inputfile" id="avatar" type="file" name="avatar" data-multiple-caption="{count} files selected" multiple="">
+                            <label class="btn-secondary" name="avatar" for="avatar"> <i class="mdi mdi-upload"></i><span>Thêm ảnh</span></label>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-12 col-sm-3 col-form-label text-sm-right">Ngày sinh</label>
+                            <div class="col-12 col-sm-8 col-lg-6">
+                            <input class="form-control" id="datepicker" data-provide="datepicker" name="dateOfBirth" type="text" required="" placeholder="" autocomplete="off">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-12 col-sm-3 col-form-label text-sm-right" for="inputTextarea3">Giới tính</label>
+                            <div class="col-12 col-sm-8 col-lg-6">
+                                <div class="form-check-inline">
+                                <input type="radio" class="form-check-input" name="gender" value="male">Nam
+                                </div>
+                                <div class="form-check-inline">
+                                <input type="radio" class="form-check-input" name="gender" value="female">Nữ
+                                </div>
+                                <div class="form-check-inline">
+                                <input type="radio" class="form-check-input" name="gender" value="other">Khác
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                        <div class="form-group row text-right">
+                          <div class="col col-sm-10 col-lg-9 offset-sm-1 offset-lg-0">
+                            <button class="btn btn-space btn-primary" type="submit">Submit</button>
+                            <a href="/admin/moderator">
+                              <button class="btn btn-space btn-secondary">Cancel</button>
+
+                            </a>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+      <nav class="be-right-sidebar">
+        </div>
+      </nav>
+    </div>
+    <script src="/admin/assets/lib/jquery/jquery.min.js" type="text/javascript"></script>
+    <script src="/admin/assets/lib/perfect-scrollbar/js/perfect-scrollbar.min.js" type="text/javascript"></script>
+    <script src="/admin/assets/lib/bootstrap/dist/js/bootstrap.bundle.min.js" type="text/javascript"></script>
+    <script src="/admin/assets/js/app.js" type="text/javascript"></script>
+    <script src="/admin/assets/lib/jquery-flot/jquery.flot.js" type="text/javascript"></script>
+    <script src="/admin/assets/lib/jquery-flot/jquery.flot.pie.js" type="text/javascript"></script>
+    <script src="/admin/assets/lib/jquery-flot/jquery.flot.time.js" type="text/javascript"></script>
+    <script src="/admin/assets/lib/jquery-flot/jquery.flot.resize.js" type="text/javascript"></script>
+    <script src="/admin/assets/lib/jquery-flot/plugins/jquery.flot.orderBars.js" type="text/javascript"></script>
+    <script src="/admin/assets/lib/jquery-flot/plugins/curvedLines.js" type="text/javascript"></script>
+    <script src="/admin/assets/lib/jquery-flot/plugins/jquery.flot.tooltip.js" type="text/javascript"></script>
+    <script src="/admin/assets/lib/jquery.sparkline/jquery.sparkline.min.js" type="text/javascript"></script>
+    <script src="/admin/assets/lib/countup/countUp.min.js" type="text/javascript"></script>
+    <script src="/admin/assets/lib/jquery-ui/jquery-ui.min.js" type="text/javascript"></script>
+    <script src="/admin/assets/lib/jqvmap/jquery.vmap.min.js" type="text/javascript"></script>
+    <script src="/admin/assets/lib/jqvmap/maps/jquery.vmap.world.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="/admin/assets/js/validator.js"></script>
+    <script src="/admin/assets/js/registration.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function(){
+      	//-initialize the javascript
+      	App.init();
+      	App.dataTables();
+      });
+    </script>
+    <script>
+    $('.datepicker').datepicker({
+        language: "vi",
+        orientation: "bottom right",
+        autoclose: true
+    });
+    </script>

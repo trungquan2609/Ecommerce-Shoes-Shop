@@ -18,9 +18,22 @@ class AdminController {
             tReceipt,
             brand, quantity
         });
-
+        console.log(req.user)
     }
 
+    login(req, res, next) {
+        console.log(req.session.passport)
+        var messages = req.flash('error');
+        res.render('admin/profile/login', {
+            layout: '',
+            messages,
+            hasErrors: messages.length > 0,
+        })
+    }
+
+    successLogin(req, res, next) {
+        console.log(req.body)
+    }
 }
 
 module.exports = new AdminController;

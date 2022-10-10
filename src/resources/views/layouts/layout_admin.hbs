@@ -8,6 +8,7 @@
     <meta name="author" content="">
     <link rel="shortcut icon" href="/admin/assets/img/gallery/logomain.png">
     <title>{{title}}</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" integrity="sha512-mSYUmp1HYZDFaVKK//63EcZq4iFWFjxSL+Z3T/aCt4IO9Cejm03q3NKKYN6pFQzY0SBOr8h+eCIAZHPXcpZaNw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" type="text/css" href="/admin/assets/lib/perfect-scrollbar/css/perfect-scrollbar.css">
     <link rel="stylesheet" type="text/css" href="/admin/assets/lib/material-design-icons/css/material-design-iconic-font.min.css">
     <link rel="stylesheet" type="text/css" href="/admin/assets/lib/jquery.vectormap/jquery-jvectormap-1.2.2.css">
@@ -93,13 +94,17 @@
                         </li>
                         <li><a href="/admin/stockin/addstockin">Nhập hàng</a>
                         </li>
-                        <!-- <li><a href="EditProduct.html">Sửa sản phẩm</a>
-                        </li> -->
-                        {{!-- <li><a href="Comentproduct.html">Bình luận sản phẩm</a>
-                        </li> --}}
                     </ul>
                   </li>
                   <li><a href="/admin/contact"><i class="icon mdi mdi-phone"></i><span>Contact</span></a>
+                  </li>
+                  <li class="parent"><a href="/admin/moderator"><i class="icon mdi mdi-face"></i><span>Moderator</span></a>
+                    <ul class="sub-menu">
+                        <li><a href="/admin/moderator">Danh sách quản trị viên</a>
+                        </li>
+                        <li><a href="/admin/moderator/add">Thêm quản trị viên</a>
+                        </li>
+                    </ul>
                   </li>
                   {{!-- <li class="parent"><a href="news.html"><i class="icon mdi mdi-layers"></i><span>Tin tức</span></a> --}}
                     <!-- <ul class="sub-menu">

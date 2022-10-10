@@ -17,7 +17,10 @@ const methodOverride = require('method-override');
 const cookieParser = require('cookie-parser');
 const MongoStore = require('connect-mongo');
 const mongoose = require('mongoose');
-const passport = require('passport');
+// const Passport = require('passport').Passport;
+// const passport = new Passport();
+// const passportAdmin = new Passport();
+var passport = require('passport');
 const flash = require('connect-flash');
 const db = require('./config/connectDB');
 const global = require('./config/global');
@@ -37,13 +40,16 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // [METHOD POST]
 const bodyParser = require('body-parser');
-app.use(cookieParser());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser(''));
 // app.use(express.json());
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
 // Passport
-require('./config/passport');
+
+require('./config/passport')(passport);
+require('./config/passportAdmin')(passport);
+
 app.use(session({
   secret: 'guesswhat',
   resave: false,
@@ -52,14 +58,15 @@ app.use(session({
     mongoUrl: process.env.DATABASE_URL,
     touchAfter: 24 * 3600
   }),
-  cookie: { 
-    maxAge: 120 * 60 * 1000,
-    secure: false
-  },
+  cookie: {
+    sameSite: false
+  }
 }));
 app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
+// app.use(passportAdmin.initialize());
+// app.use(passportAdmin.session());
 app.use(methodOverride('_method'));
 
 // HTTP Logger
