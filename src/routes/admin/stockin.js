@@ -4,12 +4,26 @@ const upload = require('../../config/uploadFileExcel');
 
 const StockIn = require('../../app/controllers/admin/StockInController');
 
-router.post('/addstockin', upload.single('stock_in-file'), StockIn.save)
+router.post('/addstockin', isLoggedIn, upload.single('stock_in-file'), StockIn.save)
 
-router.get('/addstockin', StockIn.add)
+router.get('/addstockin', isLoggedIn, StockIn.add)
 
-router.get('/:id', StockIn.detail)
+router.get('/:id', isLoggedIn, StockIn.detail)
 
-router.get('/', StockIn.index);
+router.get('/', isLoggedIn, StockIn.index);
 
 module.exports = router;
+
+function isLoggedIn(req, res, next) {
+    if (req.isAuthenticated()) {
+        return next();
+    }
+    res.redirect('/admin/login');
+}
+
+function notLoggedIn(req, res, next) {
+    if (!req.isAuthenticated()) {
+        return next();
+    }
+    res.redirect('/admin');
+}

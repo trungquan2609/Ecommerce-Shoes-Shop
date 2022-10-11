@@ -6,7 +6,7 @@ const ProfileController = require('../../app/controllers/admin/ProfileController
 // var csrfProtection = csrf();
 const upload = require('../../config/upload');
 
-router.get('/', ProfileController.profile)
+router.get('/', isLoggedIn, ProfileController.profile)
 
 module.exports = router;
 
@@ -14,12 +14,12 @@ function isLoggedIn(req, res, next) {
     if (req.isAuthenticated()) {
         return next();
     }
-    res.redirect('/');
+    res.redirect('/admin/login');
 }
 
 function notLoggedIn(req, res, next) {
     if (!req.isAuthenticated()) {
         return next();
     }
-    res.redirect('/');
+    res.redirect('/admin');
 }

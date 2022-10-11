@@ -3,10 +3,24 @@ const router = express.Router();
 
 const EditHomePage = require('../../app/controllers/admin/EditHomePageController');
 
-router.patch('/:_id', EditHomePage.update);
+router.patch('/:_id', isLoggedIn, EditHomePage.update);
 
-router.get('/:_id', EditHomePage.edit)
+router.get('/:_id', isLoggedIn, EditHomePage.edit)
 
-router.get('/', EditHomePage.index);
+router.get('/', isLoggedIn, EditHomePage.index);
 
 module.exports = router;
+
+function isLoggedIn(req, res, next) {
+    if (req.isAuthenticated()) {
+        return next();
+    }
+    res.redirect('/admin/login');
+}
+
+function notLoggedIn(req, res, next) {
+    if (!req.isAuthenticated()) {
+        return next();
+    }
+    res.redirect('/admin');
+}
