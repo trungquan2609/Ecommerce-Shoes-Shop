@@ -8,6 +8,7 @@
     <meta name="author" content="">
     <link rel="shortcut icon" href="/admin/assets/img/gallery/logomain.png">
     <title>{{title}}</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" integrity="sha512-mSYUmp1HYZDFaVKK//63EcZq4iFWFjxSL+Z3T/aCt4IO9Cejm03q3NKKYN6pFQzY0SBOr8h+eCIAZHPXcpZaNw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" type="text/css" href="/admin/assets/lib/perfect-scrollbar/css/perfect-scrollbar.css">
     <link rel="stylesheet" type="text/css" href="/admin/assets/lib/material-design-icons/css/material-design-iconic-font.min.css">
     <link rel="stylesheet" type="text/css" href="/admin/assets/lib/jquery.vectormap/jquery-jvectormap-1.2.2.css">
@@ -36,12 +37,29 @@
           <div class="page-title"><span>Dashboard</span></div>
           <div class="be-right-navbar">
             <ul class="nav navbar-nav float-right be-user-nav">
-              <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-expanded="false"><img src="assets/img/avatar.png" alt="Avatar"><span class="user-name">Lương Ngọc Nam</span></a>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-expanded="false">
+                  <img src="/admin/uploads/avatar/{{user.avatar.filename}}" onerror="src='/admin/assets/img/avatar.png'" alt="Avatar">
+                  <span class="user-name">Lương Ngọc Nam</span>
+                </a>
                 <div class="dropdown-menu" role="menu">     
                   <div class="user-info">
-                    <div class="user-name">Lương Ngọc Nam</div>
+                    <div class="user-name">
+                {{#if user.fullname}}
+                  <p>{{user.fullname}}</p>
+                {{else}}
+                  <p>{{user.email}}</p>
+                {{/if}}</div>
                     <div class="user-position online">Available</div>
-                  </div><a class="dropdown-item" href="account.html"><span class="icon mdi mdi-face"></span>Account</a><a class="dropdown-item" href="login.html"><span class="icon mdi mdi-power"></span>Logout</a>
+                  </div>
+                  <a class="dropdown-item" href="/admin/profile">
+                    <span class="icon mdi mdi-face"> Account</span>
+                  </a>
+                  <form action="/admin/logout?_method=DELETE" method="POST">
+                    <input type="hidden" name="_csrf" value="{{ csrfToken }}">
+                  <button type="submit" class="dropdown-item"><span class="icon mdi mdi-power"> Logout</span>
+                  </button>
+                  </form>
                 </div>
               </li>
             </ul>
@@ -50,7 +68,7 @@
       </nav>
       <!-- phần menu -->
       <div class="be-left-sidebar">
-        <div class="left-sidebar-wrapper"><a class="left-sidebar-toggle" href="#">Dashboard</a>
+        <div class="left-sidebar-wrapper"><a class="left-sidebar-toggle" href="/admin">Dashboard</a>
           <div class="left-sidebar-spacer">
             <div class="left-sidebar-scroll">
               <div class="left-sidebar-content">
@@ -93,14 +111,20 @@
                         </li>
                         <li><a href="/admin/stockin/addstockin">Nhập hàng</a>
                         </li>
-                        <!-- <li><a href="EditProduct.html">Sửa sản phẩm</a>
-                        </li> -->
-                        {{!-- <li><a href="Comentproduct.html">Bình luận sản phẩm</a>
-                        </li> --}}
                     </ul>
                   </li>
                   <li><a href="/admin/contact"><i class="icon mdi mdi-phone"></i><span>Contact</span></a>
                   </li>
+                  {{#ifCond user.role '==' "admin"}}
+                  <li class="parent"><a href="/admin/moderator"><i class="icon mdi mdi-face"></i><span>Moderator</span></a>
+                    <ul class="sub-menu">
+                        <li><a href="/admin/moderator">Danh sách quản trị viên</a>
+                        </li>
+                        <li><a href="/admin/moderator/add">Thêm quản trị viên</a>
+                        </li>
+                    </ul>
+                  </li>
+                  {{/ifCond}}
                   {{!-- <li class="parent"><a href="news.html"><i class="icon mdi mdi-layers"></i><span>Tin tức</span></a> --}}
                     <!-- <ul class="sub-menu">
                       <li><a href="pages-blank.html">Blank Page</a>

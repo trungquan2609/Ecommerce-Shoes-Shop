@@ -39,7 +39,6 @@ function getOrder(id) {
     $('#order-detail').html('')
     for (var i in rs) {
       renderOrder(rs[i])
-      console.log(rs)
     }
   })
 }

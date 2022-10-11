@@ -3,9 +3,11 @@ const product = require('./product.js');
 const cart = require('./cart.js');
 const feedback = require('./feedback')
 const order = require('./order');
+const mod = require('./mod.js');
 
 function routeApi(app) {
 
+    app.use('/api/mod', mod)
     app.use('/api/order', order)
     app.use('/api/feedback', feedback)
     app.use('/api/cart', cart)

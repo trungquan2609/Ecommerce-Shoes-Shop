@@ -8,16 +8,20 @@ const adminSchema = new Schema({
     fullname: { type: String, default: '' },
     address: { type: String, default: '' },
     phone: { type: String, default: '' },
-    avatar: { type: String, default: '' },
+    avatar: Object,
+    dateOfBirth: Date,
+    gender: { type: String},
+    role: { type: String, default: 'mod'} ,
+    status: { type: String, default: 'active'}
 }, {
     collection: 'admins',
     timestamps: true,
 });
 
-adminSchema.methods.encryptPassword = function(password) {
-    return bcrypt.hashSync(password, bcrypt.genSaltSync(5), null);
+adminSchema.methods.encryptPassword = function (password) {
+    return bcrypt.hashSync(password, bcrypt.genSaltSync(6), null);
 };
-adminSchema.methods.validPassword = function(password) {
+adminSchema.methods.validPassword = function (password) {
     return bcrypt.compareSync(password, this.password);
 };
 

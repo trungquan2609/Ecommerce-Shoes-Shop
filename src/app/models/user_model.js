@@ -10,7 +10,7 @@ const userSchema = new Schema({
     phone: { type: String, default: '' },
     avatar: { type: String, default: '' },
     totalSpent: { type: Number, default: 0 },
-    
+    status: { type: String, default: 'active'}
 }, {
     collection: 'users',
     timestamps: true,
