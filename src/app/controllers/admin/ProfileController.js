@@ -1,11 +1,13 @@
+const Admin = require('../../models/admin_model')
 
 class ProfileController {
-    login(req, res, next) {
-        var messages = req.flash('error');
-        res.render('admin/profile/login', {
-            layout: '',
-            messages,
-            hasErrors: messages.length > 0,
+
+    async profile(req, res, next) {
+        var id = req.user._id
+        const admin = await Admin.findById(id);
+        res.render('admin/profile/profile', {
+            style: ['image'],
+            layout: 'layout_admin.hbs',
         })
     }
 }

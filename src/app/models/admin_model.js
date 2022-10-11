@@ -12,7 +12,7 @@ const adminSchema = new Schema({
     dateOfBirth: Date,
     gender: { type: String},
     role: { type: String, default: 'mod'} ,
-    status: String
+    status: { type: String, default: 'active'}
 }, {
     collection: 'admins',
     timestamps: true,

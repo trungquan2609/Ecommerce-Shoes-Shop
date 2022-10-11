@@ -3,10 +3,12 @@ const Admin = require('../../models/admin_model')
 class ModController {
     async index(req, res, next) {
         console.log(req.user)
+        var admin = await Admin.find()
         res.render('admin/moderator/index', {
             title: 'Danh sách mod',
             style: [],
             layout: 'layout_admin.hbs',
+            admin
         })
     }
 

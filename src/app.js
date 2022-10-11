@@ -17,9 +17,6 @@ const methodOverride = require('method-override');
 const cookieParser = require('cookie-parser');
 const MongoStore = require('connect-mongo');
 const mongoose = require('mongoose');
-// const Passport = require('passport').Passport;
-// const passport = new Passport();
-// const passportAdmin = new Passport();
 var passport = require('passport');
 const flash = require('connect-flash');
 const db = require('./config/connectDB');
@@ -48,7 +45,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // Passport
 
 require('./config/passport')(passport);
-require('./config/passportAdmin')(passport);
 
 app.use(session({
   secret: 'guesswhat',
@@ -63,10 +59,8 @@ app.use(session({
   }
 }));
 app.use(flash());
-app.use(passport.initialize());
+app.use(passport.initialize({userProperty: "user"}));
 app.use(passport.session());
-// app.use(passportAdmin.initialize());
-// app.use(passportAdmin.session());
 app.use(methodOverride('_method'));
 
 // HTTP Logger

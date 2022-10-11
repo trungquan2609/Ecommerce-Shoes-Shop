@@ -34,6 +34,13 @@ class AdminController {
     successLogin(req, res, next) {
         console.log(req.body)
     }
+
+    async logout(req, res, next) {
+        req.logout(function (err) {
+            if (err) { return next(err); }
+            res.redirect('/admin/login')
+        });
+    }
 }
 
 module.exports = new AdminController;

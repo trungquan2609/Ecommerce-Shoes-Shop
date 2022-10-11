@@ -25,6 +25,7 @@
                         <th>Số điện thoại</th>
                         <th>Nội dung</th>
                         <th>Tình trạng</th>
+                        <th>Người xác nhận</th>
                         <th>Thao tác</th>
                         
                       </tr>
@@ -38,6 +39,7 @@
                             <td class="center">{{this.phone}}</td>
                             <td class="center">{{this.message}}</td>
                             <td class="center">{{this.status}}</td>
+                            <td class="center">{{this.adminId.fullname}}</td>
                             <td class="center">
                                 <a href="/admin/contact/{{this._id}}"><button class="btn btn-rounded btn-space btn-primary btn_A">Xác nhận đã liên hệ</button></a>
                             </td>

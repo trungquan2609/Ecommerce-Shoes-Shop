@@ -4,7 +4,9 @@ const passport = require('passport');
 
 const adminController = require('../../app/controllers/admin/AdminController');
 
-router.get('/login', adminController.login);
+router.delete('/logout', isLoggedIn, adminController.logout);
+
+router.get('/login', notLoggedIn, adminController.login);
 
 router.post('/login', passport.authenticate('local.adminLogin', {
     successRedirect: '/admin',
