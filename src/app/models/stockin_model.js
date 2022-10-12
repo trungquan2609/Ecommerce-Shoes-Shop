@@ -18,7 +18,8 @@ const stockInSchema = new Schema({
         productImage: { type: String },
         quantity: { type: Number },
         description: { type: String },
-        rate: Number
+        rate: Number,
+        adminId: {type: Schema.Types.ObjectId, ref: Admin }
     }],
 }, {
     collection: 'StockIn',

@@ -24,6 +24,7 @@
                       <tr>
                         <th>STT</th>
                         <th>Tên danh sách</th>
+                        <th>Người nhập</th>
                         <th>Ngày nhập</th>
                         <th>Thao tác</th>
                       </tr>
@@ -35,6 +36,9 @@
                         <td>{{sum @index 1}}</td>
                         <td>
                           {{this.file.originalname}}
+                        </td>
+                        <td>
+                          {{this.adminId.fullname}}
                         </td>
                         <td>{{this.createdAt}}</td>
                         <td class="center">

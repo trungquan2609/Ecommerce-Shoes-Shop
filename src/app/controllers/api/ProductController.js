@@ -15,17 +15,17 @@ class ProductController {
             var lt = 9999999999
             var gt = 0
 
-            if (req.param('gt')) {
-                var gt = parseInt(req.param('gt'));
+            if (req.query.gt) {
+                var gt = parseInt(req.query.gt);
             }
-            if (req.param('lt')) {
-                var lt = parseInt(req.param('lt'));
+            if (req.query.lt) {
+                var lt = parseInt(req.query.lt);
             }
 
-            if(req.param('search')) {
-                var q = req.param('search')
+            if(req.query.search) {
+                var q = req.query.search
             }
-            if ( req.param('sn') === 'name' ) {
+            if ( req.query.sn === 'name' ) {
                 Product.aggregate([
                     { "$match": { 
                         "$or": [ {productName: {$regex: new RegExp(q, 'i')}}, { productName2: {$regex: new RegExp(q, 'i')}}],
@@ -39,7 +39,7 @@ class ProductController {
                         productImage: '$productImage',
                         rate: '$rate'
                     }}},
-                    { $sort: { '_id.name' : parseInt(req.param('order')) } }
+                    { $sort: { '_id.name' : parseInt(req.query.order) } }
                 ])
                     .skip(skip)
                     .limit(PAGE_SIZE)
@@ -53,7 +53,7 @@ class ProductController {
                                 SKU: '$SKU',
                             }}},
                             { $count: 'SKU' },
-                            { $sort: { '_id.name' : parseInt(req.param('order')) } }
+                            { $sort: { '_id.name' : parseInt(req.query.order) } }
                         ])
                         .then((total) => {
                             var totalPage = Math.ceil(total[0]?.SKU/PAGE_SIZE)
@@ -66,7 +66,7 @@ class ProductController {
                     })
                     .catch(next);
             }
-            else if ( req.param('sn') == 'price' ) {
+            else if ( req.query.sn == 'price' ) {
                 Product.aggregate([
                     { "$match": { 
                         "$or": [ {productName: {$regex: new RegExp(q, 'i')}}, { productName2: {$regex: new RegExp(q, 'i')}}],
@@ -81,7 +81,7 @@ class ProductController {
                         productImage: '$productImage',
                         rate: '$rate'
                     }}},
-                    { $sort: { '_id.currentPrice' : parseInt(req.param('order')) } }
+                    { $sort: { '_id.currentPrice' : parseInt(req.query.order) } }
                 ])
                     .skip(skip)
                     .limit(PAGE_SIZE)
@@ -160,13 +160,13 @@ class ProductController {
             var lt = 9999999999
             var gt = 0
 
-            if (req.param('gt')) {
-                var gt = parseInt(req.param('gt'));
+            if (req.query.gt) {
+                var gt = parseInt(req.query.gt);
             }
-            if (req.param('lt')) {
-                var lt = parseInt(req.param('lt'));
+            if (req.query.lt) {
+                var lt = parseInt(req.query.lt);
             }
-            if ( req.params.brandid && req.param('sn') === 'name' ) {
+            if ( req.params.brandid && req.query.sn === 'name' ) {
                 Product.aggregate([
                     { $match: { 
                         brandId: req.params.brandid.toObjectId(),
@@ -180,7 +180,7 @@ class ProductController {
                         productImage: '$productImage',
                         rate: '$rate'
                     }}},
-                    { $sort: { '_id.name' : parseInt(req.param('order')) } }
+                    { $sort: { '_id.name' : parseInt(req.query.order) } }
                 ])
                     .skip(skip)
                     .limit(PAGE_SIZE)
@@ -194,7 +194,7 @@ class ProductController {
                                 SKU: '$SKU',
                             }}},
                             { $count: 'SKU' },
-                            { $sort: { '_id.name' : parseInt(req.param('order')) } }
+                            { $sort: { '_id.name' : parseInt(req.query.order) } }
                         ])
                         .then((total) => {
                             var totalPage = Math.ceil(total[0]?.SKU/PAGE_SIZE)
@@ -207,7 +207,7 @@ class ProductController {
                     })
                     .catch(next);
             }
-            else if ( req.params.brandid && req.param('sn') == 'price' ) {
+            else if ( req.params.brandid && req.query.sn == 'price' ) {
                 Product.aggregate([
                     { $match: { 
                         brandId: req.params.brandid.toObjectId(),
@@ -222,7 +222,7 @@ class ProductController {
                         productImage: '$productImage',
                         rate: '$rate'
                     }}},
-                    { $sort: { '_id.currentPrice' : parseInt(req.param('order')) } }
+                    { $sort: { '_id.currentPrice' : parseInt(req.query.order) } }
                 ])
                     .skip(skip)
                     .limit(PAGE_SIZE)
@@ -290,12 +290,12 @@ class ProductController {
     }
 
     showQuantity(req, res, next) {
-        Product.find({_id: req.param('_id')})
+        Product.find({_id: req.query._id})
         .then(rs=> res.json(rs))
     }
 
     search(req, res, next) {
-        var q = req.param('search')
+        var q = req.query.search
         Product.aggregate([
             { $match: { 
                 productName: {$regex: new RegExp(q, 'i')},

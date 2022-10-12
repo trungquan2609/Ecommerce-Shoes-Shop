@@ -8,7 +8,7 @@ class StockInController {
 
     //GET admin/stockin
     async index(req, res, next) {
-        const list = await StockIn.find().sort({createdAt : -1})
+        const list = await StockIn.find().sort({createdAt : -1}).populate('adminId')
         res.render('admin/storage/index', {
             title: 'Nhập hàng',
             style: ['app'],
@@ -46,6 +46,7 @@ class StockInController {
             }
         }
         var dataStockIn = new StockIn({
+            adminId: req.user._id,
             file: req.file,
             data
         })
