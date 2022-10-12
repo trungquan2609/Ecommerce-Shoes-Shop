@@ -25,7 +25,7 @@ class ProductController {
 }
 
     sort(req, res, next) {
-        if ( req.params.brandid && req.param('sn') === 'name' ) {
+        if ( req.params.brandid && req.query.sn === 'name' ) {
             Product.aggregate([
                 { $match: { brandId: req.params.brandid.toObjectId() }},
                 { $group: {_id: {
@@ -35,7 +35,7 @@ class ProductController {
                     salePrice: '$salePrice',
                     productImage: '$productImage',
                 }}},
-                { $sort: { '_id.name' : parseInt(req.param('order')) } }
+                { $sort: { '_id.name' : parseInt(req.query.order) } }
             ])
                 .then(products => res.render('site/product/product', {
                     title: 'N&Q Shop',
@@ -43,11 +43,11 @@ class ProductController {
                     scripts: ['pagination.min','product', 'products'],
                     layout: 'layout_site.hbs',
                     products : products,
-                    brand: req.param('brand')
+                    brand: req.query.brand
                 }))
                 .catch(next);
         }
-        else if ( req.params.brandid && req.param('sn') == 'price' ) {
+        else if ( req.params.brandid && req.query.sn == 'price' ) {
             Product.aggregate([
                 { $match: { brandId: req.params.brandid.toObjectId() }},
                 { $group: {_id: {
@@ -57,7 +57,7 @@ class ProductController {
                     salePrice: '$salePrice',
                     productImage: '$productImage',
                 }}},
-                { $sort: { '_id.price' : parseInt(req.param('order')) } }
+                { $sort: { '_id.price' : parseInt(req.query.order) } }
             ])
                 .then(products => res.render('site/product/product', {
                     title: 'N&Q Shop',
@@ -65,7 +65,7 @@ class ProductController {
                     scripts: ['pagination.min','product', 'products'],
                     layout: 'layout_site.hbs',
                     products : products,
-                    brand: req.param('brand')
+                    brand: req.query.brand
                 }))
                 .catch(next);
         } else {
@@ -85,7 +85,7 @@ class ProductController {
                     scripts: ['pagination.min','product', 'products'],
                     layout: 'layout_site.hbs',
                     products : products,
-                    brand: req.param('brand')
+                    brand: req.query.brand
                 }))
                 .catch(next);
         }
