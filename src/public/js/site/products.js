@@ -139,6 +139,16 @@ function titleSort() {
 
 titleSort()
 
+function materialFilter(material) {
+  var materialFilter = document.querySelectorAll('.material')
+  for (var i in materialFilter) {
+    if(materialFilter[i].checked) {
+      return window.location.search = `material=${material}`
+    }
+  }
+  console.log(materialFilter)
+}
+
 function sortFilter(sn, order) {
   var sortFilter = document.querySelectorAll('.dropdown-item')
   for (var i in sortFilter) {
@@ -156,7 +166,7 @@ function sortFilter(sn, order) {
 }
 
 function priceFilter() {
-  var priceFilter = document.querySelectorAll('input[type=radio]');
+  var priceFilter = document.querySelectorAll('.checkGia');
   for (var i in priceFilter) {
     if(priceFilter[i].checked) {
       var q = window.location.search
@@ -174,7 +184,7 @@ function priceFilter() {
 }
 
 function checkedPriceFilter() {
-  var priceFilter = document.querySelectorAll('input[type=radio]');
+  var priceFilter = document.querySelectorAll('.checkGia');
   var q = window.location.search;
   switch ( q.slice(q.search('lt'),q.search('lt') + 4)) {
     case 'lt=1':

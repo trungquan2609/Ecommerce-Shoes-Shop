@@ -14,6 +14,7 @@ class ProductController {
             var skip = (page-1) * PAGE_SIZE
             var lt = 9999999999
             var gt = 0
+            var material = req.query.material ? req.query.material : null
 
             if (req.query.gt) {
                 var gt = parseInt(req.query.gt);
@@ -110,7 +111,8 @@ class ProductController {
                 Product.aggregate([
                     { "$match": { 
                         "$or": [ {productName: {$regex: new RegExp(q, 'i')}}, { productName2: {$regex: new RegExp(q, 'i')}}],
-                        currentPrice: { $gte: gt, $lte: lt }
+                        currentPrice: { $gte: gt, $lte: lt },
+                        material: material
                     }},
                     { $group: {_id: {
                         SKU: '$SKU',
@@ -127,7 +129,9 @@ class ProductController {
                         Product.aggregate([
                             { "$match": { 
                                 "$or": [ {productName: {$regex: new RegExp(q, 'i')}}, { productName2: {$regex: new RegExp(q, 'i')}}],
-                                currentPrice: { $gte: gt, $lte: lt }
+                                currentPrice: { $gte: gt, $lte: lt },
+                                material: material
+
                             }},
                             { $group: {_id: {
                                 SKU: '$SKU',

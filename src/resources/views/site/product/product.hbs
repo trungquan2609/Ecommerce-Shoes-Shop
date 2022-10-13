@@ -35,6 +35,28 @@
                     </li>
                 </ul>
             </div>
+            <div class="product__filter-price">
+              <h4 class="product__filter-heading">Chất liệu <i class="fi-rs-minus"
+                  onclick="khonghienthidanhsach(1,`khoanggia`)" id="minus-1"></i> <i class="fi-rs-plus hidden"
+                  id="plus-1" onclick="khonghienthidanhsach(1,`khoanggia`)"></i></h4>
+                  <ul id = "khoanggia" class="product__filter-ckeckbox">
+                    <li class="product__filter-item">
+                        <label class="form-check-label" for="kg1">
+                              <input type="radio" class="form-check-input material" id="kg1" name="optradio" onclick="materialFilter('Da')" value="Da"><span>Da</span>
+                            </label>
+                    </li>
+                    <li class="product__filter-item">
+                        <label class="form-check-label" for="kg1">
+                              <input type="radio" class="form-check-input material" id="kg1" name="optradio" onclick="materialFilter('Cao su')" value="Cao su"><span>Cao su</span>
+                            </label>
+                    </li>
+                    <li class="product__filter-item">
+                        <label class="form-check-label" for="kg1">
+                              <input type="radio" class="form-check-input material" id="kg1" name="optradio" onclick="materialFilter('vải')" value="Vải"><span>Vải</span>
+                            </label>
+                    </li>
+                </ul>
+            </div>
             <div class="product__filter-trademark">
               <h4 class="product__filter-heading">Thương hiệu <i class="fi-rs-minus"
                   onclick="khonghienthidanhsach(2,`thuonghieu`)" id="minus-2"></i> <i class="fi-rs-plus hidden"

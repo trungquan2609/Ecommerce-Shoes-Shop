@@ -115,6 +115,16 @@
                   </li>
                   <li><a href="/admin/contact"><i class="icon mdi mdi-phone"></i><span>Contact</span></a>
                   </li>
+                  <li><a href="/admin/statistics"><i class="icon mdi mdi-store"></i><span>Statistics</span></a>
+                    {{!-- <ul class="sub-menu">
+                        <li><a href="/admin/stockin">Danh sách nhập hàng</a>
+                        </li>
+                        <li><a href="/admin/stockin/addstockin">Nhập hàng</a>
+                        </li>
+                    </ul> --}}
+                  </li>
+                  <li><a href="/admin/contact"><i class="icon mdi mdi-phone"></i><span>Contact</span></a>
+                  </li>
                   {{#ifCond user.role '==' "admin"}}
                   <li class="parent"><a href="/admin/moderator"><i class="icon mdi mdi-face"></i><span>Moderator</span></a>
                     <ul class="sub-menu">

@@ -8,9 +8,11 @@ const stockinRouter = require('./stockin');
 const contactRouter = require('./contact');
 const modRouter = require('./mod');
 const profileRouter = require('./profile');
+const statistics = require('./statistics');
 
 function routeAdmin(app) {
 
+    app.use('/admin/statistics', statistics)
     app.use('/admin/profile', profileRouter)
     app.use('/admin/moderator', modRouter)
     app.use('/admin/contact', contactRouter)
