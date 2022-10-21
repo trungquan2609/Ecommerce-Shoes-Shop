@@ -1,28 +1,32 @@
 const api = '/api/statistics'
+var clearBtn = document.getElementById('clear-btn')
+
+clearBtn.addEventListener('click', function () {
+    document.getElementById("from").value = ''
+    document.getElementById("to").value = ''
+    sexual = undefined
+    material = undefined
+    document.querySelector('button[name="material"').innerHTML = 'Lọc chất liệu'
+    document.querySelector('button[name="sexual"').innerHTML = 'Lọc loại giày'
+    getList()
+})
+
 $('#sandbox-container .input-daterange').datepicker({
     autoclose: true,
     language: "vi",
-    todayHighlight: true
+    todayHighlight: true,
+    orientation: "bottom auto"
 });
 
-function renderList(element) {
-    var item = `<tr class="odd name">
-    <td>${element.item.SKU}</td>
-    <td>${element.item.productName}</td>
-    <td>${element.item.size}</td>
-    <td>${element.item.material}</td>
-    <td>${element.item.sexual}</td>
-    <td>${element.qty}</td>
-    <td>${element.createdAt}</td>
-    </tr>`
-    $('#list').append(item)
-}
+var dateFrom = document.getElementById("from").value.replaceAll('/','-');
+var dateTo = document.getElementById("to").value.replaceAll('/','-');
 
 var material
 var materialList = document.querySelectorAll('.material')
 for ( var i of materialList) {
     i.addEventListener('click', function (e) {
         material = e.target.innerHTML
+        document.querySelector('button[name="material"').innerHTML = material
         getList()
     })
 }
@@ -32,30 +36,42 @@ var sexualList = document.querySelectorAll('.sexual')
 for ( var i of sexualList) {
     i.addEventListener('click', function (e) {
         sexual = e.target.innerHTML
-        console.log(sexual )
+        document.querySelector('button[name="sexual"').innerHTML = sexual
         getList()
     })
 }
 
-
-
-
-
-// function getVar() {
-//     console.log(material, sexual)
-// }
-// console.log(materialList)
 function getList() {
     var dateFrom = document.getElementById("from").value.replaceAll('/','-');
     var dateTo = document.getElementById("to").value.replaceAll('/','-');
-    $('#list').html('')
-    
     fetch(`${api}?material=${material}&sexual=${sexual}&from=${dateFrom}&to=${dateTo}`)
     .then(response => response.json())
     .then(rs => {
-        // console.log(rs)
+        var data = []
         for (var i in rs) {
-            renderList(rs[i])
+            data.push({
+                'SKU': rs[i].item.SKU,
+                'Tên sản phẩm': rs[i].item.productName,
+                'Size': rs[i].item.size,
+                'Chất liệu': rs[i].item.material ? rs[i].item.material : null,
+                'Loại giày': rs[i].item.sexual ? rs[i].item.sexual : null,
+                'Số lượng bán': rs[i].qty,
+            })
         }
+        var table = $('#table1').DataTable({
+            retrieve: true,
+            "columns": [
+                {'data':'SKU'},
+                {'data':'Tên sản phẩm'},
+                {'data':'Size'},
+                {'data':'Chất liệu'},
+                {'data':'Loại giày'},
+                {'data':'Số lượng bán'},
+            ]
+        });
+        table.clear().draw();
+        table.rows.add(data).draw()
     })
 }
+
+getList()

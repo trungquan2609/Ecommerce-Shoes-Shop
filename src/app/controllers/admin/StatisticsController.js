@@ -9,7 +9,7 @@ class Statistics {
             for (var j in product) {
                 var product2 = product[j]
                 product2.createdAt = order[i].createdAt
-                    data.push(product2)
+                data.push(product2)
             }
         }
         res.render('admin/statistics/index', {
