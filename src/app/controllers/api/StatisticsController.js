@@ -13,11 +13,17 @@ class Statistics {
             var productId = order[i].productId
             for (var j in productId) {
                 var product = productId[j]
+                product.createdAt = order[i].createdAt
                 data.push(product)
-                for ( var k in data) {
-                    if ( data[k].SKU != product.SKU && data[k].size != product.size) {
-                    }
-                }
+            }
+        }
+        for ( var m in data ) {
+            for ( var n = 0; n < data.length; n++) {
+                if ( data[m].item.SKU == data[n].item.SKU && data[m].item.size == data[n].item.size) {
+                    data[m].qty += data[n].qty;
+                    data.splice(n,1)
+                    n -= 1
+                }                
             }
         }
         // product2.createdAt = order[i].createdAt

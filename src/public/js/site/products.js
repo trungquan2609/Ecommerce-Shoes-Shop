@@ -206,6 +206,22 @@ function checkedPriceFilter() {
 
 checkedPriceFilter()
 
+function checkedMaterial() {
+  var materialFilter = document.querySelectorAll('input[name="material"')
+  var q = window.location.search
+  if ( q.search('material=Da') > 0) {
+    return materialFilter[0].checked = true;
+  }
+  if ( q.search('material=Cao%20su') > 0) {
+    return materialFilter[1].checked = true;
+  }
+  if ( q.search('material=V%E1%BA%A3i') != -1) {
+    return materialFilter[2].checked = true;
+  }
+}
+
+checkedMaterial()
+
 function checkedBrandFilterOnClick(brand) {
   var brandFilter = document.querySelectorAll('.checkthuonghieu');
   for(var i in brandFilter) {
