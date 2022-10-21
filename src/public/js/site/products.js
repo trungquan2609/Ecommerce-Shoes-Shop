@@ -139,6 +139,15 @@ function titleSort() {
 
 titleSort()
 
+function materialFilter(material) {
+  var materialFilter = document.querySelectorAll('.material')
+  for (var i in materialFilter) {
+    if(materialFilter[i].checked) {
+      return window.location.search = `material=${material}`
+    }
+  }
+}
+
 function sortFilter(sn, order) {
   var sortFilter = document.querySelectorAll('.dropdown-item')
   for (var i in sortFilter) {
@@ -156,7 +165,7 @@ function sortFilter(sn, order) {
 }
 
 function priceFilter() {
-  var priceFilter = document.querySelectorAll('input[type=radio]');
+  var priceFilter = document.querySelectorAll('.checkGia');
   for (var i in priceFilter) {
     if(priceFilter[i].checked) {
       var q = window.location.search
@@ -174,7 +183,7 @@ function priceFilter() {
 }
 
 function checkedPriceFilter() {
-  var priceFilter = document.querySelectorAll('input[type=radio]');
+  var priceFilter = document.querySelectorAll('.checkGia');
   var q = window.location.search;
   switch ( q.slice(q.search('lt'),q.search('lt') + 4)) {
     case 'lt=1':
@@ -196,6 +205,22 @@ function checkedPriceFilter() {
 }
 
 checkedPriceFilter()
+
+function checkedMaterial() {
+  var materialFilter = document.querySelectorAll('input[name="material"')
+  var q = window.location.search
+  if ( q.search('material=Da') > 0) {
+    return materialFilter[0].checked = true;
+  }
+  if ( q.search('material=Cao%20su') > 0) {
+    return materialFilter[1].checked = true;
+  }
+  if ( q.search('material=V%E1%BA%A3i') != -1) {
+    return materialFilter[2].checked = true;
+  }
+}
+
+checkedMaterial()
 
 function checkedBrandFilterOnClick(brand) {
   var brandFilter = document.querySelectorAll('.checkthuonghieu');

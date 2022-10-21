@@ -176,8 +176,10 @@ class ProductController {
                 price: req.body.price,
                 salePrice: req.body.salePrice,
                 description: req.body.description,
-            currentPrice: req.body.salePrice ? req.body.salePrice : req.body.price,
-            productImage: productImage,
+                material: req.body.material,
+                sexual: req.body.sexual,
+                currentPrice: req.body.salePrice ? req.body.salePrice : req.body.price,
+                productImage: productImage,
             }
         } else {
             var updateProduct = await {
@@ -187,8 +189,10 @@ class ProductController {
                 brandId: mongoose.Types.ObjectId(req.body.brandId),
                 price: req.body.price,
                 salePrice: req.body.salePrice,
-            currentPrice: req.body.salePrice ? req.body.salePrice : req.body.price,
-            description: req.body.description,
+                material: req.body.material,
+                sexual: req.body.sexual,
+                currentPrice: req.body.salePrice ? req.body.salePrice : req.body.price,
+                description: req.body.description,
             }
         }
         Product.updateMany({ SKU: req.params.SKU }, { $set: updateProduct})

@@ -1,3 +1,4 @@
+const { request } = require('express');
 const Product = require('../../models/product_model')
 const Rate = require('../../models/rate_model')
 
@@ -12,23 +13,31 @@ class ProductController {
                 page = 1
             }
             var skip = (page-1) * PAGE_SIZE
-            var lt = 9999999999
-            var gt = 0
+            var lt = req.query.lt ? parseInt(req.query.lt) : 9999999999
+            var gt = req.query.gt ? parseInt(req.query.gt) : 0
+            var material = req.query.material ? req.query.material : {$regex: new RegExp('', 'i')}
+            var sexual = req.query.sexual ? req.query.sexual : {$regex: new RegExp('', 'i')}
+            var search = req.query.search
+            var sortName = req.query.sn
+            // if (req.query.gt) {
+            //     var gt = parseInt(req.query.gt);
+            // }
+            // if (req.query.lt) {
+            //     var lt = parseInt(req.query.lt);
+            // }
 
-            if (req.query.gt) {
-                var gt = parseInt(req.query.gt);
-            }
-            if (req.query.lt) {
-                var lt = parseInt(req.query.lt);
-            }
-
-            if(req.query.search) {
-                var q = req.query.search
-            }
+            // if(req.query.search) {
+            //     var search = req.query.search
+            // }
             if ( req.query.sn === 'name' ) {
                 Product.aggregate([
                     { "$match": { 
-                        "$or": [ {productName: {$regex: new RegExp(q, 'i')}}, { productName2: {$regex: new RegExp(q, 'i')}}],
+                        "$or": [ 
+                            {productName: {$regex: new RegExp(search, 'i')}}, 
+                            {productName2: {$regex: new RegExp(search, 'i')}},
+                        ],
+                        sexual,
+                        material,
                         currentPrice: { $gte: gt, $lte: lt }
                     }},
                     { $group: {_id: {
@@ -46,7 +55,12 @@ class ProductController {
                     .then(data => {
                         Product.aggregate([
                             { "$match": { 
-                                "$or": [ {productName: {$regex: new RegExp(q, 'i')}}, { productName2: {$regex: new RegExp(q, 'i')}}],
+                                "$or": [ 
+                                    {productName: {$regex: new RegExp(search, 'i')}}, 
+                                    {productName2: {$regex: new RegExp(search, 'i')}},
+                                ],
+                                sexual,
+                                material,
                                 currentPrice: { $gte: gt, $lte: lt }
                             }},
                             { $group: {_id: {
@@ -69,7 +83,12 @@ class ProductController {
             else if ( req.query.sn == 'price' ) {
                 Product.aggregate([
                     { "$match": { 
-                        "$or": [ {productName: {$regex: new RegExp(q, 'i')}}, { productName2: {$regex: new RegExp(q, 'i')}}],
+                        "$or": [ 
+                            {productName: {$regex: new RegExp(search, 'i')}}, 
+                            {productName2: {$regex: new RegExp(search, 'i')}},
+                        ],
+                        sexual,
+                        material,
                         currentPrice: { $gte: gt, $lte: lt }
                     }},
                     { $group: {_id: {
@@ -88,7 +107,12 @@ class ProductController {
                     .then(data => {
                         Product.aggregate([
                             { "$match": { 
-                                "$or": [ {productName: {$regex: new RegExp(q, 'i')}}, { productName2: {$regex: new RegExp(q, 'i')}}],
+                                "$or": [ 
+                                    {productName: {$regex: new RegExp(search, 'i')}}, 
+                                    {productName2: {$regex: new RegExp(search, 'i')}},
+                                ],
+                                sexual,
+                                material,
                                 currentPrice: { $gte: gt, $lte: lt }
                             }},
                             { $group: {_id: {
@@ -108,9 +132,14 @@ class ProductController {
                     .catch(next);
             } else {
                 Product.aggregate([
-                    { "$match": { 
-                        "$or": [ {productName: {$regex: new RegExp(q, 'i')}}, { productName2: {$regex: new RegExp(q, 'i')}}],
-                        currentPrice: { $gte: gt, $lte: lt }
+                    { $match: { 
+                        $or: [ 
+                            {productName: {$regex: new RegExp(search, 'i')}}, 
+                            {productName2: {$regex: new RegExp(search, 'i')}},
+                        ],
+                        sexual,
+                        material,
+                        currentPrice: { $gte: gt, $lte: lt },
                     }},
                     { $group: {_id: {
                         SKU: '$SKU',
@@ -126,8 +155,13 @@ class ProductController {
                     .then(data => {
                         Product.aggregate([
                             { "$match": { 
-                                "$or": [ {productName: {$regex: new RegExp(q, 'i')}}, { productName2: {$regex: new RegExp(q, 'i')}}],
-                                currentPrice: { $gte: gt, $lte: lt }
+                                "$or": [ 
+                                    {productName: {$regex: new RegExp(search, 'i')}}, 
+                                    {productName2: {$regex: new RegExp(search, 'i')}},
+                                ],
+                                sexual,
+                                material,
+                                    currentPrice: { $gte: gt, $lte: lt },
                             }},
                             { $group: {_id: {
                                 SKU: '$SKU',
@@ -151,6 +185,8 @@ class ProductController {
     async sort(req, res, next) {
         const PAGE_SIZE = 6;
         var page = req.query.page
+        var material = req.query.material ? req.query.material : {$regex: new RegExp('', 'i')}
+        var sexual = req.query.sexual ? req.query.sexual : {$regex: new RegExp('', 'i')}
         if(page) {
             page = parseInt(page)
             if(page < 1 ) {
@@ -170,6 +206,8 @@ class ProductController {
                 Product.aggregate([
                     { $match: { 
                         brandId: req.params.brandid.toObjectId(),
+                        sexual,
+                        material,
                         currentPrice: { $gte: gt, $lte: lt }
                     }},
                     { $group: {_id: {
@@ -188,6 +226,8 @@ class ProductController {
                         Product.aggregate([
                             { $match: { 
                                 brandId: req.params.brandid.toObjectId(),
+                                sexual,
+                                material,
                                 currentPrice: { $gte: gt, $lte: lt }
                             }},
                             { $group: {_id: {
@@ -211,6 +251,8 @@ class ProductController {
                 Product.aggregate([
                     { $match: { 
                         brandId: req.params.brandid.toObjectId(),
+                        sexual,
+                        material,
                         currentPrice: { $gte: gt, $lte: lt }
                     }},
                     { $group: {_id: {
@@ -230,6 +272,8 @@ class ProductController {
                         Product.aggregate([
                             { $match: { 
                                 brandId: req.params.brandid.toObjectId(),
+                                sexual,
+                                material,
                                 currentPrice: { $gte: gt, $lte: lt }
                             }},
                             { $group: {_id: {
@@ -251,6 +295,8 @@ class ProductController {
                 Product.aggregate([
                     { $match: { 
                         brandId: req.params.brandid.toObjectId(),
+                        sexual,
+                        material,
                         currentPrice: { $gte: gt, $lte: lt }
                     }},
                     { $group: {_id: {
@@ -268,6 +314,8 @@ class ProductController {
                         Product.aggregate([
                             { $match: { 
                                 brandId: req.params.brandid.toObjectId(),
+                                sexual,
+                                material,
                                 currentPrice: { $gte: gt, $lte: lt }
                             }},
                             { $group: {_id: {
@@ -298,7 +346,7 @@ class ProductController {
         var q = req.query.search
         Product.aggregate([
             { $match: { 
-                productName: {$regex: new RegExp(q, 'i')},
+                productName: {$regex: new RegExp(search, 'i')},
             }},
             { $group: {_id: {
                 SKU: '$SKU',

@@ -38,7 +38,12 @@ class StockInController {
             }
             var product = await Product.find({$and: [{SKU: data[i].SKU}, {size: data[i].size}]})
             if ( product.length > 0 ) {
-                var update = await Product.updateOne({_id: product[0]._id}, {$set:{quantity: (product[0].quantity + data[i].quantity)}})
+                var update = {
+                    quantity: (product[0].quantity + data[i].quantity),
+                    material: data[i].material, 
+                    sexual: data[i].sexual
+                }
+                var query = await Product.updateOne({_id: product[0]._id}, update)
             } 
             else {
                 var update = new Product(data[i])
@@ -52,6 +57,7 @@ class StockInController {
         })
         dataStockIn.save()
         res.redirect('/admin/stockin')
+        // res.json(data)
     }
 
     async detail(req, res, next) {

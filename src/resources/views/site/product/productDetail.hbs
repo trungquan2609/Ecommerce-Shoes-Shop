@@ -47,6 +47,12 @@
                   <div class="infor-oder">
                       Hãng sản phẩm: <b>{{this.brandId.brandName}}</b>
                   </div>
+                  <div class="infor-oder">
+                      Chất liệu: <b>{{this.material}}</b>
+                  </div>
+                  <div class="infor-oder">
+                      Loại giày: <b>{{this.sexual}}</b>
+                  </div>
                   {{#if this.salePrice}}
                     <div class="product__price">
                       <h2>{{priceFormat this.salePrice}}</h2>
@@ -120,9 +126,9 @@
                     <div class="product__wrap">
                         <div class="product__amount">
                         <label for="">Số lượng: </label>
-                        <input type="button" value="-" class="control" onclick="tru(1)">
+                        <input type="button" value="-" class="control" onclick="minus()">
                         <input type="text" name="quantity" value="1" class="text-input" id="text_so_luong-1" onkeypress='validate(event)'> 
-                        <input type="button" value="+" class="control" onclick="cong(1)">
+                        <input type="button" value="+" class="control" onclick="plus()">
                         </div>
                         <a href="" id="add-to-cart">
                           <button class="add-cart" onclick="fadeInModal()">Thêm vào giỏ</button>
