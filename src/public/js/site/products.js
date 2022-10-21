@@ -146,7 +146,6 @@ function materialFilter(material) {
       return window.location.search = `material=${material}`
     }
   }
-  console.log(materialFilter)
 }
 
 function sortFilter(sn, order) {

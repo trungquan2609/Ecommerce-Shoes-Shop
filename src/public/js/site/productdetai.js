@@ -118,4 +118,15 @@ function renderComment(element) {
     $('.body__comment').append(item)
 }
 
+function minus() {
+    var value = parseInt(document.querySelector('input[name=quantity]').value)
+    if ( value > 1 ) {
+        document.querySelector('input[name=quantity]').value = value - 1
+    }
+}
+
+function plus() {
+    var value = parseInt(document.querySelector('input[name=quantity]').value)
+    document.querySelector('input[name=quantity]').value = value +1
+}
 
