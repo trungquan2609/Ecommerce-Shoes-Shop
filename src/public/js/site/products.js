@@ -21,6 +21,16 @@ $('#paging').pagination({
 
 })
 
+var sizeFilter
+var checkSizeBtn = document.querySelectorAll('input[name="size-filter"]')
+for ( var m of checkSizeBtn) {
+  m.addEventListener('click', function (e) {
+    sizeFilter = e.target.attributes.value.value;
+    // console.log(sizeFilter)
+    window.location.search = `size=${sizeFilter}`
+  })
+}
+
 
 function loadPage(page) {
   $('#products').html('')
@@ -40,6 +50,23 @@ function loadPage(page) {
 }
 
 loadPage(1)
+function title() {
+  var size = window.location.search
+  if ( size.search('size') > 0 ) {
+    document.getElementById('title').innerHTML = `Các sản phẩm size ${size.slice(6,8)}`
+  }
+}
+
+title()
+
+var sizeFilterBtn = document.querySelectorAll('input=[name=size-filter]')
+
+for ( var i in sizeFilterBtn) {
+  var size = window.location.search
+  if ( size.search('size') > 0 && sizeFilterBtn[i].innerHTML == size.slice(6,8)) {
+    sizeFilterBtn[i].checked
+  }
+}
 
 function render(element) {
   if (element._id.salePrice) {
@@ -306,3 +333,4 @@ function checkedBrandFilter() {
 }
 
 checkedBrandFilter()
+

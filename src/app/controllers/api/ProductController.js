@@ -18,7 +18,9 @@ class ProductController {
             var material = req.query.material ? req.query.material : {$regex: new RegExp('', 'i')}
             var sexual = req.query.sexual ? req.query.sexual : {$regex: new RegExp('', 'i')}
             var search = req.query.search
+            var size = req.query.size ? parseInt(req.query.size) : null
             var sortName = req.query.sn
+            console.log(size)
             // if (req.query.gt) {
             //     var gt = parseInt(req.query.gt);
             // }
@@ -130,7 +132,60 @@ class ProductController {
                         })
                     })
                     .catch(next);
-            } else {
+            } 
+            else if (size) {
+                Product.aggregate([
+                    { "$match": { 
+                        "$or": [ 
+                            {productName: {$regex: new RegExp(search, 'i')}}, 
+                            {productName2: {$regex: new RegExp(search, 'i')}},
+                        ],
+                        sexual,
+                        material,
+                        size,
+                        currentPrice: { $gte: gt, $lte: lt }
+                    }},
+                    { $group: {_id: {
+                        SKU: '$SKU',
+                        name: '$productName',
+                        price: '$price' ,
+                        salePrice: '$salePrice',
+                        currentPrice: '$currentPrice',
+                        productImage: '$productImage',
+                        rate: '$rate'
+                    }}},
+                ])
+                    .skip(skip)
+                    .limit(PAGE_SIZE)
+                    .then(data => {
+                        Product.aggregate([
+                            { "$match": { 
+                                "$or": [ 
+                                    {productName: {$regex: new RegExp(search, 'i')}}, 
+                                    {productName2: {$regex: new RegExp(search, 'i')}},
+                                ],
+                                sexual,
+                                material,
+                                size,
+                                currentPrice: { $gte: gt, $lte: lt }
+                            }},
+                            { $group: {_id: {
+                                SKU: '$SKU',
+                            }}},
+                            { $count: 'SKU' },
+                        ])
+                        .then((total) => {
+                            var totalPage = Math.ceil(total[0]?.SKU/PAGE_SIZE)
+                            res.json({
+                                total,
+                                totalPage,
+                                data
+                            })
+                        })
+                    })
+                    .catch(next);
+            }
+             else {
                 Product.aggregate([
                     { $match: { 
                         $or: [ 
