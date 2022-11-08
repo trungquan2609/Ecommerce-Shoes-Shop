@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const orderController = require('../../app/controllers/admin/orderController.js');
+const orderController = require('../../app/controllers/admin/OrderController.js');
 
 router.patch('/:id', isLoggedIn, orderController.update)
 
