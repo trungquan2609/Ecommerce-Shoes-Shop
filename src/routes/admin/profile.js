@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const passport = require('passport');
 // const csrf = require('csurf');
-const ProfileController = require('../../app/controllers/admin/ProfileController');
+const ProfileController = require('../../app/controllers/admin/ProfileController.js');
 // var csrfProtection = csrf();
 const upload = require('../../config/upload');
 

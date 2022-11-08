@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const EditHomePage = require('../../app/controllers/admin/EditHomePageController');
+const EditHomePage = require('../../app/controllers/admin/EditHomePageController.js');
 
 router.patch('/:_id', isLoggedIn, EditHomePage.update);
 

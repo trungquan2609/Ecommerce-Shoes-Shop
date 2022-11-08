@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const upload = require('../../config/uploadBrand');
 
-const brandController = require('../../app/controllers/admin/BrandController');
+const brandController = require('../../app/controllers/admin/BrandController.js');
 
 router.patch('/edit/:id', isLoggedIn, upload.single('brandImage'), brandController.update)
 

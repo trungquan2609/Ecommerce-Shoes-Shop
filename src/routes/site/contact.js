@@ -2,7 +2,7 @@
 const express = require('express');
 const router = express.Router();
 
-const ContactController = require('../../app/controllers/site/ContactController');
+const ContactController = require('../../app/controllers/site/ContactController.js');
 
 router.get('/success', ContactController.success);
 

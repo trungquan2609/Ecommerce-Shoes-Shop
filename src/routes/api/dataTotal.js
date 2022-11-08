@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const dataChartController = require('../../app/controllers/api/dataChartController');
+const dataChartController = require('../../app/controllers/api/dataChartController.js');
 
 router.get('/dataTotal/databymonth', dataChartController.dataByMonth)
 

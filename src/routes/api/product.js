@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const ProductController = require('../../app/controllers/api/ProductController');
+const ProductController = require('../../app/controllers/api/ProductController.js');
 
 
 router.get('/sort/:brandid', ProductController.sort);

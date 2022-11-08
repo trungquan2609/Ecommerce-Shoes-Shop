@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const feedbackController = require('../../app/controllers/site/FeedbackController');
+const feedbackController = require('../../app/controllers/site/FeedbackController.js');
 
 router.post('/comment', isLoggedIn, feedbackController.comment);
 

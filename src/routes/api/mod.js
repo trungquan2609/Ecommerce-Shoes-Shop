@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Modcontroller = require('../../app/controllers/api/Modcontroller');
+const Modcontroller = require('../../app/controllers/api/Modcontroller.js');
 
 router.get('/deleteMod', Modcontroller.delete);
 

@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const ContactController = require('../../app/controllers/admin/ContactController');
+const ContactController = require('../../app/controllers/admin/ContactController.js');
 
 router.get('/:id', isLoggedIn, ContactController.confirm);
 

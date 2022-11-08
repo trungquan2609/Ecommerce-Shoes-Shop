@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const upload = require('../../config/uploadFileExcel');
 
-const StockIn = require('../../app/controllers/admin/StockInController');
+const StockIn = require('../../app/controllers/admin/StockInController.js');
 
 router.post('/addstockin', isLoggedIn, upload.single('stock_in-file'), StockIn.save)
 

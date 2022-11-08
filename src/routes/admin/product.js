@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const upload = require('../../config/uploadProduct');
 
-const productController = require('../../app/controllers/admin/ProductController');
+const productController = require('../../app/controllers/admin/ProductController.js');
 
 router.patch('/editproductall/:SKU', isLoggedIn, upload.single('productImage'), productController.updateAll)
 

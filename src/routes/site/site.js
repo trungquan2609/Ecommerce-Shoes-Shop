@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const siteController = require('../../app/controllers/site/SiteController');
+const siteController = require('../../app/controllers/site/SiteController.js');
 
 router.get('/success', siteController.success);
 router.get('/intro', siteController.intro);

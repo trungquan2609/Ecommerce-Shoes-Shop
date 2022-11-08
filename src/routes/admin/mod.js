@@ -3,7 +3,7 @@ const router = express.Router();
 const upload = require('../../config/uploadMod');
 const passport = require('passport');
 
-const ModController = require('../../app/controllers/admin/ModController');
+const ModController = require('../../app/controllers/admin/ModController.js');
 
 router.post('/add', isLoggedIn, upload.single('avatar'), passport.authenticate('local.adminRegister', {
     successRedirect: '/admin/moderator',

@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const passport = require('passport');
 
-const adminController = require('../../app/controllers/admin/AdminController');
+const adminController = require('../../app/controllers/admin/AdminController.js');
 
 router.delete('/logout', isLoggedIn, adminController.logout);
 
