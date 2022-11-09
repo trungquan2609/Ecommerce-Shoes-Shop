@@ -1,3 +1,10 @@
 {
-    "outputDirectory": "./src/public"
-}
+    "version": 2,
+    "name": "ecommerce-selling-shoes",
+    "builds": [
+       { "src": "./src/app.js", "use": "@vercel/node" }
+    ],
+    "routes": [
+       { "src": "/(.*)", "dest": "./src/app.js" }
+    ]
+ }
