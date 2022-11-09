@@ -8,7 +8,6 @@
   },
   "scripts": {
     "start": "nodemon --inspect src/app.js",
-    "build": "node src/app.js",
     "beautiful": "npx prettier --single-quote --trailing-comma all --tab-width 4 --write src/**/*.{js}",
     "watch": "node-sass --watch src/resources/scss/ --output src/public/css/",
     "test": "echo \"Error: no test specified\" && exit 1"
