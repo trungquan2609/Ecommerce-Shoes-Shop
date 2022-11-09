@@ -3,8 +3,11 @@
   "version": "1.0.0",
   "description": "website ban giay",
   "main": "src/app.js",
+  "engines": {
+    "node": "16.x"
+  },
   "scripts": {
-    "start": "nodemon --inspect src/app.js",
+    "start": "node src/app.js",
     "beautiful": "npx prettier --single-quote --trailing-comma all --tab-width 4 --write src/**/*.{js}",
     "watch": "node-sass --watch src/resources/scss/ --output src/public/css/",
     "test": "echo \"Error: no test specified\" && exit 1"
