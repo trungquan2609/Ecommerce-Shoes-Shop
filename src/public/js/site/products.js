@@ -59,7 +59,7 @@ function title() {
 
 title()
 
-var sizeFilterBtn = document.querySelectorAll('input=[name=size-filter]')
+var sizeFilterBtn = document.querySelectorAll('input[name=size-filter]')
 
 for ( var i in sizeFilterBtn) {
   var size = window.location.search
