@@ -1,6 +1,9 @@
 Open terminal and use these command
 
 ```
-npm init
 npm i
 ```
+
+Demo
+
+https://ecommerce-shoes-shop-production.up.railway.app
