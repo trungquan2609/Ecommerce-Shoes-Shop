@@ -17,7 +17,7 @@ class OrderController {
 
     async detail(req, res, next) {
         Order.findById(req.params.id).populate('userId')
-            .then(rs => res.render('admin/order/orderdetail', {
+            .then(rs => res.render('admin/order/orderDetail', {
                 style: [],
                 layout: 'layout_admin.hbs',
                 rs
