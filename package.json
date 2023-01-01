@@ -7,7 +7,7 @@
     "node": "16.x"
   },
   "scripts": {
-    "start": "nodemon --inspect src/app.js",
+    "start": "nodemon --inspect app.js",
     "beautiful": "npx prettier --single-quote --trailing-comma all --tab-width 4 --write src/**/*.{js}",
     "watch": "node-sass --watch src/resources/scss/ --output src/public/css/",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -29,7 +29,7 @@
   "bugs": {
     "url": "https://github.com/trungquan2609/DATN/issues"
   },
-  "homepage": "https://github.com/trungquan2609/DATN#readme",
+  "homepage": "http://shoeshop.darkmoon.click",
   "lint-staged": {
     "src/**/*.{js}": "prettier --single-quote --trailing-comma all --tab-width 4 --write"
   },

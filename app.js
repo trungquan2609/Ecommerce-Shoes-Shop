@@ -10,18 +10,18 @@ const app = express();
 // const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access');
 const path = require('path');
 const morgan = require('morgan');
-const routeSite = require('./routes/site');
-const routeAdmin = require('./routes/admin');
-const routeApi = require('./routes/api');
+const routeSite = require('./src/routes/site');
+const routeAdmin = require('./src/routes/admin');
+const routeApi = require('./src/routes/api');
 const methodOverride = require('method-override');
 const cookieParser = require('cookie-parser');
 const MongoStore = require('connect-mongo');
 const mongoose = require('mongoose');
 var passport = require('passport');
 const flash = require('connect-flash');
-const db = require('./config/connectDB');
-const global = require('./config/global');
-const templateEngine = require('./config/templateEngine');
+const db = require('./src/config/connectDB');
+const global = require('./src/config/global');
+const templateEngine = require('./src/config/templateEngine');
 const cors = require('cors');
 const xlsx = require('xlsx');
 
@@ -33,7 +33,7 @@ require('dotenv').config({
 db.connect();
 
 // Static files
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '/src/public')));
 
 // [METHOD POST]
 const bodyParser = require('body-parser');
@@ -44,13 +44,20 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // Passport
 
-require('./config/passport')(passport);
+require('./src/config/passport')(passport);
+
+// const clientP = mongoose.connect(
+//   process.env.DATABASE_URL,
+//   { useNewUrlParser: true, useUnifiedTopology: true }
+// ).then(m => m.connection.getClient())
 
 app.use(session({
   secret: 'guesswhat',
   resave: false,
   saveUninitialized: false,
   store: MongoStore.create({
+    // clientPromise: clientP,
+    // dbName: "test",
     mongoUrl: process.env.DATABASE_URL,
     touchAfter: 24 * 3600
   }),
