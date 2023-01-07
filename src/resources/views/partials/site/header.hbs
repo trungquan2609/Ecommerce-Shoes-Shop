@@ -4,23 +4,57 @@
     <div class="drawer-header">
       <a href="">
         <div class="drawer-header--auth">
+          {{#if login}}
           <div class="_object">
-            {{!-- <img src="/img/product/giayxah2.jpg" alt=""> --}}
+            <img src="{{user.avatar}}" onerror="this.src='/img/userImages/noavatar.png';" alt="">
           </div>
-          <div class="_body">Đăng nhập
+          <div class="_body">
+            
+            {{#if user.fullname}}
+                  <p>{{user.fullname}}</p>
+                {{else}}
+                  <p>{{user.email}}</p>
+                {{/if}}
+          </div>
+        </div>
+          {{else}}
+          
+          <div class="_object">
+            <img src="/img/product/giayxah2.jpg" alt="">
+          </div>
+          <div class="_body">
+            
+            Đăng nhập
             <br>Nhận nhiều ưu đãi hơn
           </div>
         </div>
+          {{/if}}
       </a>
     </div>
     <ul class="ul-first-menu">
+      {{#if login}}
+      <li>
+        <a href="/user/login">Thông tin tài khoản</a>
+      </li>
+      <li>
+        <form action="/user/logout?_method=DELETE" method="POST">
+                    <input type="hidden" name="_csrf" value="{{ csrfToken }}">
+                    <a href="">
+                      <button type="submit">
+                        <i class="fas fa-sign-in-alt mr-3"></i>Đăng xuất
+                      </button>
+                    </a>
+                  </form>
+      </li>
+      {{else}}
+      
       <li>
         <a href="/user/login">Đăng nhập</a>
       </li>
       <li>
-        <a href="/user/register"> class="abc">Đăng kí</a>
+        <a href="/user/register">Đăng kí</a>
       </li>
-    </ul>
+      {{/if}}
     </ul>
     <div class="la-scroll-fix-infor-user">
       <div class="la-nav-menu-items">
@@ -38,17 +72,15 @@
             <a href="/product">Sản phẩm <i class="fas fa-plus cong"></i> <i class="fas fa-minus tru hidden"></i></a>
             <ul class="ul-has-child1">
               {{#each brandName}}
-              <li class="level1">
+              <li>
                 <a class="hmega" href="/product/sort/{{this._id}}">{{this.brandName}}</a>
               </li>
               {{/each}}
             </ul>
           </li>
+          
           <li class="ng-scope">
-            <a href="./news.html">Tin tức</a>
-          </li>
-          <li class="ng-scope">
-            <a href="./contact.html">Liên hệ</a>
+            <a href="/contact">Liên hệ</a>
           </li>
         </ul>
       </div>
@@ -59,11 +91,11 @@
       </li>
       <li>
         <i class="fas fa-phone-square-alt footer__item-icon">HOTLINE: </i>
-        <a href="tel:19006750">19006750</a>
+        <a href="tel:0344752804">0344752804</a>
       </li>
       <li>
         <i class="fas fa-envelope-square footer__item-icon">Email: </i>
-        <a href="mailto:support@sapo.vn">support@gmail.vn</a>
+        <a href="nguyentrungquan.2609@gmail.com">nguyentrungquan.2609@gmail.com</a>
       </li>
     </ul>
   </div>
@@ -107,7 +139,6 @@
                   </li>
                 </ul>
                   </div>
-                  </div>
               {{else}}
                 <li>
                   <a href="/user/login"><i class="fas fa-sign-in-alt mr-3"></i>Đăng nhập</a>
@@ -118,6 +149,7 @@
               {{/if}}
             </ul>
           </div>
+        </div>
         </div>
       </div>
       <div class="header-main clearfix">
@@ -139,10 +171,6 @@
 
                 {{/if}}
               </a>
-              {{!-- <a href="./listlike.html" class="header__second__like--icon">
-                <i class="far fa-heart"></i>
-                <span id="header__second__like--notice" class="header__second__like--notice">3</span>
-              </a> --}}
             </div>
           </div>
           <div class="col-lg-6 m-auto pdt15">
@@ -173,6 +201,7 @@
         </div>
       </div>
     </div>
+    </div>
     <nav class="header_nav hidden-sm hidden-xs">
       <div class="container">
         <ul class="header_nav-list nav">
@@ -188,27 +217,6 @@
                     <a class="hmega" href="/product/sort/{{this._id}}">{{this.brandName}}</a>
                   </li>
                   {{/each}}
-                  {{!-- <li class="level1">
-                    <a class="hmega" href="/product/sort/62bc67a3e27b9d2c8072bdc6">Puma</a>
-                  </li>
-                  <li class="level1">
-                    <a class="hmega" href="/product/sort/62bc672ee27b9d2c8072bdc2">Nike</a>
-                  </li>
-                  <li class="level1">
-                    <a class="hmega" href="/product/sort/62bc67bfe27b9d2c8072bdc8">Vans</a>
-                  </li>
-                  <li class="level1">
-                    <a class="hmega" href="/product/sort/62bc6760e27b9d2c8072bdc3">Converse</a>
-                  </li>
-                  <li class="level1">
-                    <a class="hmega" href="/product/sort/62bc6784e27b9d2c8072bdc5">Fila</a>
-                  </li>
-                  <li class="level1">
-                    <a class="hmega" href="/product/sort/62bc67b4e27b9d2c8072bdc7">Reebok</a>
-                  </li>
-                  <li class="level1">
-                    <a class="hmega" href="/product/sort/62bc677ae27b9d2c8072bdc4">Domba</a>
-                  </li> --}}
                   <li class="level1">
                     <a class="hmega" href="/product">Tất Cả Sản Phẩm</a>
                   </li>
