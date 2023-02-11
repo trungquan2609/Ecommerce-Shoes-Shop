@@ -7,7 +7,8 @@
     "node": "16.x"
   },
   "scripts": {
-    "start": "nodemon --inspect app.js",
+    "start": "node app.js",
+    "dev": "nodemon --inspect app.js",
     "beautiful": "npx prettier --single-quote --trailing-comma all --tab-width 4 --write src/**/*.{js}",
     "watch": "node-sass --watch src/resources/scss/ --output src/public/css/",
     "test": "echo \"Error: no test specified\" && exit 1"
